@@ -1,0 +1,46 @@
+{
+  "name": "proof-of-intelligence-explorer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.33.2",
+  "scripts": {
+    "dev": "pnpm --filter @poi/explorer dev",
+    "lint": "tsx scripts/lint-secrets.ts",
+    "typecheck": "pnpm --filter @poi/sdk typecheck && pnpm --filter @poi/agent-runtime typecheck && pnpm --filter @poi/cli typecheck && pnpm --filter @poi/ui typecheck && pnpm --filter @poi/explorer typecheck && tsc -p tsconfig.scripts.json --noEmit",
+    "test": "vitest run",
+    "build": "pnpm --filter @poi/sdk build && pnpm --filter @poi/agent-runtime build && pnpm --filter @poi/cli build && pnpm --filter @poi/ui build && pnpm --filter @poi/explorer build",
+    "format": "prettier --write .",
+    "seed:demo": "pnpm --filter @poi/cli poi seed-demo",
+    "demo:verify": "pnpm --filter @poi/cli poi verify codeguardian && pnpm --filter @poi/cli poi verify fakeagent",
+    "demo:run-agent": "pnpm --filter @poi/cli poi run-codeguardian",
+    "demo:replay": "pnpm --filter @poi/cli poi replay codeguardian-run-001",
+    "demo:export-proof": "pnpm --filter @poi/cli poi export-proof codeguardian --out tmp/codeguardian-proof.json",
+    "contracts:test": "hardhat test",
+    "contracts:deploy:live": "tsx scripts/deploy-live.ts",
+    "demo:live:seed": "tsx scripts/seed-live-demo.ts",
+    "demo:live:run-agent": "tsx scripts/run-live-codeguardian.ts",
+    "vercel:deploy": "vercel --prod",
+    "final:check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm demo:verify && pnpm demo:run-agent && pnpm demo:replay && pnpm demo:export-proof"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@types/node": "^22.15.3",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "hardhat": "^2.22.19",
+    "postcss": "^8.5.1",
+    "prettier": "^3.4.2",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.19.2",
+    "turbo": "^2.3.4",
+    "typescript": "^5.8.3",
+    "vercel": "^39.2.5",
+    "vitest": "^2.1.8"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.2.0"
+  }
+}
