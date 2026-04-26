@@ -1,0 +1,300 @@
+{
+  "agent": "codeguardian",
+  "tier": 6,
+  "status": "verified",
+  "summary": "This iNFT has verified encrypted intelligence, memory, compute history, replay trace, and certificate evidence.",
+  "checks": [
+    {
+      "id": "token",
+      "label": "iNFT token and ownership",
+      "ok": true,
+      "tier": 1,
+      "source": "mock",
+      "detail": "Token exists and owner can be read"
+    },
+    {
+      "id": "manifest",
+      "label": "Proof-of-Intelligence manifest",
+      "ok": true,
+      "tier": 2,
+      "source": "mock",
+      "root": "sha256:551c701fd8db7b6c2447006a3c046d715795b48e3f3fa9bf0152946074e1c826",
+      "detail": "Manifest matches poi/v0.1 schema"
+    },
+    {
+      "id": "intelligence_bundle",
+      "label": "Encrypted intelligence bundle",
+      "ok": true,
+      "tier": 3,
+      "source": "mock",
+      "root": "sha256:1c47d70c2c89e0d843c1b8501e98f5bd2354f7b03b994e1b819b2fbc54b87fd4",
+      "detail": "Encrypted bundle exists and root matches"
+    },
+    {
+      "id": "memory",
+      "label": "Persistent memory",
+      "ok": true,
+      "tier": 4,
+      "source": "mock",
+      "root": "sha256:bd27bb774163cdfc375d5bcc22d55da8626002b0a209848d1f3687035bb90798",
+      "detail": "Memory checkpoint and history root match"
+    },
+    {
+      "id": "compute_history",
+      "label": "0G Compute run history",
+      "ok": true,
+      "tier": 5,
+      "source": "mock",
+      "root": "sha256:387f6fe1fef06fb3aec76cde6b1d5eae86d3aa11efbe29f27ca7ac9a2525b207",
+      "detail": "Analysis and critic run records are present"
+    },
+    {
+      "id": "run_trace",
+      "label": "Executable behavior trace",
+      "ok": true,
+      "tier": 5,
+      "source": "mock",
+      "root": "sha256:39d592c08a628ca34dc7b83ca6fe52584c3c56fade299fc0e274f1081c351909",
+      "detail": "Replayable trace includes analysis, patch, critic, and memory events"
+    },
+    {
+      "id": "ens",
+      "label": "Optional ENS",
+      "ok": true,
+      "tier": 2,
+      "source": "mock",
+      "detail": "ENS resolved to an agent token"
+    },
+    {
+      "id": "certificate",
+      "label": "Certificate/export bundle",
+      "ok": true,
+      "tier": 6,
+      "source": "mock",
+      "root": "sha256:da9e049fc2b1a31f320fb3ee4817435c6e5096e45fb8339c6a494b5f63624153",
+      "detail": "Certificate binds iNFT, roots, and compute run ids"
+    }
+  ],
+  "evidence": {
+    "manifestRoot": "sha256:551c701fd8db7b6c2447006a3c046d715795b48e3f3fa9bf0152946074e1c826",
+    "intelligenceBundleRoot": "sha256:1c47d70c2c89e0d843c1b8501e98f5bd2354f7b03b994e1b819b2fbc54b87fd4",
+    "memoryRoot": "sha256:bd27bb774163cdfc375d5bcc22d55da8626002b0a209848d1f3687035bb90798",
+    "latestRunRoot": "sha256:39d592c08a628ca34dc7b83ca6fe52584c3c56fade299fc0e274f1081c351909",
+    "checkpointRoot": "sha256:1327b28193e5cb885e332543c20bfeaafce555102f39e33b9bf5f491abd8d426",
+    "historyRoot": "sha256:43671740184c704a39f4f7c37bd4fc3d20befbc41713bfc9737cb1022b6cb5c4"
+  },
+  "missing": [],
+  "sources": [
+    "mock"
+  ],
+  "token": {
+    "chainId": 16602,
+    "contract": "0x1111111111111111111111111111111111117857",
+    "tokenId": "1",
+    "owner": "0x053b860f329c9e4549d23dc8aadf1116b99f1233",
+    "standard": "ERC-7857-like",
+    "metadataUri": "mock://codeguardian",
+    "manifestRoot": "sha256:551c701fd8db7b6c2447006a3c046d715795b48e3f3fa9bf0152946074e1c826",
+    "source": "mock"
+  },
+  "manifest": {
+    "schema": "poi/v0.1",
+    "name": "CodeGuardian",
+    "description": "A single iNFT-style code review agent with an encrypted intelligence bundle, persistent memory, 0G Compute history, and replayable critic-loop behavior.",
+    "inft": {
+      "chainId": 16602,
+      "contract": "0x1111111111111111111111111111111111117857",
+      "tokenId": "1",
+      "standard": "ERC-7857-like"
+    },
+    "identity": {
+      "owner": "0x053b860f329c9e4549d23dc8aadf1116b99f1233",
+      "ens": "codeguardian.poi-demo.eth"
+    },
+    "storage": {
+      "manifestRoot": "sha256:551c701fd8db7b6c2447006a3c046d715795b48e3f3fa9bf0152946074e1c826",
+      "intelligenceBundleRoot": "sha256:1c47d70c2c89e0d843c1b8501e98f5bd2354f7b03b994e1b819b2fbc54b87fd4",
+      "memoryRoot": "sha256:bd27bb774163cdfc375d5bcc22d55da8626002b0a209848d1f3687035bb90798",
+      "latestRunRoot": "sha256:39d592c08a628ca34dc7b83ca6fe52584c3c56fade299fc0e274f1081c351909"
+    },
+    "compute": {
+      "provider": "0G Compute mock/hybrid",
+      "models": [
+        "qwen/qwen-2.5-7b-instruct"
+      ],
+      "latestRunIds": [
+        "zg-compute-analysis-001",
+        "zg-compute-critic-001"
+      ]
+    },
+    "skills": [
+      {
+        "name": "static-code-review",
+        "version": "0.1.0",
+        "codeHash": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+        "permissions": [
+          "read_fixture",
+          "write_memory",
+          "append_trace"
+        ]
+      }
+    ],
+    "memory": {
+      "type": "checkpointed-kv-with-immutable-history",
+      "checkpointRoot": "sha256:1327b28193e5cb885e332543c20bfeaafce555102f39e33b9bf5f491abd8d426",
+      "historyRoot": "sha256:43671740184c704a39f4f7c37bd4fc3d20befbc41713bfc9737cb1022b6cb5c4"
+    },
+    "proof": {
+      "status": "certified",
+      "certificateId": "poi-cert-codeguardian-001",
+      "issuedAt": "2026-04-26T00:00:13.000Z"
+    },
+    "permissions": {
+      "publicProfile": true,
+      "ownerCanDecrypt": true,
+      "allowedActions": [
+        "verify",
+        "replay",
+        "export-proof",
+        "owner-decrypt-demo"
+      ]
+    }
+  },
+  "certificate": {
+    "schema": "poi-certificate/v0.1",
+    "certificateId": "poi-cert-codeguardian-001",
+    "agent": "CodeGuardian",
+    "tier": 6,
+    "issuedAt": "2026-04-26T00:00:13.000Z",
+    "issuer": "Proof-of-Intelligence Explorer",
+    "evidence": {
+      "inft": {
+        "chainId": 16602,
+        "contract": "0x1111111111111111111111111111111111117857",
+        "tokenId": "1"
+      },
+      "intelligenceBundleRoot": "sha256:1c47d70c2c89e0d843c1b8501e98f5bd2354f7b03b994e1b819b2fbc54b87fd4",
+      "memoryRoot": "sha256:bd27bb774163cdfc375d5bcc22d55da8626002b0a209848d1f3687035bb90798",
+      "latestRunRoot": "sha256:39d592c08a628ca34dc7b83ca6fe52584c3c56fade299fc0e274f1081c351909",
+      "computeRunIds": [
+        "zg-compute-analysis-001",
+        "zg-compute-critic-001"
+      ]
+    }
+  },
+  "run": {
+    "schema": "poi-run/v0.1",
+    "runId": "codeguardian-run-001",
+    "agent": "CodeGuardian",
+    "source": "hybrid",
+    "task": "Audit examples/codeguardian/fixtures/unsafe-parser.ts",
+    "events": [
+      {
+        "type": "task_received",
+        "at": "2026-04-26T00:00:00.000Z",
+        "detail": {
+          "target": "unsafe-parser.ts"
+        },
+        "root": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+      },
+      {
+        "type": "compute_started",
+        "at": "2026-04-26T00:00:01.000Z",
+        "detail": {
+          "runId": "zg-compute-analysis-001",
+          "model": "qwen/qwen-2.5-7b-instruct"
+        }
+      },
+      {
+        "type": "compute_completed",
+        "at": "2026-04-26T00:00:04.000Z",
+        "detail": {
+          "outputHash": "sha256:4444444444444444444444444444444444444444444444444444444444444444"
+        }
+      },
+      {
+        "type": "issue_found",
+        "at": "2026-04-26T00:00:05.000Z",
+        "detail": {
+          "issue": "JSON.parse accepts arbitrary input and returns it as a trusted Result without shape validation."
+        }
+      },
+      {
+        "type": "patch_proposed",
+        "at": "2026-04-26T00:00:07.000Z",
+        "detail": {
+          "patch": "Validate parsed data before returning a Result object."
+        }
+      },
+      {
+        "type": "critic_started",
+        "at": "2026-04-26T00:00:08.000Z",
+        "detail": {
+          "runId": "zg-compute-critic-001"
+        }
+      },
+      {
+        "type": "critic_completed",
+        "at": "2026-04-26T00:00:10.000Z",
+        "detail": {
+          "critique": "Patch is bounded and preserves the public API."
+        }
+      },
+      {
+        "type": "memory_written",
+        "at": "2026-04-26T00:00:11.000Z",
+        "detail": {
+          "memoryRoot": "sha256:bd27bb774163cdfc375d5bcc22d55da8626002b0a209848d1f3687035bb90798"
+        }
+      },
+      {
+        "type": "trace_committed",
+        "at": "2026-04-26T00:00:12.000Z",
+        "detail": {
+          "traceRoot": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      },
+      {
+        "type": "certificate_issued",
+        "at": "2026-04-26T00:00:13.000Z",
+        "detail": {
+          "certificateId": "poi-cert-codeguardian-001"
+        }
+      }
+    ],
+    "result": {
+      "issue": "Unsafe JSON.parse path returns unvalidated data.",
+      "patch": "Validate parsed data before returning a typed Result.",
+      "critique": "The patch is minimal, deterministic, and testable.",
+      "accepted": true
+    }
+  },
+  "computeRuns": {
+    "schema": "poi-compute-runs/v0.1",
+    "provider": "0G Compute mock/hybrid",
+    "model": "qwen/qwen-2.5-7b-instruct",
+    "runs": [
+      {
+        "id": "zg-compute-analysis-001",
+        "type": "analysis",
+        "promptHash": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+        "outputHash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+        "at": "2026-04-26T00:00:04.000Z",
+        "source": "hybrid"
+      },
+      {
+        "id": "zg-compute-critic-001",
+        "type": "critic",
+        "promptHash": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "outputHash": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+        "at": "2026-04-26T00:00:10.000Z",
+        "source": "hybrid"
+      }
+    ]
+  },
+  "da": {
+    "available": true,
+    "source": "mock"
+  },
+  "issuedAt": "2026-04-26T00:00:00.000Z"
+}

@@ -1,0 +1,15 @@
+{
+  "app": "Proof-of-Intelligence Explorer",
+  "mode": "hybrid",
+  "seededAt": "2026-04-26T00:00:00.000Z",
+  "agents": {
+    "codeguardian": {
+      "tier": 6,
+      "status": "verified"
+    },
+    "fakeagent": {
+      "tier": 1,
+      "status": "failed"
+    }
+  }
+}

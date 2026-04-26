@@ -1,0 +1,45 @@
+{
+  "agent": "fakeagent",
+  "tier": 1,
+  "status": "failed",
+  "summary": "This token has metadata-like evidence only and does not prove embedded intelligence.",
+  "checks": [
+    {
+      "id": "token",
+      "label": "iNFT token and ownership",
+      "ok": true,
+      "tier": 1,
+      "source": "mock",
+      "detail": "Token exists and owner can be read"
+    },
+    {
+      "id": "manifest",
+      "label": "Proof-of-Intelligence manifest",
+      "ok": false,
+      "tier": 2,
+      "source": "mock",
+      "detail": "No valid Proof-of-Intelligence manifest found"
+    }
+  ],
+  "evidence": {},
+  "missing": [
+    "Proof-of-Intelligence manifest"
+  ],
+  "sources": [
+    "mock"
+  ],
+  "token": {
+    "chainId": 16602,
+    "contract": "0x2222222222222222222222222222222222227857",
+    "tokenId": "2",
+    "owner": "0x053b860f329c9e4549d23dc8aadf1116b99f1233",
+    "standard": "ERC-721 metadata-only",
+    "metadataUri": "mock://fakeagent.png",
+    "source": "mock"
+  },
+  "da": {
+    "available": true,
+    "source": "mock"
+  },
+  "issuedAt": "2026-04-26T00:00:00.000Z"
+}
