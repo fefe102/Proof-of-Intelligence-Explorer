@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { dirname } from "node:path";
+import { dirname, resolve } from "node:path";
 import { runCodeGuardian, replayCodeGuardianRun, writeCodeGuardianArtifacts } from "@poi/agent-runtime";
 import { createVerifier, exportDaBundle, exportProofJson, type RunTrace } from "@poi/sdk";
 import { Command } from "commander";
@@ -18,9 +18,9 @@ program.command("seed-demo").description("Write deterministic safe demo artifact
   const verifier = createVerifier();
   const codeguardian = await verifier.verify("codeguardian");
   const fakeagent = await verifier.verify("fakeagent");
-  writeJson("public/demo/codeguardian-proof.sample.json", codeguardian);
-  writeJson("public/demo/fakeagent-proof.sample.json", fakeagent);
-  writeJson("public/demo/status.json", {
+  writeJson(repoPath("public/demo/codeguardian-proof.sample.json"), codeguardian);
+  writeJson(repoPath("public/demo/fakeagent-proof.sample.json"), fakeagent);
+  writeJson(repoPath("public/demo/status.json"), {
     app: "Proof-of-Intelligence Explorer",
     mode: process.env.NEXT_PUBLIC_POI_PUBLIC_MODE ?? "hybrid",
     seededAt: "2026-04-26T00:00:00.000Z",
@@ -98,7 +98,7 @@ program
     const report = await createVerifier().verify(target);
     const json = exportProofJson(report);
     if (options.out) {
-      writeText(options.out, `${json}\n`);
+      writeText(repoPath(options.out), `${json}\n`);
       console.log(`wrote ${options.out}`);
     } else {
       console.log(json);
@@ -129,7 +129,7 @@ async function verifyContractTarget(verifier: ReturnType<typeof createVerifier>,
 }
 
 function readRun(runId: string): RunTrace {
-  const artifact = "tmp/codeguardian/run.json";
+  const artifact = repoPath("tmp/codeguardian/run.json");
   if (existsSync(artifact)) {
     const parsed = JSON.parse(readFileSync(artifact, "utf8")) as RunTrace;
     if (parsed.runId === runId) {
@@ -137,7 +137,7 @@ function readRun(runId: string): RunTrace {
     }
   }
 
-  const fixture = JSON.parse(readFileSync("packages/sdk/fixtures/codeguardian.run.json", "utf8")) as RunTrace;
+  const fixture = JSON.parse(readFileSync(repoPath("packages/sdk/fixtures/codeguardian.run.json"), "utf8")) as RunTrace;
   if (fixture.runId === runId) {
     return fixture;
   }
@@ -167,4 +167,11 @@ function explainScript(command: string) {
       2
     )
   );
+}
+
+function repoPath(path: string) {
+  if (path.startsWith("/")) {
+    return path;
+  }
+  return resolve(new URL("../../..", import.meta.url).pathname, path);
 }
