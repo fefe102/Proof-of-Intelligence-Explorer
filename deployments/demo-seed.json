@@ -11,13 +11,13 @@
     "fakeagent": "2"
   },
   "passportId": "0x01212ca92791787ccb99c454d3b59c5596f90882c892c7fca3e63294a159430c",
-  "certificateId": "1",
+  "certificateId": "2",
   "agents": {
     "codeguardian": {
       "tier": 6,
       "status": "verified",
       "roots": {
-        "manifestRoot": "sha256:551c701fd8db7b6c2447006a3c046d715795b48e3f3fa9bf0152946074e1c826",
+        "manifestRoot": "sha256:15bfe045aec1946544e2c00a1df2cf5c982c641f823c101d0558bca9337ade43",
         "intelligenceBundleRoot": "sha256:1c47d70c2c89e0d843c1b8501e98f5bd2354f7b03b994e1b819b2fbc54b87fd4",
         "memoryRoot": "sha256:bd27bb774163cdfc375d5bcc22d55da8626002b0a209848d1f3687035bb90798",
         "latestRunRoot": "sha256:39d592c08a628ca34dc7b83ca6fe52584c3c56fade299fc0e274f1081c351909",

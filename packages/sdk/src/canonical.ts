@@ -1,9 +1,19 @@
 import { createHash } from "node:crypto";
 
-type JsonValue = null | boolean | number | string | JsonValue[] | { [key: string]: JsonValue };
+type JsonValue =
+  | null
+  | boolean
+  | number
+  | string
+  | JsonValue[]
+  | { [key: string]: JsonValue };
 
 function normalize(value: unknown): JsonValue {
-  if (value === null || typeof value === "string" || typeof value === "boolean") {
+  if (
+    value === null ||
+    typeof value === "string" ||
+    typeof value === "boolean"
+  ) {
     return value;
   }
 
@@ -38,4 +48,18 @@ export function canonicalizeJson(value: unknown): string {
 
 export function hashCanonicalJson(value: unknown): string {
   return `sha256:${createHash("sha256").update(canonicalizeJson(value)).digest("hex")}`;
+}
+
+export function manifestProofPayload<T>(manifest: T): T {
+  const payload = JSON.parse(JSON.stringify(manifest)) as {
+    storage?: { manifestRoot?: string };
+  };
+  if (payload.storage) {
+    delete payload.storage.manifestRoot;
+  }
+  return payload as T;
+}
+
+export function hashManifestForProof(manifest: unknown): string {
+  return hashCanonicalJson(manifestProofPayload(manifest));
 }

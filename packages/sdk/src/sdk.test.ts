@@ -10,6 +10,7 @@ import {
   canonicalizeJson,
   createVerifier,
   exportDaBundle,
+  hashManifestForProof,
   hashCanonicalJson,
   verifyComputeHistory,
   verifyIntelligenceBundle,
@@ -17,16 +18,20 @@ import {
   verifyMemory,
   type ComputeRuns,
   type Manifest,
-  type RunTrace
+  type RunTrace,
 } from "./index";
 
 describe("Proof-of-Intelligence SDK", () => {
   it("accepts a valid manifest", () => {
-    expect(verifyManifest(codeguardianManifest).schema).toBe("poi/v0.1");
+    const manifest = verifyManifest(codeguardianManifest);
+    expect(manifest.schema).toBe("poi/v0.1");
+    expect(hashManifestForProof(manifest)).toBe(manifest.storage.manifestRoot);
   });
 
   it("rejects an invalid manifest", () => {
-    expect(ManifestSchema.safeParse({ schema: "poi/v0.1" }).success).toBe(false);
+    expect(ManifestSchema.safeParse({ schema: "poi/v0.1" }).success).toBe(
+      false,
+    );
   });
 
   it("keeps canonical JSON hashing stable regardless of key order", () => {
@@ -51,12 +56,18 @@ describe("Proof-of-Intelligence SDK", () => {
   });
 
   it("detects an intelligence root mismatch", () => {
-    const check = verifyIntelligenceBundle(codeguardianBundle, "sha256:9999999999999999999999999999999999999999999999999999999999999999");
+    const check = verifyIntelligenceBundle(
+      codeguardianBundle,
+      "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+    );
     expect(check.ok).toBe(false);
   });
 
   it("detects a memory root mismatch", () => {
-    const check = verifyMemory(codeguardianMemory, "sha256:9999999999999999999999999999999999999999999999999999999999999999");
+    const check = verifyMemory(
+      codeguardianMemory,
+      "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+    );
     expect(check.ok).toBe(false);
   });
 
@@ -67,7 +78,9 @@ describe("Proof-of-Intelligence SDK", () => {
       }
     }
 
-    const report = await createVerifier({ compute: new EmptyComputeAdapter() }).verify("codeguardian");
+    const report = await createVerifier({
+      compute: new EmptyComputeAdapter(),
+    }).verify("codeguardian");
     expect(report.tier).toBe(4);
     expect(report.missing).toContain("0G Compute run history");
   });
@@ -82,7 +95,9 @@ describe("Proof-of-Intelligence SDK", () => {
       }
     }
 
-    const report = await createVerifier({ storage: new MissingTraceStorage() }).verify("codeguardian");
+    const report = await createVerifier({
+      storage: new MissingTraceStorage(),
+    }).verify("codeguardian");
     expect(report.tier).toBe(4);
     expect(report.missing).toContain("Executable behavior trace");
   });
@@ -90,6 +105,7 @@ describe("Proof-of-Intelligence SDK", () => {
   it("does not fail when optional ENS is absent", async () => {
     const manifest = structuredClone(codeguardianManifest) as Manifest;
     delete manifest.identity.ens;
+    manifest.storage.manifestRoot = hashManifestForProof(manifest);
     const report = await createVerifier().verify({ manifest });
     expect(report.tier).toBe(6);
     expect(report.checks.find((check) => check.id === "ens")?.ok).toBe(true);
@@ -104,11 +120,21 @@ describe("Proof-of-Intelligence SDK", () => {
   });
 
   it("reports missing compute ids", () => {
-    const check = verifyComputeHistory({ schema: "poi-compute-runs/v0.1", provider: "mock", model: "mock", runs: [] }, ["missing"]);
+    const check = verifyComputeHistory(
+      {
+        schema: "poi-compute-runs/v0.1",
+        provider: "mock",
+        model: "mock",
+        runs: [],
+      },
+      ["missing"],
+    );
     expect(check.ok).toBe(false);
   });
 
   it("validates the bundled run trace root", () => {
-    expect(hashCanonicalJson(codeguardianRun as RunTrace)).toBe((codeguardianManifest as Manifest).storage.latestRunRoot);
+    expect(hashCanonicalJson(codeguardianRun as RunTrace)).toBe(
+      (codeguardianManifest as Manifest).storage.latestRunRoot,
+    );
   });
 });

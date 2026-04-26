@@ -69,6 +69,15 @@ The optional DA module exports a bundle containing:
 
 The verifier does not fail if DA is missing.
 
+## Manifest Root Rule
+
+`storage.manifestRoot` hashes the canonical JSON manifest after removing
+`storage.manifestRoot` from the payload. This avoids self-referential hashing
+while keeping the manifest bound to the live iNFT contract, token ID, storage
+roots, compute runs, skills, memory, proof, and permissions. The SDK verifier
+uses the same `hashManifestForProof` rule and rejects a manifest whose declared
+root does not match.
+
 ## Optional ENS
 
 ENS support is light and optional. A missing ENS name does not fail verification. In mock mode, `codeguardian.poi-demo.eth` can resolve to the CodeGuardian fixture.

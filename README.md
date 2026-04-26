@@ -181,6 +181,11 @@ Manifest schema name:
 }
 ```
 
+`storage.manifestRoot` is the SHA-256 hash of canonical JSON for the manifest with
+`storage.manifestRoot` itself excluded. The SDK exports `hashManifestForProof`
+and the verifier enforces that rule before accepting any downstream intelligence,
+memory, compute, trace, or certificate evidence.
+
 ## Contracts
 
 The contract slice is intentionally small:

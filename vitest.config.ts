@@ -1,9 +1,13 @@
+import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "vitest/config";
+
+const root = fileURLToPath(new URL(".", import.meta.url));
 
 export default defineConfig({
   esbuild: {
     jsx: "automatic",
-    jsxImportSource: "react"
+    jsxImportSource: "react",
   },
   test: {
     environment: "node",
@@ -20,12 +24,12 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@poi/sdk":
-        "<workspace>/packages/sdk/src/index.ts",
-      "@poi/agent-runtime":
-        "<workspace>/packages/agent-runtime/src/index.ts",
-      "@poi/ui":
-        "<workspace>/packages/ui/src/index.ts",
+      "@poi/sdk": resolve(root, "packages/sdk/src/index.ts"),
+      "@poi/agent-runtime": resolve(
+        root,
+        "packages/agent-runtime/src/index.ts",
+      ),
+      "@poi/ui": resolve(root, "packages/ui/src/index.tsx"),
     },
   },
 });

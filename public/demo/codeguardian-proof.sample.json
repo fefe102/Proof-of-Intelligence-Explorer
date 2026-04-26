@@ -18,8 +18,8 @@
       "ok": true,
       "tier": 2,
       "source": "mock",
-      "root": "sha256:551c701fd8db7b6c2447006a3c046d715795b48e3f3fa9bf0152946074e1c826",
-      "detail": "Manifest matches poi/v0.1 schema"
+      "root": "sha256:9e114ffab9242098335816b789c1c274875f382fb733293293e5d293e600c8fd",
+      "detail": "Manifest matches poi/v0.1 schema and manifest root rule"
     },
     {
       "id": "intelligence_bundle",
@@ -76,7 +76,7 @@
     }
   ],
   "evidence": {
-    "manifestRoot": "sha256:551c701fd8db7b6c2447006a3c046d715795b48e3f3fa9bf0152946074e1c826",
+    "manifestRoot": "sha256:9e114ffab9242098335816b789c1c274875f382fb733293293e5d293e600c8fd",
     "intelligenceBundleRoot": "sha256:1c47d70c2c89e0d843c1b8501e98f5bd2354f7b03b994e1b819b2fbc54b87fd4",
     "memoryRoot": "sha256:bd27bb774163cdfc375d5bcc22d55da8626002b0a209848d1f3687035bb90798",
     "latestRunRoot": "sha256:39d592c08a628ca34dc7b83ca6fe52584c3c56fade299fc0e274f1081c351909",
@@ -94,7 +94,7 @@
     "owner": "0x053b860f329c9e4549d23dc8aadf1116b99f1233",
     "standard": "ERC-7857-like",
     "metadataUri": "mock://codeguardian",
-    "manifestRoot": "sha256:551c701fd8db7b6c2447006a3c046d715795b48e3f3fa9bf0152946074e1c826",
+    "manifestRoot": "sha256:9e114ffab9242098335816b789c1c274875f382fb733293293e5d293e600c8fd",
     "source": "mock"
   },
   "manifest": {
@@ -112,7 +112,7 @@
       "ens": "codeguardian.poi-demo.eth"
     },
     "storage": {
-      "manifestRoot": "sha256:551c701fd8db7b6c2447006a3c046d715795b48e3f3fa9bf0152946074e1c826",
+      "manifestRoot": "sha256:9e114ffab9242098335816b789c1c274875f382fb733293293e5d293e600c8fd",
       "intelligenceBundleRoot": "sha256:1c47d70c2c89e0d843c1b8501e98f5bd2354f7b03b994e1b819b2fbc54b87fd4",
       "memoryRoot": "sha256:bd27bb774163cdfc375d5bcc22d55da8626002b0a209848d1f3687035bb90798",
       "latestRunRoot": "sha256:39d592c08a628ca34dc7b83ca6fe52584c3c56fade299fc0e274f1081c351909"

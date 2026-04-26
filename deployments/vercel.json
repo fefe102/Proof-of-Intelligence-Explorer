@@ -4,7 +4,7 @@
   "url": "https://proof-of-intelligence-explorer.vercel.app",
   "mode": "hybrid",
   "liveWritesEnabled": false,
-  "deployedAt": "2026-04-26T15:05:37.000Z",
+  "deployedAt": "2026-04-26T15:43:25.000Z",
   "liveChain": {
     "chainId": 16602,
     "demoInftAddress": "0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9",
@@ -12,7 +12,7 @@
     "codeguardianTokenId": "1",
     "fakeagentTokenId": "2",
     "codeguardianPassportId": "0x01212ca92791787ccb99c454d3b59c5596f90882c892c7fca3e63294a159430c",
-    "codeguardianCertificateId": "1"
+    "codeguardianCertificateId": "2"
   },
   "safeToCommit": true,
   "notes": [
@@ -20,6 +20,7 @@
     "No Vercel secrets or private env values are recorded in this file.",
     "Public verification remains available; hosted live write actions are disabled.",
     "CodeGuardian reports live 0G Chain evidence and hybrid storage/compute evidence.",
-    "Security hardening deployment adds browser security headers and non-cacheable admin responses."
+    "Security hardening deployment adds browser security headers and non-cacheable admin responses.",
+    "Latest deployment binds the hosted certificate and raw evidence to CodeGuardian live iNFT #1."
   ]
 }
