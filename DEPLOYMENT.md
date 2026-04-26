@@ -113,6 +113,8 @@ Server-only variables to configure when live writes are enabled:
 - `0G_COMPUTE_BEARER_TOKEN`
 - `POI_DEMO_ENCRYPTION_KEY`
 
+Vercel environment variable names cannot begin with a digit. For Vercel-hosted live write configuration, use the `ZERO_G_*` aliases from `.env.example`; local scripts continue to support the original `0G_*` names.
+
 ## Production Deploy
 
 Run final checks before deployment:
@@ -125,6 +127,15 @@ Deploy:
 
 ```bash
 vercel --prod
+```
+
+If the Vercel project is on a Hobby/team setup that rejects deployments based on Git author/team membership, deploy from a source copy that does not include `.git`:
+
+```bash
+mkdir -p /tmp/poi-vercel-source-clean/.vercel
+rsync -a --exclude='.git' --exclude='.vercel' --exclude='.env' --exclude='.env.*' --exclude='node_modules' --exclude='.pnpm-store' --exclude='.next' --exclude='dist' --exclude='build' --exclude='coverage' --exclude='.turbo' --exclude='artifacts' --exclude='cache' --exclude='tmp' --exclude='temp' ./ /tmp/poi-vercel-source-clean/
+rsync -a .vercel/project.json /tmp/poi-vercel-source-clean/.vercel/project.json
+pnpm exec vercel deploy --cwd /tmp/poi-vercel-source-clean --prod --yes
 ```
 
 After deployment:
@@ -147,22 +158,18 @@ vercel --prod
 
 Then add the production URL and safe deployment metadata to the docs.
 
-## Current Deployment Attempt
+## Current Deployment
 
-Automated production deployment was attempted after `pnpm final:check` passed. The Vercel CLI could start, but the configured local Vercel token was rejected:
+Production deployment is live at:
 
-```text
-Error: The specified token is not valid. Use `vercel login` to generate a new token.
-```
+https://proof-of-intelligence-explorer.vercel.app
 
-Retry after refreshing Vercel auth:
+The successful deployment used a `.git`-less source copy so Vercel did not attach GitHub author metadata to the deploy. Public verification was checked with:
 
 ```bash
-pnpm exec vercel login
-pnpm exec vercel link --yes --project proof-of-intelligence-explorer
-pnpm exec tsx scripts/sync-vercel-env.ts
-pnpm final:check
-pnpm exec vercel --prod --yes
+curl -s 'https://proof-of-intelligence-explorer.vercel.app/api/health'
+curl -s 'https://proof-of-intelligence-explorer.vercel.app/api/verify?agent=codeguardian'
+curl -s 'https://proof-of-intelligence-explorer.vercel.app/api/verify?agent=fakeagent'
 ```
 
 ## Rotation

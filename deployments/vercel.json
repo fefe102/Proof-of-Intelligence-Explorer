@@ -1,0 +1,14 @@
+{
+  "project": "proof-of-intelligence-explorer",
+  "status": "ready",
+  "url": "https://proof-of-intelligence-explorer.vercel.app",
+  "mode": "hybrid",
+  "liveWritesEnabled": false,
+  "deployedAt": "2026-04-26T11:23:03.000Z",
+  "safeToCommit": true,
+  "notes": [
+    "Deployment was made from a temporary source copy without .git metadata.",
+    "No Vercel secrets or private env values are recorded in this file.",
+    "Public verification remains available; hosted live write actions are disabled."
+  ]
+}

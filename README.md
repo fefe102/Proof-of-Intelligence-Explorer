@@ -4,7 +4,7 @@ Proof-of-Intelligence Explorer is a 0G-backed verification layer for iNFT-style 
 
 The product combines an explorer, SDK, CLI, registry, demo agent, and printable certificate flow so 0G iNFT teams can prove that encrypted intelligence, persistent memory, compute history, and executable behavior are embedded behind an agent token.
 
-Hosted demo: `https://proof-of-intelligence-explorer.vercel.app` placeholder until the production Vercel deployment is recorded.
+Hosted demo: https://proof-of-intelligence-explorer.vercel.app
 
 ## Why This Exists
 

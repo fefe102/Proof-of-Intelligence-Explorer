@@ -8,7 +8,7 @@ Proof-of-Intelligence Explorer is a 0G-backed proof layer for iNFT-style agents.
 
 ## Links
 
-- Live demo URL: `https://proof-of-intelligence-explorer.vercel.app` placeholder; production deploy attempted but blocked by invalid local Vercel token.
+- Live demo URL: https://proof-of-intelligence-explorer.vercel.app
 - Demo video: `<add ETHGlobal demo video URL>`
 - Public GitHub: `<add public GitHub repository URL>`
 - Minted iNFT explorer link: `<add 0G Galileo explorer token URL>`
