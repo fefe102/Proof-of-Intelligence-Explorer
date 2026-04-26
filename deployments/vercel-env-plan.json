@@ -6,8 +6,13 @@
     "NEXT_PUBLIC_POI_PUBLIC_MODE": "hybrid",
     "NEXT_PUBLIC_0G_CHAIN_ID": "16602",
     "NEXT_PUBLIC_0G_RPC_URL": "https://evmrpc-testnet.0g.ai",
-    "NEXT_PUBLIC_POI_REGISTRY_ADDRESS": "",
-    "NEXT_PUBLIC_POI_DEMO_INFT_ADDRESS": ""
+    "NEXT_PUBLIC_POI_REGISTRY_ADDRESS": "0x90d7f68cbf2a860f7b2c54548095fcb72d61b9af",
+    "NEXT_PUBLIC_POI_DEMO_INFT_ADDRESS": "0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9",
+    "NEXT_PUBLIC_POI_DEMO_OWNER": "0x053B860f329C9e4549D23dc8Aadf1116b99F1233",
+    "NEXT_PUBLIC_CODEGUARDIAN_INFT_ID": "1",
+    "NEXT_PUBLIC_FAKEAGENT_INFT_ID": "2",
+    "NEXT_PUBLIC_POI_PASSPORT_ID": "0x01212ca92791787ccb99c454d3b59c5596f90882c892c7fca3e63294a159430c",
+    "NEXT_PUBLIC_POI_CERTIFICATE_ID": "1"
   },
   "sensitiveEnvPresence": [
     {
@@ -19,7 +24,15 @@
       "configured": true
     },
     {
+      "key": "ZERO_G_PRIVATE_KEY",
+      "configured": false
+    },
+    {
       "key": "0G_WALLET_ADDRESS",
+      "configured": false
+    },
+    {
+      "key": "ZERO_G_WALLET_ADDRESS",
       "configured": false
     },
     {
@@ -27,23 +40,47 @@
       "configured": true
     },
     {
+      "key": "ZERO_G_RPC_URL",
+      "configured": false
+    },
+    {
       "key": "0G_STORAGE_INDEXER_RPC",
       "configured": true
+    },
+    {
+      "key": "ZERO_G_STORAGE_INDEXER_RPC",
+      "configured": false
     },
     {
       "key": "0G_COMPUTE_BEARER_TOKEN",
       "configured": true
     },
     {
+      "key": "ZERO_G_COMPUTE_BEARER_TOKEN",
+      "configured": false
+    },
+    {
       "key": "0G_COMPUTE_PROVIDER",
       "configured": true
+    },
+    {
+      "key": "ZERO_G_COMPUTE_PROVIDER",
+      "configured": false
     },
     {
       "key": "0G_COMPUTE_MODEL",
       "configured": true
     },
     {
+      "key": "ZERO_G_COMPUTE_MODEL",
+      "configured": false
+    },
+    {
       "key": "0G_COMPUTE_SERVICE_URL",
+      "configured": false
+    },
+    {
+      "key": "ZERO_G_COMPUTE_SERVICE_URL",
       "configured": false
     },
     {

@@ -10,7 +10,12 @@ const publicEnv = {
   NEXT_PUBLIC_0G_CHAIN_ID: process.env.NEXT_PUBLIC_0G_CHAIN_ID ?? zeroGEnv("CHAIN_ID") ?? "16602",
   NEXT_PUBLIC_0G_RPC_URL: process.env.NEXT_PUBLIC_0G_RPC_URL ?? zeroGEnv("RPC_URL") ?? "https://evmrpc-testnet.0g.ai",
   NEXT_PUBLIC_POI_REGISTRY_ADDRESS: process.env.NEXT_PUBLIC_POI_REGISTRY_ADDRESS ?? deployment.registryAddress ?? "",
-  NEXT_PUBLIC_POI_DEMO_INFT_ADDRESS: process.env.NEXT_PUBLIC_POI_DEMO_INFT_ADDRESS ?? deployment.demoInftAddress ?? ""
+  NEXT_PUBLIC_POI_DEMO_INFT_ADDRESS: process.env.NEXT_PUBLIC_POI_DEMO_INFT_ADDRESS ?? deployment.demoInftAddress ?? "",
+  NEXT_PUBLIC_POI_DEMO_OWNER: process.env.NEXT_PUBLIC_POI_DEMO_OWNER ?? deployment.deployer ?? "",
+  NEXT_PUBLIC_CODEGUARDIAN_INFT_ID: process.env.NEXT_PUBLIC_CODEGUARDIAN_INFT_ID ?? deployment.codeguardianTokenId ?? "",
+  NEXT_PUBLIC_FAKEAGENT_INFT_ID: process.env.NEXT_PUBLIC_FAKEAGENT_INFT_ID ?? deployment.fakeagentTokenId ?? "",
+  NEXT_PUBLIC_POI_PASSPORT_ID: process.env.NEXT_PUBLIC_POI_PASSPORT_ID ?? deployment.codeguardianPassportId ?? "",
+  NEXT_PUBLIC_POI_CERTIFICATE_ID: process.env.NEXT_PUBLIC_POI_CERTIFICATE_ID ?? deployment.codeguardianCertificateId ?? ""
 };
 
 const sensitiveEnvPresence = [

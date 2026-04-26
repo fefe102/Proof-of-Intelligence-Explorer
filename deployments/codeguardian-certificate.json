@@ -1,7 +1,11 @@
 {
-  "mode": "hybrid",
+  "mode": "live",
   "chainId": 16602,
-  "issuer": "mock-registry",
+  "issuer": "0x053B860f329C9e4549D23dc8Aadf1116b99F1233",
+  "registryAddress": "0x90d7f68cbf2a860f7b2c54548095fcb72d61b9af",
+  "demoInftAddress": "0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9",
+  "tokenId": "1",
+  "onChainCertificateId": "1",
   "certificate": {
     "schema": "poi-certificate/v0.1",
     "certificateId": "poi-cert-codeguardian-001",
@@ -32,5 +36,5 @@
     "checkpointRoot": "sha256:1327b28193e5cb885e332543c20bfeaafce555102f39e33b9bf5f491abd8d426",
     "historyRoot": "sha256:43671740184c704a39f4f7c37bd4fc3d20befbc41713bfc9737cb1022b6cb5c4"
   },
-  "message": "Certificate artifact exported in deterministic hybrid mode."
+  "message": "Certificate artifact exported and registry certificate write is live or already recorded."
 }

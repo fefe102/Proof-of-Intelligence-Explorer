@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
-import { createPublicClient, createWalletClient, defineChain, http, type Address, type Hex } from "viem";
+import { createPublicClient, createWalletClient, defineChain, http, type Abi, type Address, type Hex } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 
 export type LiveConfig = {
@@ -17,6 +17,11 @@ export type LivePreflight = {
   chainId: number;
   address?: Address;
   balanceWei?: string;
+};
+
+export type HardhatArtifact = {
+  abi: Abi;
+  bytecode: Hex;
 };
 
 export function loadLocalEnv(path = ".env") {
@@ -124,6 +129,28 @@ export function writeSafeJson(path: string, value: unknown) {
 export function readJson<T>(path: string): T | null {
   if (!existsSync(path)) return null;
   return JSON.parse(readFileSync(path, "utf8")) as T;
+}
+
+export function readArtifact(path: string): HardhatArtifact {
+  if (!existsSync(path)) {
+    throw new Error(`Missing ${path}. Run pnpm contracts:test before live deployment.`);
+  }
+  return JSON.parse(readFileSync(path, "utf8")) as HardhatArtifact;
+}
+
+export function rootToBytes32(root: string): Hex {
+  if (!root.startsWith("sha256:")) {
+    throw new Error(`Expected sha256 root, got ${root}`);
+  }
+  const hex = root.slice("sha256:".length);
+  if (!/^[0-9a-fA-F]{64}$/.test(hex)) {
+    throw new Error(`Invalid sha256 root: ${root}`);
+  }
+  return `0x${hex}` as Hex;
+}
+
+export function publicAppUrl() {
+  return process.env.NEXT_PUBLIC_APP_URL ?? "https://proof-of-intelligence-explorer.vercel.app";
 }
 
 export function zeroGChain(chainId: number, rpcUrl: string) {

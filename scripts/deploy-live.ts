@@ -1,9 +1,11 @@
-import { existsSync, readFileSync } from "node:fs";
-import { loadLocalEnv, liveClients, liveConfig, liveWritesAvailable, preflightLiveWrite, printSanitizedPlan, writeSafeJson } from "./live-helpers";
+import { loadLocalEnv, liveClients, liveConfig, liveWritesAvailable, preflightLiveWrite, printSanitizedPlan, readArtifact, readJson, writeSafeJson } from "./live-helpers";
 
-type HardhatArtifact = {
-  abi: unknown[];
-  bytecode: `0x${string}`;
+type Deployment = {
+  mode?: string;
+  chainId?: number;
+  demoInftAddress?: string;
+  registryAddress?: string;
+  txHashes?: string[];
 };
 
 loadLocalEnv();
@@ -11,6 +13,16 @@ loadLocalEnv();
 const operation = "deploy-contracts";
 const config = liveConfig();
 printSanitizedPlan(operation, config);
+const existing = readJson<Deployment>("deployments/0g-galileo.json");
+
+if (existing?.mode === "live" && existing.demoInftAddress && existing.registryAddress && process.env.POI_FORCE_DEPLOY !== "true") {
+  writeSafeJson("deployments/0g-galileo.json", {
+    ...existing,
+    liveWrites: true,
+    message: "Live deployment already exists. Set POI_FORCE_DEPLOY=true to redeploy."
+  });
+  process.exit(0);
+}
 
 if (!liveWritesAvailable(config)) {
   writeSafeJson("deployments/0g-galileo.json", {
@@ -50,10 +62,3 @@ writeSafeJson("deployments/0g-galileo.json", {
   txHashes: [demoHash, registryHash],
   updatedAt: new Date().toISOString()
 });
-
-function readArtifact(path: string): HardhatArtifact {
-  if (!existsSync(path)) {
-    throw new Error(`Missing ${path}. Run pnpm contracts:test before live deployment.`);
-  }
-  return JSON.parse(readFileSync(path, "utf8")) as HardhatArtifact;
-}
