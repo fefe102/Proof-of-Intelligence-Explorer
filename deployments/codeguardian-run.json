@@ -1,0 +1,13 @@
+{
+  "mode": "hybrid",
+  "chainId": 16602,
+  "runId": "codeguardian-run-001",
+  "memoryRoot": "sha256:50e3e700b5b580a28a79652ecd27f7e430e755bad338725979686fe737b9968b",
+  "traceRoot": "sha256:ab564debc399cd57a749842e10d885db8e55aa6df20e364461986c0d9e968812",
+  "computeRunIds": [
+    "zg-compute-analysis-001",
+    "zg-compute-critic-001"
+  ],
+  "computeProviderConfigured": true,
+  "computeBearerConfigured": true
+}

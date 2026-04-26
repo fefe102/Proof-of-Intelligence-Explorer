@@ -11,6 +11,15 @@ importers:
       '@openzeppelin/contracts':
         specifier: ^5.2.0
         version: 5.6.1
+      '@poi/agent-runtime':
+        specifier: workspace:*
+        version: link:packages/agent-runtime
+      '@poi/sdk':
+        specifier: workspace:*
+        version: link:packages/sdk
+      viem:
+        specifier: ^2.22.17
+        version: 2.48.4(typescript@5.9.3)(zod@3.25.76)
     devDependencies:
       '@nomicfoundation/hardhat-toolbox':
         specifier: ^5.0.0

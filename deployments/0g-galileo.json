@@ -1,0 +1,6 @@
+{
+  "mode": "hybrid",
+  "chainId": 16602,
+  "liveWrites": false,
+  "message": "Live deployment skipped because POI_ENABLE_LIVE_WRITES or 0G_PRIVATE_KEY is missing."
+}
