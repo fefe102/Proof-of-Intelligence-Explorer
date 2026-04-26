@@ -147,6 +147,24 @@ vercel --prod
 
 Then add the production URL and safe deployment metadata to the docs.
 
+## Current Deployment Attempt
+
+Automated production deployment was attempted after `pnpm final:check` passed. The Vercel CLI could start, but the configured local Vercel token was rejected:
+
+```text
+Error: The specified token is not valid. Use `vercel login` to generate a new token.
+```
+
+Retry after refreshing Vercel auth:
+
+```bash
+pnpm exec vercel login
+pnpm exec vercel link --yes --project proof-of-intelligence-explorer
+pnpm exec tsx scripts/sync-vercel-env.ts
+pnpm final:check
+pnpm exec vercel --prod --yes
+```
+
 ## Rotation
 
 To rotate secrets:

@@ -1,0 +1,14 @@
+{
+  "project": "proof-of-intelligence-explorer",
+  "attemptedAt": "2026-04-26T00:00:00.000Z",
+  "status": "blocked",
+  "reason": "Vercel CLI reported that the configured token is not valid.",
+  "safeToCommit": true,
+  "commandsToRetry": [
+    "pnpm exec vercel login",
+    "pnpm exec vercel link --yes --project proof-of-intelligence-explorer",
+    "pnpm exec tsx scripts/sync-vercel-env.ts",
+    "pnpm final:check",
+    "pnpm exec vercel --prod --yes"
+  ]
+}
