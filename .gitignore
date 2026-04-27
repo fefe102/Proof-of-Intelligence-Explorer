@@ -12,14 +12,14 @@ test-results/
 .vercel/
 .env
 .env.*
-.env.example
+!.env.example
 *.local
 *.log
 .DS_Store
 .idea/
 .vscode/*
-.vscode/extensions.json
-.vscode/settings.example.json
+!.vscode/extensions.json
+!.vscode/settings.example.json
 artifacts/
 cache/
 typechain/
@@ -31,7 +31,7 @@ generated/
 tmp/
 temp/
 spec.md
-SPEC.md
+!SPEC.md
 /spec.md
 .wallets/
 keys/
