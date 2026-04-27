@@ -24,6 +24,11 @@ export function Badge({ children, tone = "neutral" }: { children: React.ReactNod
 
 export function StatusHeader({ report }: { report: VerificationReport }) {
   const tone = report.status === "verified" ? "good" : report.status === "failed" ? "bad" : "warn";
+  const sourceLabels = report.sources.map((source) =>
+    source === "mock" && report.status === "verified"
+      ? "mock optional DA/ENS"
+      : source
+  );
   return (
     <section className="border-b border-white/10 bg-[#171917] px-5 py-10">
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_360px] lg:items-end">
@@ -38,7 +43,7 @@ export function StatusHeader({ report }: { report: VerificationReport }) {
           <div className="text-sm uppercase text-slate-500">Verification status</div>
           <div className="mt-2 text-3xl font-semibold capitalize text-white">{report.status}</div>
           <div className="mt-4 flex flex-wrap gap-2">
-            {report.sources.map((source) => (
+            {sourceLabels.map((source) => (
               <Badge key={source}>{source}</Badge>
             ))}
           </div>

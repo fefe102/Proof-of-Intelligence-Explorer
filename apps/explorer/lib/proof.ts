@@ -1,4 +1,7 @@
 import {
+  ArtifactComputeAdapter,
+  ArtifactStorageAdapter,
+  MockChainAdapter,
   codeguardianCertificate,
   codeguardianManifest,
   codeguardianRun,
@@ -8,12 +11,17 @@ import {
   hashCanonicalJson,
   hashManifestForProof,
   type Certificate,
+  type ChainAdapter,
   type Manifest,
+  type ProofStorageBundle,
   type RunTrace,
+  type TokenSnapshot,
   type VerificationReport,
 } from "@poi/sdk";
+import storageBundleJson from "../../../deployments/0g-storage-bundle.json";
 
 export type AgentSlug = "codeguardian" | "fakeagent";
+const storageBundle = storageBundleJson as ProofStorageBundle;
 
 export type AgentProfile = {
   slug: AgentSlug;
@@ -45,6 +53,8 @@ export function publicStatus() {
     certificateId: process.env.NEXT_PUBLIC_POI_CERTIFICATE_ID ?? "",
     codeguardianTokenId: process.env.NEXT_PUBLIC_CODEGUARDIAN_INFT_ID ?? "",
     fakeagentTokenId: process.env.NEXT_PUBLIC_FAKEAGENT_INFT_ID ?? "",
+    proofLayers: proofLayers(),
+    proofObjects: storageBundle.objects ?? [],
     seededAgents: ["codeguardian", "fakeagent"],
   };
 }
@@ -60,7 +70,19 @@ export async function verifyAgent(slug: string) {
   if (slug !== "codeguardian" && slug !== "fakeagent") {
     throw new Error(`Unsupported demo agent: ${slug}`);
   }
-  const report = await createVerifier().verify(slug);
+  const report =
+    slug === "codeguardian" && storageBundle.manifest
+      ? await createVerifier({
+          chain: seededChainAdapter("codeguardian"),
+          storage: new ArtifactStorageAdapter(storageBundle),
+          compute: new ArtifactComputeAdapter(storageBundle),
+        }).verify({ manifest: storageBundle.manifest })
+      : await createVerifier({
+          chain:
+            slug === "fakeagent"
+              ? seededChainAdapter("fakeagent")
+              : new MockChainAdapter(),
+        }).verify(slug);
   return applyLiveOverlay(slug, report);
 }
 
@@ -72,7 +94,7 @@ export async function getAgentProfile(slug: string): Promise<AgentProfile> {
       name: "CodeGuardian",
       headline: "Certified iNFT-style code review agent",
       description:
-        "Encrypted intelligence, persistent memory, hybrid 0G Compute run history, replay trace, and certificate evidence.",
+        "Encrypted intelligence, persistent memory, live 0G Compute run history, replay trace, and certificate evidence.",
       report,
       manifest: report.manifest,
     };
@@ -90,7 +112,7 @@ export async function getAgentProfile(slug: string): Promise<AgentProfile> {
 }
 
 export function getRun(runId: string): RunTrace {
-  const run = codeguardianRun as RunTrace;
+  const run = (storageBundle.run ?? codeguardianRun) as RunTrace;
   if (run.runId !== runId) {
     throw new Error(`Run not found: ${runId}`);
   }
@@ -98,7 +120,8 @@ export function getRun(runId: string): RunTrace {
 }
 
 export function getCertificate(certificateId: string): Certificate {
-  const certificate = codeguardianCertificate as Certificate;
+  const certificate = (storageBundle.certificate ??
+    codeguardianCertificate) as Certificate;
   if (certificate.certificateId !== certificateId) {
     throw new Error(`Certificate not found: ${certificateId}`);
   }
@@ -148,9 +171,10 @@ function applyLiveOverlay(
   const owner = process.env.NEXT_PUBLIC_POI_DEMO_OWNER ?? report.token?.owner;
   const certificateId = process.env.NEXT_PUBLIC_POI_CERTIFICATE_ID ?? "";
   const passportId = process.env.NEXT_PUBLIC_POI_PASSPORT_ID ?? "";
-  const sourceSet = new Set<VerificationReport["sources"][number]>(
-    slug === "codeguardian" ? ["live", "hybrid"] : ["live", "mock"],
-  );
+  const sourceSet = new Set<VerificationReport["sources"][number]>([
+    ...report.sources,
+    "live",
+  ]);
   const chainId = Number(process.env.NEXT_PUBLIC_0G_CHAIN_ID ?? "16602");
   const liveInft = {
     chainId,
@@ -230,17 +254,6 @@ function applyLiveOverlay(
               : "Certificate binds the live demo iNFT and is issued in the live Proof-of-Intelligence registry",
         };
       }
-      if (
-        slug === "codeguardian" &&
-        [
-          "intelligence_bundle",
-          "memory",
-          "compute_history",
-          "run_trace",
-        ].includes(check.id)
-      ) {
-        return { ...check, source: "hybrid" as const };
-      }
       if (slug === "codeguardian" && check.id === "ens") {
         return { ...check, source: "hybrid" as const };
       }
@@ -289,6 +302,59 @@ function bindCertificateToInft(
         contract: inft.contract,
         tokenId: inft.tokenId,
       },
+    },
+  };
+}
+
+function proofLayers() {
+  const storageMode = storageBundle.mode ?? "hybrid";
+  const computeMode = storageBundle.computeRuns?.runs.some(
+    (run) => run.source === "live",
+  )
+    ? "live"
+    : storageBundle.computeRuns?.runs.some((run) => run.source === "hybrid")
+      ? "hybrid"
+      : "mock";
+  return {
+    chain: process.env.NEXT_PUBLIC_POI_DEMO_INFT_ADDRESS ? "live" : "mock",
+    storage: storageMode,
+    compute: computeMode,
+    da: zeroGEnv("DA_MODE") ?? "mock",
+    ens: zeroGEnv("ENS_MODE") ?? "mock",
+  };
+}
+
+function seededChainAdapter(slug: AgentSlug): ChainAdapter {
+  return {
+    source: "live",
+    async getToken(
+      _contract: string,
+      _tokenId: string,
+    ): Promise<TokenSnapshot | null> {
+      const demoInftAddress = process.env.NEXT_PUBLIC_POI_DEMO_INFT_ADDRESS;
+      if (!demoInftAddress) {
+        return null;
+      }
+      const tokenId =
+        slug === "codeguardian"
+          ? (process.env.NEXT_PUBLIC_CODEGUARDIAN_INFT_ID ?? "1")
+          : (process.env.NEXT_PUBLIC_FAKEAGENT_INFT_ID ?? "2");
+      return {
+        chainId: Number(process.env.NEXT_PUBLIC_0G_CHAIN_ID ?? "16602"),
+        contract: demoInftAddress,
+        tokenId,
+        owner: process.env.NEXT_PUBLIC_POI_DEMO_OWNER,
+        standard:
+          slug === "codeguardian"
+            ? "ERC-7857-like live demo iNFT"
+            : "ERC-721 metadata-only live control token",
+        metadataUri: `${process.env.NEXT_PUBLIC_APP_URL ?? "https://proof-of-intelligence-explorer.vercel.app"}/api/agent/${slug}`,
+        manifestRoot:
+          slug === "codeguardian"
+            ? storageBundle.manifest?.storage.manifestRoot
+            : undefined,
+        source: "live",
+      };
     },
   };
 }
