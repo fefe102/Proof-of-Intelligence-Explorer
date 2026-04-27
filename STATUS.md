@@ -26,7 +26,7 @@
 - [x] CodeGuardian positive proof paths free of mock iNFT address
 - [x] ERC-7857-style iNFT root accessors, events, and contract tests
 - [x] Minted iNFT proof cards and 0G evidence links surfaced in UI/docs
-- [ ] Final `pnpm final:check`, `pnpm contracts:test`, security audit, Vercel redeploy, commit, and push
+- [x] Final `pnpm final:check`, `pnpm contracts:test`, security audit, Vercel redeploy, commit, and push
 
 ## Submission Constants
 
