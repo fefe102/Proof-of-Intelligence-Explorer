@@ -1,311 +1,221 @@
-# Proof-of-Intelligence Explorer
+# CodeGuardian iNFT
 
-Proof-of-Intelligence Explorer is a 0G-backed verification layer for iNFT-style agents. It answers one judge-facing question: **is this iNFT actually intelligent, or is it only NFT metadata?**
+**Powered by AgentProof - Proof-of-Intelligence Explorer for 0G iNFT agents.**
 
-The product combines an explorer, SDK, CLI, registry, create-passport flow, public API, badge, demo agent, and printable certificate flow so 0G iNFT teams can prove that encrypted intelligence, persistent memory, compute history, and executable behavior are embedded behind an agent token.
+CodeGuardian iNFT is an autonomous 0G code-review agent. Its encrypted intelligence bundle is packaged as AES-256-GCM proof evidence, its memory evolves across certified runs, its critic loop is compute-backed or honestly hybrid-labeled, and every run is replayable through AgentProof.
 
-Hosted demo: https://proof-of-intelligence-explorer.vercel.app
+Winning frame: **CodeGuardian is the autonomous iNFT agent. AgentProof is how judges verify it is real.**
 
-Current live Galileo demo:
+- Live demo: https://proof-of-intelligence-explorer.vercel.app
+- Public GitHub: https://github.com/fefe102/Proof-of-Intelligence-Explorer
+- Agent Console: https://proof-of-intelligence-explorer.vercel.app/agent/codeguardian/console
+- Passport: https://proof-of-intelligence-explorer.vercel.app/passport/16602/0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9/1
 
-- Demo iNFT: `0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9`
-- Proof registry: `0x90d7f68cbf2a860f7b2c54548095fcb72d61b9af`
+## Why It Matters
+
+Many iNFTs can be metadata pointers. CodeGuardian proves a stronger claim: the agent has encrypted intelligence, persistent memory, replayable behavior, compute/critic evidence, dynamic policy upgrades, and a certificate bound to a minted 0G iNFT.
+
+AgentProof is the reusable verifier, SDK, CLI, registry, API, badge, and explorer that other 0G iNFT teams can adopt.
+
+## Minted iNFT
+
+- Chain: 0G Galileo
+- Chain ID: `16602`
+- CodeGuardian iNFT contract: `0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9`
 - CodeGuardian token ID: `1`
-- FakeAgent token ID: `2`
-- CodeGuardian passport: `0x01212ca92791787ccb99c454d3b59c5596f90882c892c7fca3e63294a159430c`
-- On-chain certificate record: `3`
+- Owner: `0x053B860f329C9e4549D23dc8Aadf1116b99F1233`
+- Proof registry: `0x90d7f68cbf2a860f7b2c54548095fcb72d61b9af`
+- Passport ID: `0x01212ca92791787ccb99c454d3b59c5596f90882c892c7fca3e63294a159430c`
+- Certificate record: `3`
+- ChainScan: https://chainscan-galileo.0g.ai/address/0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9
 
-The seeded demo now uses live 0G Chain, live 0G Storage object uploads, and live 0G Compute analysis/critic runs for CodeGuardian. Optional DA and ENS remain mock/lightweight and are labeled separately.
+ChainScan links to the contract page; token ID `1` is the CodeGuardian iNFT. Token-specific proof is available in the AgentProof passport page.
 
-## Why This Exists
+## Proof Evidence
 
-Many "AI NFTs" prove ownership of a token and maybe point to metadata. They do not prove that an agent has:
+- Manifest root: `sha256:5704511de453c1a85d9ade4cf1b1c409f052a7556e184400070acc07900096b9`
+- Encrypted intelligence root: `sha256:6289903e00f2e42448eb3cad30d322fcd4e1b3e3af54dd37f35a863a864f0bcd`
+- Latest memory root: `sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce`
+- Latest run root: `sha256:5eea73e8098964c75c6da1aba8d37e7f677b491e0c8a229818eef3f0a4069dad`
+- Compute run IDs: `zg-hybrid-analysis-001`, `zg-hybrid-critic-001`, `zg-hybrid-analysis-002`, `zg-hybrid-critic-002`, `zg-hybrid-analysis-003`, `zg-hybrid-critic-003`
+- Certificate ID: `poi-cert-codeguardian-001`
 
-- encrypted intelligence or behavior policy
-- persistent memory that changes over time
-- verifiable 0G Compute run history
-- replayable execution traces
-- a certificate/export bundle a judge can inspect
+Current regenerated CodeGuardian artifacts are labeled `hybrid` unless re-uploaded through the live 0G Storage script. The chain deployment remains live on 0G Galileo. The UI and API show source labels per evidence layer and do not hide mock/hybrid evidence as live.
 
-0G's iNFT track asks teams to link to a minted iNFT and prove embedded intelligence and memory. Proof-of-Intelligence Explorer is the reusable proof layer for that requirement.
+## Autonomous Flow
+
+CodeGuardian runs a deterministic safe autonomous workflow:
+
+1. Accept an allowlisted demo task.
+2. Load a bundled TypeScript fixture.
+3. Analyze the code through the 0G Compute adapter or deterministic hybrid fallback.
+4. Identify one bug or risk.
+5. Propose a bounded patch.
+6. Run critic/self-review.
+7. Decide whether the patch is safe.
+8. Append trace events.
+9. Write persistent memory.
+10. Check dynamic skill/policy upgrades.
+11. Commit trace roots.
+12. Emit certificate data.
+
+Trace events include `task_received`, `context_loaded`, `compute_started`, `compute_completed`, `issue_found`, `patch_proposed`, `critic_started`, `critic_completed`, `memory_delta_created`, `memory_written`, `skill_upgrade_checked`, `trace_committed`, and `certificate_issued`.
+
+## Memory Evolution
+
+CodeGuardian includes three sequential certified runs:
+
+- `codeguardian-run-001`: unsafe JSON parsing. Learned pattern: validate JSON parse failures before using parsed payloads.
+- `codeguardian-run-002`: missing authorization guard. Learned pattern: verify authorization before returning private records.
+- `codeguardian-run-003`: unchecked async side effect. Learned pattern: wrap awaited side effects in explicit error handling.
+
+After Run 002, CodeGuardian upgrades `critic-loop v0.1.0 -> v0.1.1` because it learned to require authorization checks before private records are read or returned. Skill/policy hashes are deterministic SHA-256 hashes of files under `examples/codeguardian/skills`.
 
 ## 0G Prize Alignment
 
-The project is designed around 0G's full-stack AI infrastructure:
+- **0G Chain:** minted ERC-7857-style demo iNFT, registry, root updates, certificate records, and ownership checks.
+- **0G Storage:** encrypted intelligence artifact, memory/current-state artifact, run traces, compute bundle, certificate bundle. Regenerated local artifacts are hybrid until live upload is rerun.
+- **0G Compute:** analysis and critic run records use the same adapter shape as live 0G Compute; source labels show whether records are live or hybrid.
+- **Optional 0G DA:** exportable proof bundle.
+- **Optional ENS:** light mock resolver only; no ENS name is required.
 
-- **0G Chain:** demo iNFT, Proof-of-Intelligence registry, certificate issuance, and ownership checks on Galileo testnet.
-- **0G Storage:** encrypted intelligence bundle, current memory checkpoint, immutable run trace, compute run bundle, and certificate object uploads.
-- **0G Compute:** CodeGuardian analysis and critic/self-review records with provider/model/run identifiers from the 0G Compute broker path.
-- **0G DA, optional:** exportable proof bundle for teams that want an additional data availability artifact.
-- **ENS, optional:** light resolver support for nicer aliases; no ENS name is required.
+## AgentProof Flows
 
-Every public page labels evidence honestly as `live`, `hybrid`, or `mock`.
+- Verify CodeGuardian: `/agent/codeguardian`
+- Open Agent Console: `/agent/codeguardian/console`
+- Verify FakeAgent: `/agent/fakeagent`
+- Verify any token: `/verify`
+- Create Passport: `/create`
+- Replay runs: `/run/codeguardian-run-001`, `/run/codeguardian-run-002`, `/run/codeguardian-run-003`
+- Certificate: `/certificate/poi-cert-codeguardian-001`
+- Badge: `/badge/16602/0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9/1.svg`
 
-## Demo Agents
-
-**CodeGuardian** is the seeded demo agent. It audits a deterministic TypeScript fixture, finds a bug/risk, proposes a patch, self-critiques the patch, writes memory, appends trace events, and emits certificate data.
-
-**FakeAgent** is the control. It has token-like metadata but no valid Proof-of-Intelligence manifest, encrypted intelligence bundle, memory root, compute run history, or replayable trace. It should fail high-tier checks.
-
-## Verify Any 0G iNFT
-
-Open `/verify`, enter a chain ID, contract address, and token ID, then submit. The hosted product reads the token on 0G Galileo when RPC is configured, checks owner and metadata, tries known Proof-of-Intelligence manifest roots, and returns an honest report. If no manifest exists, the result remains low-tier: token ownership may be readable, but embedded intelligence is not proven.
-
-Dynamic Passport pages live at:
+## API And Badge
 
 ```text
-/passport/16602/<contract>/<tokenId>
+GET /api/verify?agent=codeguardian
+GET /api/verify?agent=fakeagent
+GET /api/verify?chainId=16602&contract=0x...&tokenId=1
+GET /api/passport/16602/0x.../1
+GET /api/run/codeguardian-run-003
+GET /api/certificate/poi-cert-codeguardian-001
+GET /api/health
 ```
-
-Public API:
-
-```text
-/api/verify?chainId=16602&contract=0x...&tokenId=1
-/api/passport/16602/0x.../1
-```
-
-Badge embed:
 
 ```md
-[![Proof of Intelligence](https://proof-of-intelligence-explorer.vercel.app/badge/16602/0x.../1.svg)](https://proof-of-intelligence-explorer.vercel.app/passport/16602/0x.../1)
+[![Proof of Intelligence](https://proof-of-intelligence-explorer.vercel.app/badge/16602/0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9/1.svg)](https://proof-of-intelligence-explorer.vercel.app/passport/16602/0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9/1)
 ```
 
-## Create Passport
-
-Open `/create` to generate a Passport draft for a testnet agent. The wizard collects agent basics, token details, skills, allowed actions, and memory policy, then computes a manifest root and badge/API URLs. In public hosted mode this is a deterministic preview. With live writes enabled, the same roots can be uploaded to 0G Storage and registered through guarded testnet operations or a future wallet-owned transaction path.
-
-## Verification Tiers
-
-| Tier | Result              | Meaning                                                         |
-| ---- | ------------------- | --------------------------------------------------------------- |
-| 0    | Unsupported         | Not recognized as an iNFT-style asset.                          |
-| 1    | Token readable      | Token exists and ownership can be checked.                      |
-| 2    | Manifest valid      | A `poi/v0.1` manifest is found and schema-valid.                |
-| 3    | Intelligence proven | Encrypted intelligence bundle exists and root/hash matches.     |
-| 4    | Memory proven       | Persistent memory checkpoint and current state roots verify.    |
-| 5    | Behavior proven     | 0G Compute history and executable run trace verify.             |
-| 6    | Certified           | Replayable certified agent with JSON/export/certificate bundle. |
-
-## Quick Start
-
-```bash
-pnpm install
-pnpm dev
-```
-
-Then open `http://localhost:3000`.
-
-Useful local checks:
-
-```bash
-pnpm lint
-pnpm typecheck
-pnpm test
-pnpm build
-pnpm final:check
-```
-
-Mock demo commands:
-
-```bash
-pnpm seed:demo
-pnpm demo:verify
-pnpm demo:run-agent
-pnpm demo:replay
-pnpm demo:export-proof
-```
-
-CLI examples:
-
-```bash
-pnpm --filter @poi/cli poi verify codeguardian
-pnpm --filter @poi/cli poi verify fakeagent
-pnpm --filter @poi/cli poi verify --chain-id 16602 --contract 0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9 --token-id 1
-pnpm --filter @poi/cli poi create-passport
-pnpm --filter @poi/cli poi run-codeguardian
-pnpm --filter @poi/cli poi replay codeguardian-run-001
-pnpm --filter @poi/cli poi export-proof codeguardian --out tmp/codeguardian-proof.json
-pnpm --filter @poi/cli poi health
-```
-
-## Live 0G Setup
-
-Copy `.env.example` to a local ignored env file and fill only local or Vercel-managed values. Never commit secrets.
-
-Required live chain values:
-
-- `0G_CHAIN_ID`
-- `0G_RPC_URL`
-- `0G_PRIVATE_KEY`
-- `0G_WALLET_ADDRESS`
-- `POI_ADMIN_TOKEN`
-- `POI_ENABLE_LIVE_WRITES`
-
-Optional live values:
-
-- `0G_STORAGE_INDEXER_RPC`
-- `0G_COMPUTE_PROVIDER`
-- `0G_COMPUTE_MODEL`
-- `0G_COMPUTE_SERVICE_URL`
-- `0G_COMPUTE_BEARER_TOKEN`
-- `0G_DA_ENDPOINT`
-
-Live write scripts and admin routes must preflight chain ID, wallet address, balance, retry limits, and testnet-only guardrails before sending transactions.
-
-## Vercel Deployment
-
-Project name: `proof-of-intelligence-explorer`
-
-```bash
-vercel link
-vercel env add NEXT_PUBLIC_APP_NAME production
-vercel env add NEXT_PUBLIC_APP_URL production
-vercel env add NEXT_PUBLIC_POI_PUBLIC_MODE production
-vercel env add NEXT_PUBLIC_0G_CHAIN_ID production
-vercel env add NEXT_PUBLIC_0G_RPC_URL production
-vercel env add NEXT_PUBLIC_POI_REGISTRY_ADDRESS production
-vercel env add NEXT_PUBLIC_POI_DEMO_INFT_ADDRESS production
-vercel env add NEXT_PUBLIC_POI_DEMO_OWNER production
-vercel env add NEXT_PUBLIC_CODEGUARDIAN_INFT_ID production
-vercel env add NEXT_PUBLIC_FAKEAGENT_INFT_ID production
-vercel env add NEXT_PUBLIC_POI_PASSPORT_ID production
-vercel env add NEXT_PUBLIC_POI_CERTIFICATE_ID production
-vercel --prod
-```
-
-Set server-only secrets with Vercel sensitive environment variables or stdin/temp-file methods that do not print values. Do not expose private keys, bearer tokens, admin tokens, or encryption material to browser code.
-
-See [DEPLOYMENT.md](DEPLOYMENT.md) for the full release flow.
-
-## SDK Example
+## SDK And CLI
 
 ```ts
-import { createVerifier, exportProofJson } from "@poi/sdk";
+import { createVerifier, createPoiRecorder } from "@poi/sdk";
 
 const verifier = createVerifier();
 const report = await verifier.verify("codeguardian");
-
-console.log(report.tier, report.status, report.evidence);
-const proofJson = exportProofJson(report);
-```
-
-Builder recorder example:
-
-```ts
-import { createPoiRecorder } from "@poi/sdk";
 
 const recorder = createPoiRecorder({
   chainId: 16602,
   contract: "0x...",
   tokenId: "1"
 });
-
-await recorder.startRun({ task: "Audit this repository" });
-await recorder.recordComputeCall({ model: "0G Compute", inputHash, outputHash });
-await recorder.recordMemoryWrite({ memoryRoot });
-await recorder.finishRun({ resultRoot });
 ```
 
-Manifest schema name:
-
-```json
-{
-  "schema": "poi/v0.1",
-  "name": "CodeGuardian",
-  "inft": {
-    "chainId": 16602,
-    "contract": "<demo iNFT address>",
-    "tokenId": "1",
-    "standard": "ERC-7857-style"
-  },
-  "storage": {
-    "manifestRoot": "<manifest root>",
-    "intelligenceBundleRoot": "<encrypted intelligence root>",
-    "memoryRoot": "<memory root>",
-    "latestRunRoot": "<run root>"
-  }
-}
+```bash
+pnpm --filter @poi/cli poi verify codeguardian
+pnpm --filter @poi/cli poi verify fakeagent
+pnpm --filter @poi/cli poi verify --chain-id 16602 --contract 0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9 --token-id 1
+pnpm --filter @poi/cli poi run-codeguardian
+pnpm --filter @poi/cli poi replay codeguardian-run-003
+pnpm --filter @poi/cli poi export-proof codeguardian --out tmp/codeguardian-proof.json
 ```
 
-`storage.manifestRoot` is the SHA-256 hash of canonical JSON for the manifest with
-`storage.manifestRoot` itself excluded. The SDK exports `hashManifestForProof`
-and the verifier enforces that rule before accepting any downstream intelligence,
-memory, compute, trace, or certificate evidence.
+## Local Setup
+
+```bash
+pnpm install
+pnpm dev
+```
+
+Useful checks:
+
+```bash
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm contracts:test
+pnpm build
+pnpm final:check
+```
+
+Generate deterministic public proof artifacts:
+
+```bash
+pnpm demo:generate-artifacts
+pnpm seed:demo
+```
+
+## Live 0G Setup
+
+Copy `.env.example` to an ignored local env file. Never commit secrets.
+
+Required for guarded live writes:
+
+- `0G_CHAIN_ID=16602`
+- `0G_RPC_URL`
+- `0G_PRIVATE_KEY`
+- `0G_WALLET_ADDRESS`
+- `POI_ADMIN_TOKEN`
+- `POI_ENABLE_LIVE_WRITES=true`
+
+Optional:
+
+- `0G_STORAGE_INDEXER_RPC`
+- `0G_COMPUTE_PROVIDER`
+- `0G_COMPUTE_MODEL`
+- `0G_COMPUTE_SERVICE_URL`
+- `0G_COMPUTE_BEARER_TOKEN`
+
+Live scripts preflight chain ID, wallet address, balance, retry limits, and allowlisted actions before spending 0G Galileo testnet funds.
 
 ## Contracts
 
-The contract slice is intentionally small:
+- `DemoINFT.sol`: ERC-7857-style demo iNFT with manifest, intelligence, memory, latest-run, usage, skill-hash, and certification semantics.
+- `ProofOfIntelligenceRegistry.sol`: passport registration, root updates, certificate issuance, and public reads.
 
-- `DemoINFT.sol`: minimal ERC-721/ERC-7857-style demo iNFT that stores or references a manifest root.
-- `ProofOfIntelligenceRegistry.sol`: passport registration, root updates, certificate issuance, and read APIs.
-- certificate records: issued directly by the registry to keep the hackathon demo minimal and reliable.
-
-Contract checks cover minting, passport registration, root updates, certificate issuance, unauthorized update rejection, and public reads.
-
-Live Galileo contract metadata is recorded in [deployments/0g-galileo.json](deployments/0g-galileo.json). The public deployment is read-only by default; hosted live write actions remain disabled unless server-only admin and wallet secrets are configured.
+This is ERC-7857-style proof semantics aligned to 0G iNFT requirements, not a generic marketplace.
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-  Judge["Judge / Explorer UI"] --> Verifier["ProofOfIntelligenceVerifier"]
-  CLI["poi CLI"] --> Verifier
-  SDK["SDK"] --> Verifier
-  Verifier --> Chain["0G Chain Adapter"]
-  Verifier --> Storage["0G Storage Adapter"]
-  Verifier --> Compute["0G Compute Adapter"]
-  Verifier --> DA["Optional 0G DA Adapter"]
-  Verifier --> ENS["Optional ENS Adapter"]
-  Chain --> Registry["Proof Registry + Certificate"]
-  Storage --> Bundle["Encrypted Intelligence + Memory + Trace Roots"]
-  Compute --> Runs["Analysis + Critic Run Records"]
-  CodeGuardian["CodeGuardian Runtime"] --> Storage
-  CodeGuardian --> Compute
-  CodeGuardian --> Registry
+  CodeGuardian["CodeGuardian iNFT"] --> Runtime["Agent Runtime"]
+  Runtime --> Memory["Evolving Memory"]
+  Runtime --> Trace["Replayable Runs"]
+  Runtime --> Compute["0G Compute / Hybrid Adapter"]
+  Runtime --> Storage["0G Storage / Hybrid Artifacts"]
+  AgentProof["AgentProof Verifier"] --> Chain["0G Chain"]
+  AgentProof --> Storage
+  AgentProof --> Compute
+  AgentProof --> Cert["Certificate + Badge + API"]
+  Judge["Judge"] --> Console["Agent Console"]
+  Console --> AgentProof
 ```
 
-## Public Explorer Pages
+## Security
 
-- `/` landing page
-- `/verify`
-- `/create`
-- `/passport/[chainId]/[contract]/[tokenId]`
-- `/agent/codeguardian`
-- `/agent/fakeagent`
-- `/run/[runId]`
-- `/certificate/[certificateId]`
-- `/developer`
-- `/mint-demo`
-- `/admin`
-- `/badge/[chainId]/[contract]/[tokenId].svg`
+- Public pages and APIs are read-only.
+- Admin writes require `POI_ADMIN_TOKEN` and are disabled unless `POI_ENABLE_LIVE_WRITES=true`.
+- Browser code never receives private keys, bearer tokens, admin tokens, encryption keys, mnemonics, or keystores.
+- No arbitrary calldata, raw transaction signing, shell execution, or untrusted repo execution is accepted from public input.
+- Demo encryption uses safe fixture content only. Real secrets stay in ignored env files or Vercel sensitive env vars.
 
-Public pages must work without local setup. Admin write actions require a server-only admin token and must be disabled when live writes are not configured.
+## Limitations / Future Work
 
-## Security Model
+- Regenerated proof artifacts are hybrid until live 0G Storage upload is rerun.
+- Wallet-owned create-passport writes are future work; hosted create flow is currently a deterministic preview.
+- Optional DA is export-only.
+- ENS support is light/mock.
+- Demo video URL is added in the ETHGlobal dashboard.
 
-- The repository is public; secrets stay in ignored env files or Vercel sensitive env vars.
-- Browser code sees only public display configuration.
-- Admin routes require `POI_ADMIN_TOKEN` and never accept arbitrary calldata or raw transaction signing input.
-- Live writes are allowlisted, testnet-only, idempotent where practical, and balance/chain preflighted.
-- Public routes are read-only and must not return private env values.
-- Demo encryption uses safe fixture content only; live owner decrypt remains server-gated until wallet-based decrypt is implemented.
-
-See [docs/security.md](docs/security.md) for the checklist.
-
-## Limitations
-
-- Hosted live write buttons remain disabled unless server-only admin and wallet secrets are configured in Vercel.
-- Optional DA remains an export bundle rather than a required verifier tier.
-- ENS support is intentionally light and optional.
-- Printable HTML certificates are the reliable baseline; PDF export is optional if runtime dependencies permit.
-- FakeAgent is a negative-control fixture, not a malicious-token detector.
-
-## Submission Checklist
-
-- Hosted URL recorded in `SUBMISSION.md`.
-- Public GitHub URL recorded in `SUBMISSION.md`.
-- Demo video URL added in the ETHGlobal dashboard.
-- Contract addresses and minted iNFT link recorded after live deployment.
-- CodeGuardian high-tier proof and FakeAgent failure shown in the explorer.
-- JSON proof export and certificate page verified.
-- No personal contact details or secrets committed.
+Team/contact details are provided in the ETHGlobal dashboard and omitted from this public repository.

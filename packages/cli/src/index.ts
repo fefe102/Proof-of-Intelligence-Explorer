@@ -55,7 +55,8 @@ program
     );
     writeJson(repoPath("public/demo/fakeagent-proof.sample.json"), fakeagent);
     writeJson(repoPath("public/demo/status.json"), {
-      app: "Proof-of-Intelligence Explorer",
+      app: "CodeGuardian iNFT",
+      proofLayer: "AgentProof - Proof-of-Intelligence Explorer",
       mode: process.env.NEXT_PUBLIC_POI_PUBLIC_MODE ?? "hybrid",
       seededAt: "2026-04-26T00:00:00.000Z",
       agents: {

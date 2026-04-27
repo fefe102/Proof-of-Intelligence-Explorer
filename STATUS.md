@@ -16,16 +16,16 @@
 
 ## Active Backlog
 
-- [ ] Agent-first README, SUBMISSION, DEMO, docs, and landing-page framing
-- [ ] CodeGuardian Agent Console at `/agent/codeguardian/console`
-- [ ] Three deterministic autonomous runs with memory evolution
-- [ ] Dynamic critic-policy upgrade evidence
-- [ ] Placeholder skill hashes replaced with hashes of real skill/policy files
-- [ ] AES-256-GCM encrypted public intelligence artifact
-- [ ] Manifest root and trace root semantics revalidated after artifact regeneration
-- [ ] CodeGuardian positive proof paths free of mock iNFT address
-- [ ] ERC-7857-style iNFT root accessors, events, and contract tests
-- [ ] Minted iNFT proof cards and 0G evidence links surfaced in UI/docs
+- [x] Agent-first README, SUBMISSION, DEMO, docs, and landing-page framing
+- [x] CodeGuardian Agent Console at `/agent/codeguardian/console`
+- [x] Three deterministic autonomous runs with memory evolution
+- [x] Dynamic critic-policy upgrade evidence
+- [x] Placeholder skill hashes replaced with hashes of real skill/policy files
+- [x] AES-256-GCM encrypted public intelligence artifact
+- [x] Manifest root and trace root semantics revalidated after artifact regeneration
+- [x] CodeGuardian positive proof paths free of mock iNFT address
+- [x] ERC-7857-style iNFT root accessors, events, and contract tests
+- [x] Minted iNFT proof cards and 0G evidence links surfaced in UI/docs
 - [ ] Final `pnpm final:check`, `pnpm contracts:test`, security audit, Vercel redeploy, commit, and push
 
 ## Submission Constants

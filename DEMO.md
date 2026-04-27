@@ -1,10 +1,22 @@
 # Demo Guide
 
-This guide supports the ETHGlobal judging flow for Proof-of-Intelligence Explorer.
+This guide supports the ETHGlobal judging flow for **CodeGuardian iNFT**.
 
 ## Goal
 
-Show that CodeGuardian is a real iNFT-style agent with embedded intelligence, persistent memory, compute-backed runs, and replayable behavior, while FakeAgent fails those checks.
+Show that CodeGuardian is an autonomous 0G iNFT code-review agent with embedded encrypted intelligence, evolving memory, compute/hybrid critic evidence, replayable behavior, dynamic policy upgrade evidence, and a Proof-of-Intelligence certificate. AgentProof verifies it. FakeAgent fails.
+
+## Hosted Walkthrough
+
+1. Open https://proof-of-intelligence-explorer.vercel.app.
+2. Open **Agent Console**.
+3. Show minted 0G Galileo iNFT details: contract `0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9`, token ID `1`.
+4. Click **Run CodeGuardian on demo file** and explain it is an allowlisted deterministic/hybrid preview.
+5. Show memory evolution across `codeguardian-run-001`, `codeguardian-run-002`, and `codeguardian-run-003`.
+6. Replay the latest run.
+7. Open the certificate.
+8. Open FakeAgent and show low-tier failure.
+9. Show API/badge/SDK/CLI on the developer page.
 
 ## Local Demo
 
@@ -13,11 +25,10 @@ pnpm install
 pnpm dev
 ```
 
-Open `http://localhost:3000`.
-
-Run the seeded proof flow. With the checked-in deployment artifacts present, the CLI verifies the live CodeGuardian proof bundle and the FakeAgent control:
+Run the seeded proof flow:
 
 ```bash
+pnpm demo:generate-artifacts
 pnpm seed:demo
 pnpm demo:verify
 pnpm demo:run-agent
@@ -25,30 +36,11 @@ pnpm demo:replay
 pnpm demo:export-proof
 ```
 
-## Browser Walkthrough
+## Live / Hybrid Notes
 
-1. Open the landing page.
-2. Click **Try FakeAgent** and point out the low tier, missing manifest/intelligence/memory/compute evidence, and failed checklist items.
-3. Click **Verify CodeGuardian** and show the high tier, source mode badges, evidence roots, and raw JSON.
-4. Open the replay page and walk through the timeline from `task_received` through `certificate_issued`.
-5. Open the certificate page and show the printable proof with iNFT, owner, roots, and compute run IDs.
-6. Open the developer page and show the SDK/CLI snippet for other 0G iNFT teams.
+- 0G Chain proof is live on Galileo.
+- Regenerated CodeGuardian Storage/Compute artifacts are currently labeled `hybrid` unless live upload/compute scripts are rerun with configured env.
+- Admin actions are disabled unless `POI_ENABLE_LIVE_WRITES=true` and `POI_ADMIN_TOKEN` are configured server-side.
+- Live writes spend only 0G Galileo testnet funds and preflight chain ID, wallet address, and balance.
 
-## Live Demo Notes
-
-- Public pages work without admin access.
-- The hosted demo is seeded on 0G Galileo with Demo iNFT `0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9`, registry `0x90d7f68cbf2a860f7b2c54548095fcb72d61b9af`, CodeGuardian token `1`, and FakeAgent token `2`.
-- Admin actions are hidden or disabled unless live writes and `POI_ADMIN_TOKEN` are configured.
-- Live writes spend only 0G Galileo testnet funds and must preflight chain ID, wallet address, and balance.
-- The public UI labels 0G Chain, Storage, Compute, DA, and ENS evidence separately. CodeGuardian is seeded with live Chain, Storage, and Compute evidence; DA/ENS remain optional.
-
-## Fallback
-
-If the live deployment, wallet, or 0G service is unavailable during judging:
-
-1. Use the hosted public seeded demo if available.
-2. Use the deterministic local mock flow.
-3. Show `public/demo/codeguardian-proof.sample.json` and `public/demo/fakeagent-proof.sample.json` as safe proof fixtures.
-4. Explain which components are live, hybrid, or mock in the status panel.
-
-For the exact 3-minute narration, use [docs/demo-script.md](docs/demo-script.md).
+For the exact sub-3-minute narration, use [docs/demo-script.md](docs/demo-script.md).

@@ -49,7 +49,11 @@ Public routes are read-only. They can return verification reports, evidence root
 
 ## Demo Encryption
 
-Mock encryption fixtures contain safe demo content only. In live/admin mode, decrypt previews should remain server-gated. A future wallet-based decrypt flow can move decryption client-side only if the secret is derived from the owner's wallet and never stored by the app.
+The public CodeGuardian intelligence artifact uses AES-256-GCM over safe demo content. The repository does not contain a real owner key. Test/local decrypt helpers use deterministic demo key material in code only for fixture validation; production owner decrypt should remain server-gated or move to wallet-derived client encryption in a future release.
+
+## Safe Agent Run Preview
+
+The Agent Console "Run CodeGuardian on demo file" path is an allowlisted deterministic/hybrid preview. It does not accept arbitrary repositories, execute shell commands, run untrusted code, send transactions, sign calldata, or expose private keys.
 
 ## Secret Checks
 
