@@ -5,10 +5,10 @@ import { ThemeToggle } from "../components/theme-toggle";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Proof-of-Intelligence Explorer",
+  title: "CodeGuardian iNFT",
   description:
-    "Verify encrypted intelligence, persistent memory, compute history, and replayable iNFT behavior.",
-  applicationName: "Proof-of-Intelligence Explorer",
+    "Autonomous 0G iNFT code-review agent verified by AgentProof.",
+  applicationName: "CodeGuardian iNFT",
 };
 
 const themeInitScript = `
@@ -47,14 +47,15 @@ export default function RootLayout({
             >
               <ProductMark className="app-brand-mark" />
               <span className="app-brand-copy">
-                <span>Proof-of-Intelligence</span>
-                <span>Explorer</span>
+                <span>CodeGuardian iNFT</span>
+                <span>AgentProof Explorer</span>
               </span>
             </Link>
             <div className="app-shell-links">
               <Link href="/verify">Verify</Link>
               <Link href="/create">Create Passport</Link>
-              <Link href="/agent/codeguardian">Demo</Link>
+              <Link href="/agent/codeguardian/console">Agent Console</Link>
+              <Link href="/agent/codeguardian">Proof</Link>
               <Link href="/developer">Developer</Link>
               <Link href="/admin">Admin</Link>
             </div>

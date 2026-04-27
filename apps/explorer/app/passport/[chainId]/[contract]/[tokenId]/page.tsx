@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import {
   AgentActions,
   Checklist,
+  EvidenceObjects,
   EvidencePanel,
   StatusHeader,
   TierLadder,
@@ -10,8 +11,10 @@ import {
 import {
   badgePath,
   getPassportForTarget,
+  getProofObjects,
   parsePassportTarget,
   passportPath,
+  storageScanSearchUrl,
 } from "../../../../../lib/proof";
 
 export default async function PassportPage({
@@ -82,6 +85,13 @@ export default async function PassportPage({
           </div>
 
           <Checklist report={report} />
+
+          {report.agent === "codeguardian" ? (
+            <EvidenceObjects
+              objects={getProofObjects()}
+              storageScanUrl={storageScanSearchUrl()}
+            />
+          ) : null}
 
           <div className="grid gap-5 md:grid-cols-2">
             <div className="rounded-md border border-white/10 bg-black/20 p-4">

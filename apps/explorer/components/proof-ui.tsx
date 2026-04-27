@@ -1,5 +1,10 @@
 import Link from "next/link";
-import type { Certificate, RunTrace, VerificationReport } from "@poi/sdk";
+import type {
+  Certificate,
+  ProofObjectRecord,
+  RunTrace,
+  VerificationReport,
+} from "@poi/sdk";
 import { certificateRoot } from "../lib/proof";
 
 const tierLabels = [
@@ -100,6 +105,11 @@ export function EvidencePanel({ report }: { report: VerificationReport }) {
 export function AgentActions({ agent, certificateId, runId }: { agent: string; certificateId?: string; runId?: string }) {
   return (
     <div className="flex flex-wrap gap-3">
+      {agent === "codeguardian" ? (
+        <Link className="rounded-md border border-white/15 px-4 py-2 text-sm font-semibold text-white" href="/agent/codeguardian/console">
+          Agent Console
+        </Link>
+      ) : null}
       <Link className="rounded-md bg-emerald-300 px-4 py-2 text-sm font-semibold text-[#121412]" href={`/api/verify?agent=${agent}`}>
         Export proof
       </Link>
@@ -113,6 +123,55 @@ export function AgentActions({ agent, certificateId, runId }: { agent: string; c
           Replay
         </Link>
       ) : null}
+    </div>
+  );
+}
+
+export function EvidenceObjects({
+  objects,
+  storageScanUrl,
+}: {
+  objects: ProofObjectRecord[];
+  storageScanUrl: string;
+}) {
+  return (
+    <div className="divide-y divide-white/10 border-y border-white/10">
+      <div className="py-4">
+        <div className="text-sm uppercase text-slate-500">0G evidence objects</div>
+        <p className="mt-2 text-sm text-slate-400">
+          Roots are copyable. When a StorageScan deep link is unavailable, search the root or tx sequence on StorageScan.
+        </p>
+      </div>
+      {objects.map((object) => (
+        <div
+          key={object.name}
+          className="grid gap-3 py-4 md:grid-cols-[150px_1fr_110px] md:items-center"
+        >
+          <div>
+            <div className="font-medium capitalize text-white">{object.name}</div>
+            <Badge tone={object.source === "live" ? "good" : object.source === "hybrid" ? "warn" : "neutral"}>
+              {object.source}
+            </Badge>
+          </div>
+          <div className="space-y-2">
+            <code className="block break-all text-xs text-emerald-200">{object.poiRoot}</code>
+            {object.zeroGRootHash ? (
+              <code className="block break-all text-xs text-slate-400">{object.zeroGRootHash}</code>
+            ) : null}
+            <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-500">
+              {object.txHash ? <span className="break-all">tx {object.txHash}</span> : null}
+              {object.txSeq ? <span>seq {object.txSeq}</span> : null}
+              {object.byteLength ? <span>{object.byteLength} bytes</span> : null}
+            </div>
+          </div>
+          <Link
+            className="rounded-md border border-white/15 px-3 py-2 text-center text-xs font-semibold text-white"
+            href={storageScanUrl}
+          >
+            StorageScan
+          </Link>
+        </div>
+      ))}
     </div>
   );
 }

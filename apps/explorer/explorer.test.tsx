@@ -2,6 +2,7 @@ import { renderToString } from "react-dom/server";
 import { afterEach, describe, expect, it } from "vitest";
 import { NextRequest } from "next/server";
 import AdminPage from "./app/admin/page";
+import CodeGuardianConsolePage from "./app/agent/codeguardian/console/page";
 import AgentPage from "./app/agent/[agent]/page";
 import { GET as BadgeGET } from "./app/badge/[chainId]/[contract]/[tokenId].svg/route";
 import CertificatePage from "./app/certificate/[certificateId]/page";
@@ -27,9 +28,9 @@ afterEach(() => {
 describe("explorer app smoke tests", () => {
   it("home page renders", async () => {
     const html = renderToString(await HomePage());
-    expect(html).toContain("Proof-of-Intelligence Explorer");
-    expect(html).toContain("Verify any 0G iNFT agent");
-    expect(html).toContain("Create Passport");
+    expect(html).toContain("CodeGuardian iNFT");
+    expect(html).toContain("Autonomous 0G code-review iNFT");
+    expect(html).toContain("Open Agent Console");
   });
 
   it("verify page has arbitrary token form", async () => {
@@ -59,6 +60,18 @@ describe("explorer app smoke tests", () => {
     expect(html).toContain("Encrypted intelligence bundle");
   });
 
+  it("Agent Console renders memory evolution and upgrade", async () => {
+    const html = renderToString(
+      await CodeGuardianConsolePage({
+        searchParams: Promise.resolve({ preview: "allowlisted-demo" }),
+      }),
+    );
+    expect(html).toContain("Autonomous code-review agent console");
+    expect(html).toContain("Memory evolution");
+    expect(html).toContain("critic-loop");
+    expect(html).toContain("Hybrid preview generated");
+  });
+
   it("FakeAgent page renders failures", async () => {
     const html = renderToString(
       await AgentPage({ params: Promise.resolve({ agent: "fakeagent" }) }),
@@ -76,6 +89,22 @@ describe("explorer app smoke tests", () => {
     );
     expect(html).toContain("task_received");
     expect(html).toContain("certificate_issued");
+  });
+
+  it("all CodeGuardian demo run pages render", async () => {
+    for (const runId of [
+      "codeguardian-run-001",
+      "codeguardian-run-002",
+      "codeguardian-run-003",
+    ]) {
+      const html = renderToString(
+        await RunPage({
+          params: Promise.resolve({ runId }),
+        }),
+      );
+      expect(html).toContain(runId);
+      expect(html).toContain("memory_delta_created");
+    }
   });
 
   it("certificate page renders certificate", async () => {

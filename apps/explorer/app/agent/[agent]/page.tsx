@@ -1,13 +1,17 @@
 import { notFound } from "next/navigation";
 import {
   AgentActions,
-  Badge,
   Checklist,
+  EvidenceObjects,
   EvidencePanel,
   StatusHeader,
   TierLadder,
 } from "../../../components/proof-ui";
-import { getAgentProfile, publicStatus } from "../../../lib/proof";
+import {
+  getAgentProfile,
+  getProofObjects,
+  storageScanSearchUrl,
+} from "../../../lib/proof";
 
 export default async function AgentPage({
   params,
@@ -18,7 +22,7 @@ export default async function AgentPage({
   if (agent !== "codeguardian" && agent !== "fakeagent") notFound();
   const profile = await getAgentProfile(agent);
   const report = profile.report;
-  const status = publicStatus();
+  const proofObjects = getProofObjects();
 
   return (
     <main className="min-h-screen bg-ink text-white">
@@ -45,10 +49,8 @@ export default async function AgentPage({
         <div className="space-y-10">
           <div className="grid gap-5 md:grid-cols-2">
             {[
-              [
-                "Embedded intelligence",
-                report.evidence.intelligenceBundleRoot ?? "missing",
-              ],
+              ["Minted iNFT", `${report.token?.contract ?? "missing"} #${report.token?.tokenId ?? "?"}`],
+              ["Embedded intelligence", report.evidence.intelligenceBundleRoot ?? "missing"],
               ["Persistent memory", report.evidence.memoryRoot ?? "missing"],
               [
                 "0G Compute history",
@@ -69,41 +71,10 @@ export default async function AgentPage({
           </div>
           <Checklist report={report} />
           {agent === "codeguardian" ? (
-            <div className="divide-y divide-white/10 border-y border-white/10">
-              <div className="py-4">
-                <div className="text-sm uppercase text-slate-500">
-                  0G Storage proof objects
-                </div>
-                <p className="mt-2 text-sm text-slate-400">
-                  These uploaded object roots back the manifest, encrypted
-                  intelligence bundle, memory, live run trace, compute history,
-                  and certificate.
-                </p>
-              </div>
-              {status.proofObjects.map((object) => (
-                <div
-                  key={object.name}
-                  className="grid gap-3 py-4 md:grid-cols-[160px_1fr_90px] md:items-center"
-                >
-                  <div className="font-medium capitalize text-white">
-                    {object.name}
-                  </div>
-                  <div>
-                    <code className="block break-all text-xs text-emerald-200">
-                      {object.poiRoot}
-                    </code>
-                    {object.zeroGRootHash ? (
-                      <code className="mt-1 block break-all text-xs text-slate-500">
-                        {object.zeroGRootHash}
-                      </code>
-                    ) : null}
-                  </div>
-                  <Badge tone={object.source === "live" ? "good" : "warn"}>
-                    {object.source}
-                  </Badge>
-                </div>
-              ))}
-            </div>
+            <EvidenceObjects
+              objects={proofObjects}
+              storageScanUrl={storageScanSearchUrl()}
+            />
           ) : null}
           <EvidencePanel report={report} />
         </div>

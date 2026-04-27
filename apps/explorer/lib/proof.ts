@@ -17,6 +17,7 @@ import {
   type ChainAdapter,
   type Manifest,
   type ProofStorageBundle,
+  type ProofObjectRecord,
   type RunTrace,
   type TokenSnapshot,
   type VerificationReport,
@@ -142,10 +143,10 @@ export async function getAgentProfile(slug: string): Promise<AgentProfile> {
   if (slug === "codeguardian") {
     return {
       slug,
-      name: "CodeGuardian",
-      headline: "Certified iNFT-style code review agent",
+      name: "CodeGuardian iNFT",
+      headline: "Autonomous 0G iNFT code-review agent",
       description:
-        "Encrypted intelligence, persistent memory, live 0G Compute run history, replay trace, and certificate evidence.",
+        "Encrypted intelligence, evolving memory, compute-backed critic loops, replay traces, dynamic upgrade evidence, and certificate roots.",
       report,
       manifest: report.manifest,
     };
@@ -174,6 +175,81 @@ export function getRun(runId: string): RunTrace {
     throw new Error(`Run not found: ${runId}`);
   }
   return run;
+}
+
+export function getCodeGuardianRuns(): RunTrace[] {
+  return (storageBundle.runs ?? [storageBundle.run ?? codeguardianRun]).filter(
+    Boolean,
+  ) as RunTrace[];
+}
+
+export function getCodeGuardianMemoryEvolution() {
+  return storageBundle.memoryEvolution ?? [];
+}
+
+export function getCodeGuardianPolicyUpgrade() {
+  return storageBundle.policyUpgrade as
+    | {
+        skill: string;
+        oldVersion: string;
+        newVersion: string;
+        oldHash: string;
+        newHash: string;
+        reason: string;
+        runId: string;
+      }
+    | undefined;
+}
+
+export function getCodeGuardianSkillHashes() {
+  return (storageBundle.skillHashes ?? {}) as Record<string, string>;
+}
+
+export function getProofObjects(): ProofObjectRecord[] {
+  return storageBundle.objects ?? [];
+}
+
+export function chainscanContractUrl() {
+  const address = currentDemoInftAddress();
+  return address ? `https://chainscan-galileo.0g.ai/address/${address}` : "";
+}
+
+export function storageScanSearchUrl() {
+  return "https://storagescan-galileo.0g.ai";
+}
+
+export async function getCodeGuardianConsole() {
+  const profile = await getAgentProfile("codeguardian");
+  const runs = getCodeGuardianRuns();
+  const latestRun = runs.at(-1) ?? profile.report.run;
+  const latestAnalysis = profile.report.computeRuns?.runs
+    .filter((run) => run.type === "analysis")
+    .at(-1);
+  const latestCritic = profile.report.computeRuns?.runs
+    .filter((run) => run.type === "critic")
+    .at(-1);
+  return {
+    profile,
+    runs,
+    latestRun,
+    latestAnalysis,
+    latestCritic,
+    memoryEvolution: getCodeGuardianMemoryEvolution(),
+    policyUpgrade: getCodeGuardianPolicyUpgrade(),
+    skillHashes: getCodeGuardianSkillHashes(),
+    proofObjects: getProofObjects(),
+    mintedInft: {
+      chain: "0G Galileo",
+      chainId: currentChainId(),
+      contract: currentDemoInftAddress(),
+      tokenId: currentCodeGuardianTokenId(),
+      owner: currentDemoOwner(),
+      registry: currentRegistryAddress(),
+      certificateRecordId: currentCertificateRecordId(),
+      passportId: process.env.NEXT_PUBLIC_POI_PASSPORT_ID ?? "",
+      chainUrl: chainscanContractUrl(),
+    },
+  };
 }
 
 export function getCertificate(certificateId: string): Certificate {

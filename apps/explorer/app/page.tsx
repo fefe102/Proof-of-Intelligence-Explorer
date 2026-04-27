@@ -23,35 +23,35 @@ export default async function HomePage() {
           <div>
             <Badge tone="good">{status.mode} 0G evidence mode</Badge>
             <p className="mt-5 text-sm uppercase text-slate-500">
-              Proof-of-Intelligence Explorer
+              CodeGuardian iNFT + AgentProof
             </p>
             <h1 className="mt-6 max-w-4xl text-5xl font-semibold leading-tight md:text-7xl">
-              Verify any 0G iNFT agent.
+              Autonomous 0G code-review iNFT.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-              Check whether an agent NFT actually contains encrypted
-              intelligence, persistent memory, compute-backed runs, and
-              replayable behavior. Generate a public report, certificate, API,
-              and badge.
+              CodeGuardian's encrypted intelligence bundle, evolving memory,
+              compute-backed critic loop, replayable traces, and dynamic policy
+              upgrade are certified through AgentProof - the
+              Proof-of-Intelligence Explorer for 0G iNFT agents.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 className="rounded-md bg-emerald-300 px-5 py-3 font-semibold text-[#121412]"
+                href="/agent/codeguardian/console"
+              >
+                Open Agent Console
+              </Link>
+              <Link
+                className="rounded-md border border-white/15 px-5 py-3 font-semibold text-slate-100"
                 href="/verify"
               >
-                Verify an Agent
+                Verify Any iNFT
               </Link>
               <Link
                 className="rounded-md border border-white/15 px-5 py-3 font-semibold text-slate-100"
-                href="/create"
+                href="/agent/fakeagent"
               >
-                Create Passport
-              </Link>
-              <Link
-                className="rounded-md border border-white/15 px-5 py-3 font-semibold text-slate-100"
-                href="/agent/codeguardian"
-              >
-                Compare Real vs Fake
+                Show FakeAgent Failing
               </Link>
             </div>
             <div className="mt-8 rounded-md border border-white/10 bg-black/20 p-4">
@@ -71,8 +71,8 @@ export default async function HomePage() {
             </div>
             <div className="mt-6 grid gap-8 md:grid-cols-2">
               <div>
-                <div className="text-3xl font-semibold">
-                  {codeguardian.name}
+              <div className="text-3xl font-semibold">
+                  CodeGuardian iNFT
                 </div>
                 <p className="mt-2 text-sm text-slate-400">
                   {codeguardian.headline}
@@ -167,15 +167,15 @@ export default async function HomePage() {
           {[
             [
               "Why Proof-of-Intelligence?",
-              "Many agent NFTs are metadata pointers. This explorer checks for actual encrypted intelligence, memory, compute history, and behavior traces.",
+              "Many agent NFTs are metadata pointers. CodeGuardian is the autonomous iNFT; AgentProof proves its intelligence, memory, compute history, and behavior traces.",
             ],
             [
               "0G full-stack evidence",
-              "0G Chain anchors iNFT passports, 0G Storage carries roots and encrypted bundles, 0G Compute records analysis and critic runs, and DA export is optional.",
+              "0G Chain anchors the minted iNFT, Storage carries encrypted proof artifacts or hybrid fallbacks, Compute records analysis and critic runs, and DA export is optional.",
             ],
             [
               "Developer SDK",
-              "Any iNFT team can adopt the manifest schema, adapters, CLI, and proof export to make intelligence claims verifiable.",
+              "Any 0G iNFT team can reuse AgentProof's manifest schema, adapters, CLI, API, badge, and proof export to make intelligence claims verifiable.",
             ],
           ].map(([title, body]) => (
             <div key={title} className="border-t border-white/10 pt-5">
