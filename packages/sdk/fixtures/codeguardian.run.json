@@ -1,87 +1,144 @@
 {
   "schema": "poi-run/v0.1",
-  "runId": "codeguardian-run-001",
+  "runId": "codeguardian-run-003",
   "agent": "CodeGuardian",
   "source": "hybrid",
-  "task": "Audit examples/codeguardian/fixtures/unsafe-parser.ts",
+  "task": "Audit async side effects for unchecked failures.",
   "events": [
     {
       "type": "task_received",
-      "at": "2026-04-26T00:00:00.000Z",
+      "at": "2026-04-26T00:20:00.000Z",
       "detail": {
-        "target": "unsafe-parser.ts"
+        "target": "examples/codeguardian/fixtures/unchecked-async-side-effect.ts",
+        "goal": "Audit async side effects for unchecked failures.",
+        "source": "hybrid"
       },
-      "root": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+      "root": "sha256:5bdd45a35c1bce03fa4ef187477edf75b510b7b3bb267f77cdc46460c9f72280"
+    },
+    {
+      "type": "context_loaded",
+      "at": "2026-04-26T00:20:01.000Z",
+      "detail": {
+        "target": "examples/codeguardian/fixtures/unchecked-async-side-effect.ts",
+        "sourceHash": "sha256:79fabb8f811fd1fb260468b81663b19269a16979aca4f3c2908c28b968e9cfa3",
+        "byteLength": 259,
+        "source": "hybrid"
+      },
+      "root": "sha256:0df2aeb043de6cf7e41f782323de60876df9cc838fa036b9b4a4d30bdc01e76f"
     },
     {
       "type": "compute_started",
-      "at": "2026-04-26T00:00:01.000Z",
+      "at": "2026-04-26T00:20:02.000Z",
       "detail": {
-        "runId": "zg-compute-analysis-001",
-        "model": "qwen/qwen-2.5-7b-instruct"
-      }
+        "runId": "zg-hybrid-analysis-003",
+        "model": "qwen/qwen-2.5-7b-instruct",
+        "provider": "0G Compute hybrid broker",
+        "source": "hybrid"
+      },
+      "root": "sha256:3d1444fb5e18c8496ab211875abfa7997616b8ed2a62ffe1e13f9278ea66be5a"
     },
     {
       "type": "compute_completed",
-      "at": "2026-04-26T00:00:04.000Z",
+      "at": "2026-04-26T00:20:04.000Z",
       "detail": {
-        "outputHash": "sha256:4444444444444444444444444444444444444444444444444444444444444444"
-      }
+        "runId": "zg-hybrid-analysis-003",
+        "outputHash": "sha256:df9a8ab1137844cdd896941fc9791b4931e3a3ddddbbcd8fe878fb14da0bcf1f",
+        "source": "hybrid"
+      },
+      "root": "sha256:ca9c105ab431427d6038b8e2ddd4d5be8f0912957df0c5577d999006fb3f65ff"
     },
     {
       "type": "issue_found",
-      "at": "2026-04-26T00:00:05.000Z",
+      "at": "2026-04-26T00:20:05.000Z",
       "detail": {
-        "issue": "JSON.parse accepts arbitrary input and returns it as a trusted Result without shape validation."
-      }
+        "issue": "A failed awaited side effect can escape without explicit classification or recovery.",
+        "source": "hybrid"
+      },
+      "root": "sha256:f7ed5662107cda21251d436b59d6127dfef51fb237a7f4fc3189a9ddfa401889"
     },
     {
       "type": "patch_proposed",
-      "at": "2026-04-26T00:00:07.000Z",
+      "at": "2026-04-26T00:20:07.000Z",
       "detail": {
-        "patch": "Validate parsed data before returning a Result object."
-      }
+        "patch": "Wrap the awaited side effect in explicit error handling and return a typed failure result.",
+        "source": "hybrid"
+      },
+      "root": "sha256:e5326c1de31ae2c557967229b3975604e94a75f771e48aefd5480629fa0004aa"
     },
     {
       "type": "critic_started",
-      "at": "2026-04-26T00:00:08.000Z",
+      "at": "2026-04-26T00:20:08.000Z",
       "detail": {
-        "runId": "zg-compute-critic-001"
-      }
+        "runId": "zg-hybrid-critic-003",
+        "model": "qwen/qwen-2.5-7b-instruct",
+        "provider": "0G Compute hybrid broker",
+        "source": "hybrid"
+      },
+      "root": "sha256:b4a574f5b16d2d1fd5c9fbfc9fa0c3079bfb64edd2a7fbf9a2dd560a4810a511"
     },
     {
       "type": "critic_completed",
-      "at": "2026-04-26T00:00:10.000Z",
+      "at": "2026-04-26T00:20:10.000Z",
       "detail": {
-        "critique": "Patch is bounded and preserves the public API."
-      }
+        "critique": "The patch turns an implicit runtime rejection into a deterministic failure branch that callers can test.",
+        "accepted": true,
+        "source": "hybrid"
+      },
+      "root": "sha256:8447740ce1f04de67fb27dab484048c9369a71d3f4b4dca4ab00b713cc3d2e72"
+    },
+    {
+      "type": "memory_delta_created",
+      "at": "2026-04-26T00:20:11.000Z",
+      "detail": {
+        "learnedPattern": "Wrap awaited side effects in explicit error handling.",
+        "memoryDelta": "Added an async side-effect handling pattern to persistent review memory.",
+        "source": "hybrid"
+      },
+      "root": "sha256:b5f465e30d2efdccb902018b478c49a3d60e7046cebe8a01f962f6fa9c9d1006"
     },
     {
       "type": "memory_written",
-      "at": "2026-04-26T00:00:11.000Z",
+      "at": "2026-04-26T00:20:12.000Z",
       "detail": {
-        "memoryRoot": "sha256:bd27bb774163cdfc375d5bcc22d55da8626002b0a209848d1f3687035bb90798"
-      }
+        "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce",
+        "version": 3,
+        "source": "hybrid"
+      },
+      "root": "sha256:dab918a5887a69f69de6a8d98fa06d75f4362c4d641894d9a3a62be6d2d93f61"
+    },
+    {
+      "type": "skill_upgrade_checked",
+      "at": "2026-04-26T00:20:13.000Z",
+      "detail": {
+        "upgraded": false,
+        "source": "hybrid"
+      },
+      "root": "sha256:a7781139ac43f77fe8ad49728fadd57a188ed9e5f312db97eecb545f6dd23077"
     },
     {
       "type": "trace_committed",
-      "at": "2026-04-26T00:00:12.000Z",
+      "at": "2026-04-26T00:20:14.000Z",
       "detail": {
-        "preCertificateTraceRoot": "sha256:1bd8af6ab0905f137e20956b13389234b39ebad5329f98dd000e7acbdc16aa8c"
-      }
+        "traceRoot": "sha256:c4a01e4a7817d88a0b9b8043221591a3896f433bdecde60976c554cf725292c4",
+        "source": "hybrid"
+      },
+      "root": "sha256:a306fdb31ab4c6d2cf6c6f7655fcd69efafb57f186cdf004a11bdc3387ed81b8"
     },
     {
       "type": "certificate_issued",
-      "at": "2026-04-26T00:00:13.000Z",
+      "at": "2026-04-26T00:20:15.000Z",
       "detail": {
-        "certificateId": "poi-cert-codeguardian-001"
-      }
+        "certificateId": "poi-cert-codeguardian-001",
+        "source": "hybrid"
+      },
+      "root": "sha256:3170bc3254d93c4c9d36df5ca19ca1c5b9f2b1489eff546c831438678563a2fb"
     }
   ],
   "result": {
-    "issue": "Unsafe JSON.parse path returns unvalidated data.",
-    "patch": "Validate parsed data before returning a typed Result.",
-    "critique": "The patch is minimal, deterministic, and testable.",
-    "accepted": true
+    "issue": "A failed awaited side effect can escape without explicit classification or recovery.",
+    "patch": "Wrap the awaited side effect in explicit error handling and return a typed failure result.",
+    "critique": "The patch turns an implicit runtime rejection into a deterministic failure branch that callers can test.",
+    "accepted": true,
+    "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce"
   }
 }

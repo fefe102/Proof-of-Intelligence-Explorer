@@ -3,7 +3,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import {
-  runCodeGuardian,
+  runCodeGuardianSequence,
   replayCodeGuardianRun,
   writeCodeGuardianArtifacts,
 } from "@poi/agent-runtime";
@@ -155,15 +155,16 @@ program
   .command("run-codeguardian")
   .description("Run deterministic CodeGuardian fixture audit")
   .action(() => {
-    const result = runCodeGuardian();
+    const result = runCodeGuardianSequence();
     writeCodeGuardianArtifacts(result);
     console.log(
       JSON.stringify(
         {
           runId: result.run.runId,
+          runCount: result.runs.length,
           events: result.run.events.length,
           issue: result.run.result.issue,
-          memoryRoot: result.memoryRootAfter,
+          memoryRoot: result.roots.memoryRoot,
           traceRoot: result.certificate.evidence.latestRunRoot,
           artifacts: "tmp/codeguardian",
         },
@@ -352,6 +353,10 @@ function readRun(runId: string): RunTrace {
   const bundle = readJson<ProofStorageBundle>(
     repoPath("deployments/0g-storage-bundle.json"),
   );
+  const bundledRun = bundle?.runs?.find((run) => run.runId === runId);
+  if (bundledRun) {
+    return bundledRun;
+  }
   if (bundle?.run?.runId === runId) {
     return bundle.run;
   }
@@ -372,6 +377,13 @@ function readRun(runId: string): RunTrace {
   ) as RunTrace;
   if (fixture.runId === runId) {
     return fixture;
+  }
+  const fixtures = readJson<RunTrace[]>(
+    repoPath("packages/sdk/fixtures/codeguardian.runs.json"),
+  );
+  const fixtureRun = fixtures?.find((run) => run.runId === runId);
+  if (fixtureRun) {
+    return fixtureRun;
   }
 
   throw new Error(`Run not found: ${runId}`);

@@ -1,4 +1,6 @@
+import { createCipheriv, createDecipheriv, createHash, randomBytes } from "node:crypto";
 import {
+  canonicalizeJson,
   hashCanonicalJson,
   hashCertificate,
   hashIntelligenceBundle,
@@ -16,6 +18,9 @@ import type {
 } from "./schema";
 import type { EvidenceSource } from "./adapters";
 import type { VerificationReport, VerificationTier } from "./verifier";
+
+const demoKeyMaterial =
+  "CodeGuardian iNFT deterministic demo encryption key - not a production secret";
 
 export type AgentPassport = {
   chainId: number;
@@ -55,22 +60,31 @@ export function createIntelligenceBundle(input: {
   behaviorPolicy: string;
   toolPermissions: string[];
   skills: string[];
+  capabilities?: string[];
+  storage?: string;
+  compute?: string;
   version?: string;
   ciphertext?: string;
+  iv?: string;
+  authTag?: string;
 }): IntelligenceBundle {
   return {
     schema: "poi-intelligence/v0.1",
     agent: input.agent,
     encrypted: true,
-    algorithm: "mock-aes-256-gcm-demo",
-    ciphertext:
-      input.ciphertext ??
-      `mock:${input.agent.toLowerCase().replaceAll(/\s+/g, "-")}:v1`,
+    algorithm: "aes-256-gcm",
+    ciphertext: input.ciphertext ?? "",
+    iv: input.iv ?? "",
+    authTag: input.authTag ?? "",
     publicSummary: {
+      agent: input.agent,
       goals: input.goals,
       behaviorPolicy: input.behaviorPolicy,
       toolPermissions: input.toolPermissions,
       skills: input.skills,
+      capabilities: input.capabilities,
+      storage: input.storage,
+      compute: input.compute,
       version: input.version ?? "0.1.0",
     },
   };
@@ -78,9 +92,22 @@ export function createIntelligenceBundle(input: {
 
 export function encryptIntelligenceBundle(
   bundle: Record<string, unknown>,
-  options: { agent?: string; keyId?: string } = {},
+  options: { agent?: string; key?: string | Buffer; iv?: Buffer } = {},
 ): IntelligenceBundle {
   const agent = options.agent ?? String(bundle.name ?? "Agent");
+  const key = encryptionKey(options.key);
+  const iv =
+    options.iv ??
+    createHash("sha256")
+      .update(canonicalPlaintext(bundle))
+      .digest()
+      .subarray(0, 12);
+  const cipher = createCipheriv("aes-256-gcm", key, iv);
+  const ciphertext = Buffer.concat([
+    cipher.update(canonicalPlaintext(bundle), "utf8"),
+    cipher.final(),
+  ]);
+  const authTag = cipher.getAuthTag();
   return createIntelligenceBundle({
     agent,
     goals: Array.isArray(bundle.goals)
@@ -91,11 +118,49 @@ export function encryptIntelligenceBundle(
       ? bundle.toolPermissions.map(String)
       : [],
     skills: Array.isArray(bundle.skills) ? bundle.skills.map(String) : [],
-    ciphertext: `mock:${hashCanonicalJson({
-      bundle,
-      keyId: options.keyId ?? "demo",
-    })}`,
+    capabilities: Array.isArray(bundle.capabilities)
+      ? bundle.capabilities.map(String)
+      : undefined,
+    storage: typeof bundle.storage === "string" ? bundle.storage : undefined,
+    compute: typeof bundle.compute === "string" ? bundle.compute : undefined,
+    version: typeof bundle.version === "string" ? bundle.version : undefined,
+    ciphertext: ciphertext.toString("base64"),
+    iv: iv.toString("base64"),
+    authTag: authTag.toString("base64"),
   });
+}
+
+export function decryptIntelligenceBundleForTest(
+  bundle: IntelligenceBundle,
+  key?: string | Buffer,
+) {
+  const decipher = createDecipheriv(
+    "aes-256-gcm",
+    encryptionKey(key),
+    Buffer.from(bundle.iv, "base64"),
+  );
+  decipher.setAuthTag(Buffer.from(bundle.authTag, "base64"));
+  const plaintext = Buffer.concat([
+    decipher.update(Buffer.from(bundle.ciphertext, "base64")),
+    decipher.final(),
+  ]).toString("utf8");
+  return JSON.parse(plaintext) as Record<string, unknown>;
+}
+
+export function createRandomEncryptionIv() {
+  return randomBytes(12);
+}
+
+function encryptionKey(key?: string | Buffer) {
+  if (Buffer.isBuffer(key)) {
+    if (key.length !== 32) throw new Error("AES-256-GCM key must be 32 bytes");
+    return key;
+  }
+  return createHash("sha256").update(key ?? demoKeyMaterial).digest();
+}
+
+function canonicalPlaintext(value: unknown) {
+  return canonicalizeJson(value);
 }
 
 export function createRunTrace(input: {

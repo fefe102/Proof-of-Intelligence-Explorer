@@ -163,6 +163,12 @@ export async function getAgentProfile(slug: string): Promise<AgentProfile> {
 }
 
 export function getRun(runId: string): RunTrace {
+  const runFromBundle = storageBundle.runs?.find(
+    (candidate) => candidate.runId === runId,
+  );
+  if (runFromBundle) {
+    return runFromBundle as RunTrace;
+  }
   const run = (storageBundle.run ?? codeguardianRun) as RunTrace;
   if (run.runId !== runId) {
     throw new Error(`Run not found: ${runId}`);

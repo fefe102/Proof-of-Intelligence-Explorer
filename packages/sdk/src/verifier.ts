@@ -18,6 +18,7 @@ import {
   MockComputeAdapter,
   MockDAAdapter,
   MockEnsAdapter,
+  demoContracts,
   MockStorageAdapter,
   type ChainAdapter,
   type ComputeAdapter,
@@ -89,7 +90,14 @@ export function verifyIntelligenceBundle(
 ): CheckResult {
   const parsed = IntelligenceBundleSchema.safeParse(bundle);
   const root = parsed.success ? hashCanonicalJson(parsed.data) : undefined;
-  const ok = parsed.success && root === expectedRoot && parsed.data.encrypted;
+  const ok =
+    parsed.success &&
+    root === expectedRoot &&
+    parsed.data.encrypted &&
+    parsed.data.algorithm === "aes-256-gcm" &&
+    !parsed.data.ciphertext.startsWith("mock:") &&
+    parsed.data.iv.length > 0 &&
+    parsed.data.authTag.length > 0;
   return {
     id: "intelligence_bundle",
     label: "Encrypted intelligence bundle",
@@ -98,8 +106,8 @@ export function verifyIntelligenceBundle(
     source: "mock",
     root,
     detail: ok
-      ? "Encrypted bundle exists and root matches"
-      : "Bundle missing, invalid, unencrypted, or root mismatch",
+      ? "AES-256-GCM encrypted bundle exists and root matches"
+      : "Bundle missing, invalid, unencrypted, mock-encrypted, or root mismatch",
   };
 }
 
@@ -160,16 +168,36 @@ export function verifyRunTrace(
   );
   const required = [
     "task_received",
+    "context_loaded",
     "compute_completed",
     "issue_found",
     "patch_proposed",
     "critic_completed",
+    "memory_delta_created",
     "memory_written",
+    "trace_committed",
   ];
+  const traceEvent = parsed.success
+    ? parsed.data.events.find((event) => event.type === "trace_committed")
+    : undefined;
+  const traceIndex = parsed.success
+    ? parsed.data.events.findIndex((event) => event.type === "trace_committed")
+    : -1;
+  const committedTraceRoot =
+    typeof traceEvent?.detail.traceRoot === "string"
+      ? traceEvent.detail.traceRoot
+      : undefined;
+  const recomputedTraceRoot =
+    parsed.success && traceIndex > 0
+      ? hashCanonicalJson(parsed.data.events.slice(0, traceIndex))
+      : undefined;
   const ok =
     parsed.success &&
     root === expectedRoot &&
-    required.every((event) => eventTypes.has(event));
+    required.every((event) => eventTypes.has(event)) &&
+    Boolean(committedTraceRoot) &&
+    committedTraceRoot === recomputedTraceRoot &&
+    !committedTraceRoot?.endsWith("0000000000000000000000000000000000000000000000000000000000000000");
   return {
     id: "run_trace",
     label: "Executable behavior trace",
@@ -316,7 +344,7 @@ export class ProofOfIntelligenceVerifier {
       if (!manifest && agent === "fakeagent") {
         token =
           (await this.chain.getToken(
-            "0x2222222222222222222222222222222222227857",
+            demoContracts.fakeagent,
             "2",
           )) ?? undefined;
       }

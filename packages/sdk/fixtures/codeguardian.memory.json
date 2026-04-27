@@ -2,15 +2,40 @@
   "schema": "poi-memory/v0.1",
   "agent": "CodeGuardian",
   "checkpoint": {
-    "runCount": 1,
-    "lastFinding": "Unsafe JSON.parse path returns unknown data without validating the expected shape.",
-    "stateRoot": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+    "runCount": 3,
+    "lastFinding": "A failed awaited side effect can escape without explicit classification or recovery.",
+    "stateRoot": "sha256:c68b6efe2d509a6c233e7f5063a75ce1ac2eacc040ca69357ba200ec221fada8"
   },
   "history": [
     {
       "runId": "codeguardian-run-001",
-      "summary": "Found unsafe parsing and proposed a zod-backed parseResult guard.",
-      "root": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+      "version": 1,
+      "summary": "Unsafe JSON.parse path returns unvalidated data as a trusted Result.",
+      "learnedPattern": "Validate JSON parse failures before using parsed payloads.",
+      "memoryDelta": "Added a JSON-shape validation heuristic to future reviews.",
+      "at": "2026-04-26T00:00:00.000Z",
+      "source": "hybrid",
+      "root": "sha256:47b59c17c3aa18d6313507f0f528991fa24eabfb134501cd522ab87c8b307c34"
+    },
+    {
+      "runId": "codeguardian-run-002",
+      "version": 2,
+      "summary": "Private records can be returned before verifying the caller owns the account.",
+      "learnedPattern": "Verify authorization before returning private records.",
+      "memoryDelta": "Added an authorization-check heuristic to critic reviews.",
+      "at": "2026-04-26T00:10:00.000Z",
+      "source": "hybrid",
+      "root": "sha256:1ab55bae34c23ffd6439466fdf199617e9b39782ec2093b1ab9dece345b2471d"
+    },
+    {
+      "runId": "codeguardian-run-003",
+      "version": 3,
+      "summary": "A failed awaited side effect can escape without explicit classification or recovery.",
+      "learnedPattern": "Wrap awaited side effects in explicit error handling.",
+      "memoryDelta": "Added an async side-effect handling pattern to persistent review memory.",
+      "at": "2026-04-26T00:20:00.000Z",
+      "source": "hybrid",
+      "root": "sha256:77d8bfabf57c07a9130d4877328ccc84296bafe6dc5efea4a3260f607f610d69"
     }
   ]
 }

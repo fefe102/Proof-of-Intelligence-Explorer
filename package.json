@@ -15,6 +15,8 @@
     "demo:verify": "pnpm --filter @poi/cli poi verify codeguardian && pnpm --filter @poi/cli poi verify fakeagent",
     "demo:verify:arbitrary": "pnpm --filter @poi/cli poi verify --chain-id 16602 --contract 0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9 --token-id 1",
     "demo:create-passport": "pnpm --filter @poi/cli poi create-passport",
+    "demo:generate-artifacts": "tsx scripts/generate-codeguardian-artifacts.ts",
+    "demo:hash-skills": "tsx scripts/hash-skills.ts",
     "demo:run-agent": "pnpm --filter @poi/cli poi run-codeguardian",
     "demo:replay": "pnpm --filter @poi/cli poi replay codeguardian-run-001",
     "demo:export-proof": "pnpm --filter @poi/cli poi export-proof codeguardian --out tmp/codeguardian-proof.json",

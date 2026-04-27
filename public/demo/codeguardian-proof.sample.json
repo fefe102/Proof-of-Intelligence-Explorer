@@ -17,8 +17,8 @@
       "label": "Proof-of-Intelligence manifest",
       "ok": true,
       "tier": 2,
-      "source": "live",
-      "root": "sha256:44d69c5206fad0ce2fc238fb11c50ae1f4b1ba63176a134236e3b91c2c96fe0a",
+      "source": "hybrid",
+      "root": "sha256:5704511de453c1a85d9ade4cf1b1c409f052a7556e184400070acc07900096b9",
       "detail": "Manifest matches poi/v0.1 schema and manifest root rule"
     },
     {
@@ -26,17 +26,17 @@
       "label": "Encrypted intelligence bundle",
       "ok": true,
       "tier": 3,
-      "source": "live",
-      "root": "sha256:1c47d70c2c89e0d843c1b8501e98f5bd2354f7b03b994e1b819b2fbc54b87fd4",
-      "detail": "Encrypted bundle exists and root matches"
+      "source": "hybrid",
+      "root": "sha256:6289903e00f2e42448eb3cad30d322fcd4e1b3e3af54dd37f35a863a864f0bcd",
+      "detail": "AES-256-GCM encrypted bundle exists and root matches"
     },
     {
       "id": "memory",
       "label": "Persistent memory",
       "ok": true,
       "tier": 4,
-      "source": "live",
-      "root": "sha256:dc1e2df935e0db426cf1e0d3014142ebec59b2b917efdec5a5188d80a6774cdf",
+      "source": "hybrid",
+      "root": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce",
       "detail": "Memory checkpoint and history root match"
     },
     {
@@ -44,8 +44,8 @@
       "label": "0G Compute run history",
       "ok": true,
       "tier": 5,
-      "source": "live",
-      "root": "sha256:54af237833b50fa6a1a071cbc1625a978ee50266dc78e60b81ad2dfe7c613664",
+      "source": "hybrid",
+      "root": "sha256:49e5dba18a55f5a1d9bc54f32d64cbb3ed8a8abed5b6475f54d2b3de4012f0aa",
       "detail": "Analysis and critic run records are present"
     },
     {
@@ -53,8 +53,8 @@
       "label": "Executable behavior trace",
       "ok": true,
       "tier": 5,
-      "source": "live",
-      "root": "sha256:b8524cf76c1dadae7405d7fec813c4c43c84f588a42f0ceff2a5e5a1345c2e30",
+      "source": "hybrid",
+      "root": "sha256:5eea73e8098964c75c6da1aba8d37e7f677b491e0c8a229818eef3f0a4069dad",
       "detail": "Replayable trace includes analysis, patch, critic, and memory events"
     },
     {
@@ -70,22 +70,23 @@
       "label": "Certificate/export bundle",
       "ok": true,
       "tier": 6,
-      "source": "live",
-      "root": "sha256:618516d37e04a3f1c4537cf8c08f03931e2b5d799aefd3ab408d08e6b939c5e4",
+      "source": "hybrid",
+      "root": "sha256:26dd3ab514a1f829cc9986f1e7b67a3c95ab7970a709ec40ac1ba8899977c463",
       "detail": "Certificate binds iNFT, roots, and compute run ids"
     }
   ],
   "evidence": {
-    "manifestRoot": "sha256:44d69c5206fad0ce2fc238fb11c50ae1f4b1ba63176a134236e3b91c2c96fe0a",
-    "intelligenceBundleRoot": "sha256:1c47d70c2c89e0d843c1b8501e98f5bd2354f7b03b994e1b819b2fbc54b87fd4",
-    "memoryRoot": "sha256:dc1e2df935e0db426cf1e0d3014142ebec59b2b917efdec5a5188d80a6774cdf",
-    "latestRunRoot": "sha256:b8524cf76c1dadae7405d7fec813c4c43c84f588a42f0ceff2a5e5a1345c2e30",
-    "checkpointRoot": "sha256:1327b28193e5cb885e332543c20bfeaafce555102f39e33b9bf5f491abd8d426",
-    "historyRoot": "sha256:43671740184c704a39f4f7c37bd4fc3d20befbc41713bfc9737cb1022b6cb5c4"
+    "manifestRoot": "sha256:5704511de453c1a85d9ade4cf1b1c409f052a7556e184400070acc07900096b9",
+    "intelligenceBundleRoot": "sha256:6289903e00f2e42448eb3cad30d322fcd4e1b3e3af54dd37f35a863a864f0bcd",
+    "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce",
+    "latestRunRoot": "sha256:5eea73e8098964c75c6da1aba8d37e7f677b491e0c8a229818eef3f0a4069dad",
+    "checkpointRoot": "sha256:e397bbbff2aa81b1889f90cb749b8f70fee9791d0111192e49c79da51cebfbf1",
+    "historyRoot": "sha256:e4ba11b5c16faa78033c22d4f5b4ea7c3a129d5d9e007373c006de99c0707060"
   },
   "missing": [],
   "sources": [
     "live",
+    "hybrid",
     "mock"
   ],
   "token": {
@@ -95,13 +96,13 @@
     "owner": "0x053B860f329C9e4549D23dc8Aadf1116b99F1233",
     "standard": "ERC-7857-like live demo iNFT",
     "metadataUri": "https://proof-of-intelligence-explorer.vercel.app/api/agent/codeguardian",
-    "manifestRoot": "sha256:44d69c5206fad0ce2fc238fb11c50ae1f4b1ba63176a134236e3b91c2c96fe0a",
+    "manifestRoot": "sha256:5704511de453c1a85d9ade4cf1b1c409f052a7556e184400070acc07900096b9",
     "source": "live"
   },
   "manifest": {
     "schema": "poi/v0.1",
     "name": "CodeGuardian",
-    "description": "A single iNFT-style code review agent with an encrypted intelligence bundle, persistent memory, 0G Compute history, and replayable critic-loop behavior.",
+    "description": "An autonomous 0G iNFT code-review agent with encrypted intelligence, evolving memory, compute-backed critic loops, replayable traces, and dynamic policy upgrades.",
     "inft": {
       "chainId": 16602,
       "contract": "0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9",
@@ -109,46 +110,76 @@
       "standard": "ERC-7857-like live demo iNFT"
     },
     "identity": {
-      "owner": "0x053b860f329c9e4549d23dc8aadf1116b99f1233",
+      "owner": "0x053B860f329C9e4549D23dc8Aadf1116b99F1233",
       "ens": "codeguardian.poi-demo.eth"
     },
     "storage": {
-      "manifestRoot": "sha256:44d69c5206fad0ce2fc238fb11c50ae1f4b1ba63176a134236e3b91c2c96fe0a",
-      "intelligenceBundleRoot": "sha256:1c47d70c2c89e0d843c1b8501e98f5bd2354f7b03b994e1b819b2fbc54b87fd4",
-      "memoryRoot": "sha256:dc1e2df935e0db426cf1e0d3014142ebec59b2b917efdec5a5188d80a6774cdf",
-      "latestRunRoot": "sha256:b8524cf76c1dadae7405d7fec813c4c43c84f588a42f0ceff2a5e5a1345c2e30"
+      "manifestRoot": "sha256:5704511de453c1a85d9ade4cf1b1c409f052a7556e184400070acc07900096b9",
+      "intelligenceBundleRoot": "sha256:6289903e00f2e42448eb3cad30d322fcd4e1b3e3af54dd37f35a863a864f0bcd",
+      "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce",
+      "latestRunRoot": "sha256:5eea73e8098964c75c6da1aba8d37e7f677b491e0c8a229818eef3f0a4069dad"
     },
     "compute": {
-      "provider": "0xa48f01287233509FD694a22Bf840225062E67836",
+      "provider": "0G Compute hybrid broker",
       "models": [
         "qwen/qwen-2.5-7b-instruct"
       ],
       "latestRunIds": [
-        "zg-live-analysis-f8dbce325ce5",
-        "zg-live-critic-e45d15098a2d"
+        "zg-hybrid-analysis-001",
+        "zg-hybrid-critic-001",
+        "zg-hybrid-analysis-002",
+        "zg-hybrid-critic-002",
+        "zg-hybrid-analysis-003",
+        "zg-hybrid-critic-003"
       ]
     },
     "skills": [
       {
         "name": "static-code-review",
         "version": "0.1.0",
-        "codeHash": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+        "codeHash": "sha256:75e6535fdf2da0c091bd57055d9443e062cab9e890baac0ae44f4340bb9d0b48",
         "permissions": [
           "read_fixture",
           "write_memory",
           "append_trace"
         ]
+      },
+      {
+        "name": "patch-proposal",
+        "version": "0.1.0",
+        "codeHash": "sha256:4806c0aa151f1de6c31ccfdc4b2b0a1723a467c78cf085ba132687db5abfb25d",
+        "permissions": [
+          "propose_patch"
+        ]
+      },
+      {
+        "name": "critic-loop",
+        "version": "0.1.1",
+        "codeHash": "sha256:105b17eb2621b0c6591e097f1fc0ebd81b8c6596b46efe2b7404e420173de20c",
+        "permissions": [
+          "self_review",
+          "upgrade_policy"
+        ]
+      },
+      {
+        "name": "memory-update-policy",
+        "version": "0.1.0",
+        "codeHash": "sha256:3ac32f5f3fb152e07438bc904c44ad085afbb41442998bb3b066f91de8f944ee",
+        "permissions": [
+          "write_memory",
+          "checkpoint_history"
+        ]
       }
     ],
     "memory": {
       "type": "checkpointed-kv-with-immutable-history",
-      "checkpointRoot": "sha256:1327b28193e5cb885e332543c20bfeaafce555102f39e33b9bf5f491abd8d426",
-      "historyRoot": "sha256:43671740184c704a39f4f7c37bd4fc3d20befbc41713bfc9737cb1022b6cb5c4"
+      "checkpointRoot": "sha256:e397bbbff2aa81b1889f90cb749b8f70fee9791d0111192e49c79da51cebfbf1",
+      "historyRoot": "sha256:e4ba11b5c16faa78033c22d4f5b4ea7c3a129d5d9e007373c006de99c0707060"
     },
     "proof": {
       "status": "certified",
       "certificateId": "poi-cert-codeguardian-001",
-      "issuedAt": "2026-04-26T00:00:13.000Z"
+      "issuedAt": "2026-04-26T00:20:13.000Z"
     },
     "permissions": {
       "publicProfile": true,
@@ -157,7 +188,8 @@
         "verify",
         "replay",
         "export-proof",
-        "owner-decrypt-demo"
+        "owner-decrypt-demo",
+        "run-allowlisted-demo-task"
       ]
     }
   },
@@ -166,143 +198,223 @@
     "certificateId": "poi-cert-codeguardian-001",
     "agent": "CodeGuardian",
     "tier": 6,
-    "issuedAt": "2026-04-26T00:00:13.000Z",
-    "issuer": "Proof-of-Intelligence Explorer",
+    "issuedAt": "2026-04-26T00:20:13.000Z",
+    "issuer": "AgentProof - Proof-of-Intelligence Explorer",
     "evidence": {
       "inft": {
         "chainId": 16602,
         "contract": "0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9",
         "tokenId": "1"
       },
-      "intelligenceBundleRoot": "sha256:1c47d70c2c89e0d843c1b8501e98f5bd2354f7b03b994e1b819b2fbc54b87fd4",
-      "memoryRoot": "sha256:dc1e2df935e0db426cf1e0d3014142ebec59b2b917efdec5a5188d80a6774cdf",
-      "latestRunRoot": "sha256:b8524cf76c1dadae7405d7fec813c4c43c84f588a42f0ceff2a5e5a1345c2e30",
+      "intelligenceBundleRoot": "sha256:6289903e00f2e42448eb3cad30d322fcd4e1b3e3af54dd37f35a863a864f0bcd",
+      "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce",
+      "latestRunRoot": "sha256:5eea73e8098964c75c6da1aba8d37e7f677b491e0c8a229818eef3f0a4069dad",
       "computeRunIds": [
-        "zg-live-analysis-f8dbce325ce5",
-        "zg-live-critic-e45d15098a2d"
+        "zg-hybrid-analysis-001",
+        "zg-hybrid-critic-001",
+        "zg-hybrid-analysis-002",
+        "zg-hybrid-critic-002",
+        "zg-hybrid-analysis-003",
+        "zg-hybrid-critic-003"
       ]
     }
   },
   "run": {
     "schema": "poi-run/v0.1",
-    "runId": "codeguardian-run-001",
+    "runId": "codeguardian-run-003",
     "agent": "CodeGuardian",
-    "source": "live",
-    "task": "Audit examples/codeguardian/fixtures/unsafe-parser.ts",
+    "source": "hybrid",
+    "task": "Audit async side effects for unchecked failures.",
     "events": [
       {
         "type": "task_received",
-        "at": "2026-04-26T00:00:00.000Z",
+        "at": "2026-04-26T00:20:00.000Z",
         "detail": {
-          "target": "examples/codeguardian/fixtures/unsafe-parser.ts"
+          "target": "examples/codeguardian/fixtures/unchecked-async-side-effect.ts",
+          "goal": "Audit async side effects for unchecked failures.",
+          "source": "hybrid"
         },
-        "root": "sha256:de80b6bb9e0a2b3856662038b134b46b43bca121181d00c04c4dddf990fe428f"
+        "root": "sha256:5bdd45a35c1bce03fa4ef187477edf75b510b7b3bb267f77cdc46460c9f72280"
+      },
+      {
+        "type": "context_loaded",
+        "at": "2026-04-26T00:20:01.000Z",
+        "detail": {
+          "target": "examples/codeguardian/fixtures/unchecked-async-side-effect.ts",
+          "sourceHash": "sha256:79fabb8f811fd1fb260468b81663b19269a16979aca4f3c2908c28b968e9cfa3",
+          "byteLength": 259,
+          "source": "hybrid"
+        },
+        "root": "sha256:0df2aeb043de6cf7e41f782323de60876df9cc838fa036b9b4a4d30bdc01e76f"
       },
       {
         "type": "compute_started",
-        "at": "2026-04-26T00:00:01.000Z",
+        "at": "2026-04-26T00:20:02.000Z",
         "detail": {
-          "runId": "zg-live-analysis-f8dbce325ce5",
+          "runId": "zg-hybrid-analysis-003",
           "model": "qwen/qwen-2.5-7b-instruct",
-          "provider": "0xa48f01287233509FD694a22Bf840225062E67836"
+          "provider": "0G Compute hybrid broker",
+          "source": "hybrid"
         },
-        "root": "sha256:9d7172d57f6d4c78773ff515fe9c9d53cd2d4185d3964be54bc570e876de58ed"
+        "root": "sha256:3d1444fb5e18c8496ab211875abfa7997616b8ed2a62ffe1e13f9278ea66be5a"
       },
       {
         "type": "compute_completed",
-        "at": "2026-04-26T00:00:04.000Z",
+        "at": "2026-04-26T00:20:04.000Z",
         "detail": {
-          "outputHash": "sha256:9504501144c56228c18b61ea7f538b95be596f994eb00d9c8f0d1d336d6b29db"
+          "runId": "zg-hybrid-analysis-003",
+          "outputHash": "sha256:df9a8ab1137844cdd896941fc9791b4931e3a3ddddbbcd8fe878fb14da0bcf1f",
+          "source": "hybrid"
         },
-        "root": "sha256:311c30f68a250e026c5d89959f9071f968c115635ceffb047c32d6daffcb94a1"
+        "root": "sha256:ca9c105ab431427d6038b8e2ddd4d5be8f0912957df0c5577d999006fb3f65ff"
       },
       {
         "type": "issue_found",
-        "at": "2026-04-26T00:00:05.000Z",
+        "at": "2026-04-26T00:20:05.000Z",
         "detail": {
-          "issue": "Potential type safety risk when parsing the input string. The `JSON.parse` method does not validate the structure of the parsed JSON, which could lead to incorrect type assignments."
+          "issue": "A failed awaited side effect can escape without explicit classification or recovery.",
+          "source": "hybrid"
         },
-        "root": "sha256:f71e2d580e8a597ab5dc6d476a6e5ef6e286ab8b36fb3b9d35aa82ca7b0c585b"
+        "root": "sha256:f7ed5662107cda21251d436b59d6127dfef51fb237a7f4fc3189a9ddfa401889"
       },
       {
         "type": "patch_proposed",
-        "at": "2026-04-26T00:00:07.000Z",
+        "at": "2026-04-26T00:20:07.000Z",
         "detail": {
-          "patch": "Use a try-catch block to handle potential JSON parsing errors and validate the structure of the parsed JSON before casting it to the Result type.\n\n```typescript\nexport function parseResult(input: string): Result | null {\n  try {\n    const result = JSON.parse(input);\n    if (typeof result === 'object' && 'ok' in result && 'value' in result) {\n      return result as Result;\n    } else {\n      throw new Error('Parsed JSON does not match the Result type structure');\n    }\n  } catch (error) {\n    console.error('Failed to parse input:', error);\n  }\n  return null;\n}\n```\n"
+          "patch": "Wrap the awaited side effect in explicit error handling and return a typed failure result.",
+          "source": "hybrid"
         },
-        "root": "sha256:b8e59b5a2a3193dfa89ce6b6ee9c14c515eb74e91014263054d6926228e8fea7"
+        "root": "sha256:e5326c1de31ae2c557967229b3975604e94a75f771e48aefd5480629fa0004aa"
       },
       {
         "type": "critic_started",
-        "at": "2026-04-26T00:00:08.000Z",
+        "at": "2026-04-26T00:20:08.000Z",
         "detail": {
-          "runId": "zg-live-critic-e45d15098a2d",
+          "runId": "zg-hybrid-critic-003",
           "model": "qwen/qwen-2.5-7b-instruct",
-          "provider": "0xa48f01287233509FD694a22Bf840225062E67836"
+          "provider": "0G Compute hybrid broker",
+          "source": "hybrid"
         },
-        "root": "sha256:1baad0d52c01af81a395da59bf654b86e71222b942325886a7ed8ef5b15030d1"
+        "root": "sha256:b4a574f5b16d2d1fd5c9fbfc9fa0c3079bfb64edd2a7fbf9a2dd560a4810a511"
       },
       {
         "type": "critic_completed",
-        "at": "2026-04-26T00:00:10.000Z",
+        "at": "2026-04-26T00:20:10.000Z",
         "detail": {
-          "critique": "The patch improves type safety by adding a validation step for the JSON structure. However, it is important to ensure that the `Result` type is properly defined and that the properties 'ok' and 'value' are correctly typed. This will help avoid runtime errors due to incorrect type casting.",
-          "accepted": true
+          "critique": "The patch turns an implicit runtime rejection into a deterministic failure branch that callers can test.",
+          "accepted": true,
+          "source": "hybrid"
         },
-        "root": "sha256:0634db7bd25c5080051f4e4d7b0a9c9386a1f78345c08d2681182b4978af0ac0"
+        "root": "sha256:8447740ce1f04de67fb27dab484048c9369a71d3f4b4dca4ab00b713cc3d2e72"
+      },
+      {
+        "type": "memory_delta_created",
+        "at": "2026-04-26T00:20:11.000Z",
+        "detail": {
+          "learnedPattern": "Wrap awaited side effects in explicit error handling.",
+          "memoryDelta": "Added an async side-effect handling pattern to persistent review memory.",
+          "source": "hybrid"
+        },
+        "root": "sha256:b5f465e30d2efdccb902018b478c49a3d60e7046cebe8a01f962f6fa9c9d1006"
       },
       {
         "type": "memory_written",
-        "at": "2026-04-26T00:00:11.000Z",
+        "at": "2026-04-26T00:20:12.000Z",
         "detail": {
-          "memoryRoot": "sha256:dc1e2df935e0db426cf1e0d3014142ebec59b2b917efdec5a5188d80a6774cdf"
+          "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce",
+          "version": 3,
+          "source": "hybrid"
         },
-        "root": "sha256:3b60a93a68cd0e9b631de899f9490223f39f96111a2bd8231bd62f4e8f965f84"
+        "root": "sha256:dab918a5887a69f69de6a8d98fa06d75f4362c4d641894d9a3a62be6d2d93f61"
+      },
+      {
+        "type": "skill_upgrade_checked",
+        "at": "2026-04-26T00:20:13.000Z",
+        "detail": {
+          "upgraded": false,
+          "source": "hybrid"
+        },
+        "root": "sha256:a7781139ac43f77fe8ad49728fadd57a188ed9e5f312db97eecb545f6dd23077"
       },
       {
         "type": "trace_committed",
-        "at": "2026-04-26T00:00:12.000Z",
+        "at": "2026-04-26T00:20:14.000Z",
         "detail": {
-          "traceRoot": "sha256:a43922913ed4c33e062525e1d7d0b934fc6fb962fa943d0b88185b90cb908a74"
+          "traceRoot": "sha256:c4a01e4a7817d88a0b9b8043221591a3896f433bdecde60976c554cf725292c4",
+          "source": "hybrid"
         },
-        "root": "sha256:7f7bf199f19f7aaea1504f3266f0bf8fe69aaead11923f5274b730774a3de815"
+        "root": "sha256:a306fdb31ab4c6d2cf6c6f7655fcd69efafb57f186cdf004a11bdc3387ed81b8"
       },
       {
         "type": "certificate_issued",
-        "at": "2026-04-26T00:00:13.000Z",
+        "at": "2026-04-26T00:20:15.000Z",
         "detail": {
-          "certificateId": "poi-cert-codeguardian-001"
+          "certificateId": "poi-cert-codeguardian-001",
+          "source": "hybrid"
         },
-        "root": "sha256:2874813d9bcf69064639cf662a347de56aa8c32c92cab1c074f677003807b196"
+        "root": "sha256:3170bc3254d93c4c9d36df5ca19ca1c5b9f2b1489eff546c831438678563a2fb"
       }
     ],
     "result": {
-      "issue": "Potential type safety risk when parsing the input string. The `JSON.parse` method does not validate the structure of the parsed JSON, which could lead to incorrect type assignments.",
-      "patch": "Use a try-catch block to handle potential JSON parsing errors and validate the structure of the parsed JSON before casting it to the Result type.\n\n```typescript\nexport function parseResult(input: string): Result | null {\n  try {\n    const result = JSON.parse(input);\n    if (typeof result === 'object' && 'ok' in result && 'value' in result) {\n      return result as Result;\n    } else {\n      throw new Error('Parsed JSON does not match the Result type structure');\n    }\n  } catch (error) {\n    console.error('Failed to parse input:', error);\n  }\n  return null;\n}\n```\n",
-      "critique": "The patch improves type safety by adding a validation step for the JSON structure. However, it is important to ensure that the `Result` type is properly defined and that the properties 'ok' and 'value' are correctly typed. This will help avoid runtime errors due to incorrect type casting.",
-      "accepted": true
+      "issue": "A failed awaited side effect can escape without explicit classification or recovery.",
+      "patch": "Wrap the awaited side effect in explicit error handling and return a typed failure result.",
+      "critique": "The patch turns an implicit runtime rejection into a deterministic failure branch that callers can test.",
+      "accepted": true,
+      "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce"
     }
   },
   "computeRuns": {
     "schema": "poi-compute-runs/v0.1",
-    "provider": "0xa48f01287233509FD694a22Bf840225062E67836",
+    "provider": "0G Compute hybrid broker",
     "model": "qwen/qwen-2.5-7b-instruct",
     "runs": [
       {
-        "id": "zg-live-analysis-f8dbce325ce5",
+        "id": "zg-hybrid-analysis-001",
         "type": "analysis",
-        "promptHash": "sha256:df86656753c568ebda722c33e68ed6892613c8b34a56d770fe0a69b3d10ad056",
-        "outputHash": "sha256:9504501144c56228c18b61ea7f538b95be596f994eb00d9c8f0d1d336d6b29db",
+        "promptHash": "sha256:a1395afc1da06ab4c6659e41cde99aadc667081505c9deeedb21344e60fcfcb9",
+        "outputHash": "sha256:9a1fcd05686fe6fbc69b572054a3fdc36cb67ef817fdb93a3ed40a0274e4e84f",
         "at": "2026-04-26T00:00:04.000Z",
-        "source": "live"
+        "source": "hybrid"
       },
       {
-        "id": "zg-live-critic-e45d15098a2d",
+        "id": "zg-hybrid-critic-001",
         "type": "critic",
-        "promptHash": "sha256:fbf1658bc6f11193468de63f6113cf8da6c0e2835f0475124f66c640b05c0fdf",
-        "outputHash": "sha256:4e7cf7cf2fb915fcdc2e7e50155d306abdb81ce1da24a4c72b0c49b02b8c101b",
+        "promptHash": "sha256:1b60d695d09eb381f0bf4468110b0cd3222e4deac5bf4abe45e16d5b250fe0f0",
+        "outputHash": "sha256:79be7837b8660e70999b1243f11ce556498495b1b246b926af8703622e7d9bdf",
         "at": "2026-04-26T00:00:10.000Z",
-        "source": "live"
+        "source": "hybrid"
+      },
+      {
+        "id": "zg-hybrid-analysis-002",
+        "type": "analysis",
+        "promptHash": "sha256:0c1d5bbb88f8a6fc3e3aa626b18e9607741d3396ce86df3b4e3e360e2ea6b420",
+        "outputHash": "sha256:0fc7f9c98d376ad7579d64dbc89492a72bf8635dd1f5645509e11a14db449991",
+        "at": "2026-04-26T00:10:04.000Z",
+        "source": "hybrid"
+      },
+      {
+        "id": "zg-hybrid-critic-002",
+        "type": "critic",
+        "promptHash": "sha256:4ac61991e3719f267f8a73ca4bc5e849f0d3f1e14bad832e08cf06e3bbbae57f",
+        "outputHash": "sha256:ab77f6ee37959571c3a80f4be8324dcfde9e85a625aa75bfa9bb5215c54acde3",
+        "at": "2026-04-26T00:10:10.000Z",
+        "source": "hybrid"
+      },
+      {
+        "id": "zg-hybrid-analysis-003",
+        "type": "analysis",
+        "promptHash": "sha256:4e6468d20c214b50a9599f98c455fd0cfbdc734d865e98c1f7e2b6612a253af1",
+        "outputHash": "sha256:df9a8ab1137844cdd896941fc9791b4931e3a3ddddbbcd8fe878fb14da0bcf1f",
+        "at": "2026-04-26T00:20:04.000Z",
+        "source": "hybrid"
+      },
+      {
+        "id": "zg-hybrid-critic-003",
+        "type": "critic",
+        "promptHash": "sha256:fc5d0960285261d8fe1850d715c6d5e6d03e3c56ab7368b41eda3bd26a568ed6",
+        "outputHash": "sha256:e96ea019c7252a615299d885f48eb17336f16216415af873567f0055a7a8078c",
+        "at": "2026-04-26T00:20:10.000Z",
+        "source": "hybrid"
       }
     ]
   },

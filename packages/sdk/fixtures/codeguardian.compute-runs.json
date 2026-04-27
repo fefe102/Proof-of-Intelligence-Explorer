@@ -1,22 +1,54 @@
 {
   "schema": "poi-compute-runs/v0.1",
-  "provider": "0G Compute mock/hybrid",
+  "provider": "0G Compute hybrid broker",
   "model": "qwen/qwen-2.5-7b-instruct",
   "runs": [
     {
-      "id": "zg-compute-analysis-001",
+      "id": "zg-hybrid-analysis-001",
       "type": "analysis",
-      "promptHash": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
-      "outputHash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "promptHash": "sha256:a1395afc1da06ab4c6659e41cde99aadc667081505c9deeedb21344e60fcfcb9",
+      "outputHash": "sha256:9a1fcd05686fe6fbc69b572054a3fdc36cb67ef817fdb93a3ed40a0274e4e84f",
       "at": "2026-04-26T00:00:04.000Z",
       "source": "hybrid"
     },
     {
-      "id": "zg-compute-critic-001",
+      "id": "zg-hybrid-critic-001",
       "type": "critic",
-      "promptHash": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
-      "outputHash": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+      "promptHash": "sha256:1b60d695d09eb381f0bf4468110b0cd3222e4deac5bf4abe45e16d5b250fe0f0",
+      "outputHash": "sha256:79be7837b8660e70999b1243f11ce556498495b1b246b926af8703622e7d9bdf",
       "at": "2026-04-26T00:00:10.000Z",
+      "source": "hybrid"
+    },
+    {
+      "id": "zg-hybrid-analysis-002",
+      "type": "analysis",
+      "promptHash": "sha256:0c1d5bbb88f8a6fc3e3aa626b18e9607741d3396ce86df3b4e3e360e2ea6b420",
+      "outputHash": "sha256:0fc7f9c98d376ad7579d64dbc89492a72bf8635dd1f5645509e11a14db449991",
+      "at": "2026-04-26T00:10:04.000Z",
+      "source": "hybrid"
+    },
+    {
+      "id": "zg-hybrid-critic-002",
+      "type": "critic",
+      "promptHash": "sha256:4ac61991e3719f267f8a73ca4bc5e849f0d3f1e14bad832e08cf06e3bbbae57f",
+      "outputHash": "sha256:ab77f6ee37959571c3a80f4be8324dcfde9e85a625aa75bfa9bb5215c54acde3",
+      "at": "2026-04-26T00:10:10.000Z",
+      "source": "hybrid"
+    },
+    {
+      "id": "zg-hybrid-analysis-003",
+      "type": "analysis",
+      "promptHash": "sha256:4e6468d20c214b50a9599f98c455fd0cfbdc734d865e98c1f7e2b6612a253af1",
+      "outputHash": "sha256:df9a8ab1137844cdd896941fc9791b4931e3a3ddddbbcd8fe878fb14da0bcf1f",
+      "at": "2026-04-26T00:20:04.000Z",
+      "source": "hybrid"
+    },
+    {
+      "id": "zg-hybrid-critic-003",
+      "type": "critic",
+      "promptHash": "sha256:fc5d0960285261d8fe1850d715c6d5e6d03e3c56ab7368b41eda3bd26a568ed6",
+      "outputHash": "sha256:e96ea019c7252a615299d885f48eb17336f16216415af873567f0055a7a8078c",
+      "at": "2026-04-26T00:20:10.000Z",
       "source": "hybrid"
     }
   ]

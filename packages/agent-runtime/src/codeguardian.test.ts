@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { CodeGuardian, replayCodeGuardianRun, runCodeGuardian } from "./index";
+import {
+  CodeGuardian,
+  codeGuardianSkillHashes,
+  replayCodeGuardianRun,
+  runCodeGuardian,
+  runCodeGuardianSequence,
+  traceRootFromRun,
+} from "./index";
 
 describe("CodeGuardian runtime", () => {
   it("creates a run trace", () => {
@@ -17,7 +24,7 @@ describe("CodeGuardian runtime", () => {
   it("appends immutable log events", () => {
     const agent = new CodeGuardian();
     agent.run();
-    expect(agent.log.events.length).toBeGreaterThanOrEqual(10);
+    expect(agent.log.events.length).toBeGreaterThanOrEqual(13);
     expect(agent.log.events[0]?.type).toBe("task_received");
   });
 
@@ -37,5 +44,50 @@ describe("CodeGuardian runtime", () => {
     const replay = replayCodeGuardianRun(result.run);
     expect(replay.eventCount).toBe(result.run.events.length);
     expect(replay.timeline.at(-1)?.type).toBe("certificate_issued");
+  });
+
+  it("creates three autonomous runs with evolving memory roots", () => {
+    const result = runCodeGuardianSequence();
+    expect(result.runs.map((run) => run.runId)).toEqual([
+      "codeguardian-run-001",
+      "codeguardian-run-002",
+      "codeguardian-run-003",
+    ]);
+    const roots = result.memoryEvolution.map((item) => item.memoryRoot);
+    expect(new Set(roots).size).toBe(3);
+    expect(result.roots.memoryRoot).toBe(roots.at(-1));
+  });
+
+  it("records dynamic critic policy upgrade evidence", () => {
+    const result = runCodeGuardianSequence();
+    expect(result.policyUpgrade.oldVersion).toBe("0.1.0");
+    expect(result.policyUpgrade.newVersion).toBe("0.1.1");
+    expect(result.policyUpgrade.oldHash).toMatch(/^sha256:[a-f0-9]{64}$/);
+    expect(result.policyUpgrade.newHash).toMatch(/^sha256:[a-f0-9]{64}$/);
+    expect(result.policyUpgrade.oldHash).not.toBe(result.policyUpgrade.newHash);
+    expect(
+      result.runs
+        .find((run) => run.runId === "codeguardian-run-002")
+        ?.events.some((event) => event.type === "skill_upgrade_checked"),
+    ).toBe(true);
+  });
+
+  it("recomputes trace roots for every run", () => {
+    const result = runCodeGuardianSequence();
+    for (const run of result.runs) {
+      const committed = run.events.find(
+        (event) => event.type === "trace_committed",
+      );
+      expect(committed?.detail.traceRoot).toBe(traceRootFromRun(run));
+      expect(String(committed?.detail.traceRoot)).not.toContain(
+        "0000000000000000000000000000000000000000000000000000000000000000",
+      );
+    }
+  });
+
+  it("hashes real skill policy files", () => {
+    const hashes = codeGuardianSkillHashes();
+    expect(hashes["static-code-review@0.1.0"]).toMatch(/^sha256:[a-f0-9]{64}$/);
+    expect(Object.values(hashes).join("\n")).not.toContain("888888");
   });
 });

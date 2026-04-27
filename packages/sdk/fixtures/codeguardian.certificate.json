@@ -3,20 +3,24 @@
   "certificateId": "poi-cert-codeguardian-001",
   "agent": "CodeGuardian",
   "tier": 6,
-  "issuedAt": "2026-04-26T00:00:13.000Z",
-  "issuer": "Proof-of-Intelligence Explorer",
+  "issuedAt": "2026-04-26T00:20:13.000Z",
+  "issuer": "AgentProof - Proof-of-Intelligence Explorer",
   "evidence": {
     "inft": {
       "chainId": 16602,
-      "contract": "0x1111111111111111111111111111111111117857",
+      "contract": "0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9",
       "tokenId": "1"
     },
-    "intelligenceBundleRoot": "sha256:1c47d70c2c89e0d843c1b8501e98f5bd2354f7b03b994e1b819b2fbc54b87fd4",
-    "memoryRoot": "sha256:bd27bb774163cdfc375d5bcc22d55da8626002b0a209848d1f3687035bb90798",
-    "latestRunRoot": "sha256:190466eef3b7596308ef345ed1d26bb26b18b1dff4249ef5b399fcbdfe96097d",
+    "intelligenceBundleRoot": "sha256:6289903e00f2e42448eb3cad30d322fcd4e1b3e3af54dd37f35a863a864f0bcd",
+    "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce",
+    "latestRunRoot": "sha256:5eea73e8098964c75c6da1aba8d37e7f677b491e0c8a229818eef3f0a4069dad",
     "computeRunIds": [
-      "zg-compute-analysis-001",
-      "zg-compute-critic-001"
+      "zg-hybrid-analysis-001",
+      "zg-hybrid-critic-001",
+      "zg-hybrid-analysis-002",
+      "zg-hybrid-critic-002",
+      "zg-hybrid-analysis-003",
+      "zg-hybrid-critic-003"
     ]
   }
 }

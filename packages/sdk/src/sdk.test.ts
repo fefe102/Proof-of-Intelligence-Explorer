@@ -3,7 +3,11 @@ import codeguardianBundle from "../fixtures/codeguardian.intelligence.encrypted.
 import codeguardianCertificate from "../fixtures/codeguardian.certificate.json";
 import codeguardianManifest from "../fixtures/codeguardian.manifest.json";
 import codeguardianMemory from "../fixtures/codeguardian.memory.json";
+import codeguardianMemoryEvolution from "../fixtures/codeguardian.memory-evolution.json";
+import codeguardianPolicyUpgrade from "../fixtures/codeguardian.policy-upgrade.json";
 import codeguardianRun from "../fixtures/codeguardian.run.json";
+import codeguardianRuns from "../fixtures/codeguardian.runs.json";
+import codeguardianSkillHashes from "../fixtures/codeguardian.skill-hashes.json";
 import {
   ManifestSchema,
   MockComputeAdapter,
@@ -18,6 +22,7 @@ import {
   hashCanonicalJson,
   passportFromReport,
   badgeStatusForTier,
+  decryptIntelligenceBundleForTest,
   verifyComputeHistory,
   verifyCertificate,
   verifyIntelligenceBundle,
@@ -64,7 +69,7 @@ describe("Proof-of-Intelligence SDK", () => {
 
   it("returns a low tier for an arbitrary token with no manifest", async () => {
     const report = await createVerifier().verify({
-      contract: "0x1111111111111111111111111111111111117857",
+      contract: "0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9",
       tokenId: "1",
     });
     expect(report.tier).toBe(6);
@@ -173,12 +178,87 @@ describe("Proof-of-Intelligence SDK", () => {
     expect(hashRunTrace(run)).toBe(
       (codeguardianManifest as Manifest).storage.latestRunRoot,
     );
+    const traceIndex = run.events.findIndex(
+      (event) => event.type === "trace_committed",
+    );
+    expect(traceIndex).toBeGreaterThan(0);
+    expect(run.events[traceIndex]?.detail.traceRoot).toBe(
+      hashCanonicalJson(run.events.slice(0, traceIndex)),
+    );
+  });
+
+  it("keeps CodeGuardian token evidence consistent", async () => {
+    const report = await createVerifier().verify("codeguardian");
+    expect(report.manifest?.inft.contract).toBe(
+      "0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9",
+    );
+    expect(report.certificate?.evidence.inft.contract).toBe(
+      report.manifest?.inft.contract,
+    );
+    expect(report.token?.contract).toBe(report.manifest?.inft.contract);
+    const legacyMockAddress = `0x${"1".repeat(36)}7857`;
+    expect(JSON.stringify(report)).not.toContain(legacyMockAddress);
+  });
+
+  it("uses real AES-256-GCM demo encryption", () => {
+    const bundle = codeguardianBundle;
+    expect(bundle.algorithm).toBe("aes-256-gcm");
+    expect(bundle.ciphertext).not.toContain("mock:");
+    expect(JSON.stringify(bundle)).not.toContain("privateMemorySeed");
+    const plaintext = decryptIntelligenceBundleForTest(bundle);
+    expect(plaintext.privateMemorySeed).toBeTruthy();
+    expect(hashCanonicalJson(bundle)).toBe(
+      (codeguardianManifest as Manifest).storage.intelligenceBundleRoot,
+    );
+  });
+
+  it("tracks memory evolution across three runs", () => {
+    const evolution = codeguardianMemoryEvolution as Array<{
+      memoryRoot: string;
+      runId: string;
+    }>;
+    expect(evolution.map((item) => item.runId)).toEqual([
+      "codeguardian-run-001",
+      "codeguardian-run-002",
+      "codeguardian-run-003",
+    ]);
+    expect(new Set(evolution.map((item) => item.memoryRoot)).size).toBe(3);
+    expect(evolution.at(-1)?.memoryRoot).toBe(
+      (codeguardianManifest as Manifest).storage.memoryRoot,
+    );
+  });
+
+  it("contains dynamic upgrade and real skill hashes", () => {
+    const hashes = codeguardianSkillHashes as Record<string, string>;
+    const upgrade = codeguardianPolicyUpgrade as {
+      oldHash: string;
+      newHash: string;
+      reason: string;
+    };
+    expect(upgrade.reason).toContain("authorization");
+    expect(upgrade.oldHash).toBe(hashes["critic-loop@0.1.0"]);
+    expect(upgrade.newHash).toBe(hashes["critic-loop@0.1.1"]);
+    expect(upgrade.newHash).toMatch(/^sha256:[a-f0-9]{64}$/);
+    expect(JSON.stringify(codeguardianManifest)).not.toContain("888888");
+  });
+
+  it("stores three replayable CodeGuardian traces", () => {
+    const runs = codeguardianRuns as RunTrace[];
+    expect(runs).toHaveLength(3);
+    for (const run of runs) {
+      expect(run.events.map((event) => event.type)).toContain(
+        "memory_delta_created",
+      );
+      expect(run.events.map((event) => event.type)).toContain(
+        "skill_upgrade_checked",
+      );
+    }
   });
 
   it("creates Passport drafts and recorder traces", async () => {
     const manifest = createPassportManifest({
       chainId: 16602,
-      contract: "0x1111111111111111111111111111111111117857",
+      contract: "0x3333333333333333333333333333333333337857",
       tokenId: "7",
       owner: "0x053b860f329c9e4549d23dc8aadf1116b99f1233",
       name: "BuilderAgent",

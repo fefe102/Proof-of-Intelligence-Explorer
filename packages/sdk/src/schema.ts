@@ -59,11 +59,17 @@ export const IntelligenceBundleSchema = z.object({
   encrypted: z.boolean(),
   algorithm: z.string(),
   ciphertext: z.string(),
+  iv: z.string(),
+  authTag: z.string(),
   publicSummary: z.object({
+    agent: z.string().optional(),
     goals: z.array(z.string()),
     behaviorPolicy: z.string(),
     toolPermissions: z.array(z.string()),
     skills: z.array(z.string()),
+    capabilities: z.array(z.string()).optional(),
+    storage: z.string().optional(),
+    compute: z.string().optional(),
     version: z.string()
   })
 });
@@ -79,7 +85,12 @@ export const MemoryStateSchema = z.object({
   history: z.array(
     z.object({
       runId: z.string(),
+      version: z.number().int().positive().optional(),
       summary: z.string(),
+      learnedPattern: z.string().optional(),
+      memoryDelta: z.string().optional(),
+      at: z.string().optional(),
+      source: z.enum(["live", "hybrid", "mock"]).optional(),
       root: RootSchema
     })
   )
@@ -103,7 +114,9 @@ export const RunTraceSchema = z.object({
     issue: z.string(),
     patch: z.string(),
     critique: z.string(),
-    accepted: z.boolean()
+    accepted: z.boolean(),
+    memoryRoot: RootSchema.optional(),
+    policyUpgrade: z.unknown().optional()
   })
 });
 

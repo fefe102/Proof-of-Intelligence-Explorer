@@ -100,9 +100,22 @@ export type ProofStorageBundle = {
   manifest?: Manifest;
   intelligenceBundle?: IntelligenceBundle;
   memory?: MemoryState;
+  memories?: MemoryState[];
   run?: RunTrace;
+  runs?: RunTrace[];
   computeRuns?: ComputeRuns;
   certificate?: Certificate;
+  memoryEvolution?: Array<{
+    runId: string;
+    version: number;
+    learnedPattern: string;
+    memoryDelta: string;
+    memoryRoot: string;
+    traceRoot: string;
+    source: EvidenceSource;
+  }>;
+  policyUpgrade?: Record<string, unknown>;
+  skillHashes?: Record<string, string>;
 };
 
 const manifestFixture = codeguardianManifest as Manifest;
@@ -114,8 +127,8 @@ const certificateFixture = codeguardianCertificate as Certificate;
 
 export const demoContracts = {
   chainId: 16602,
-  codeguardian: "0x1111111111111111111111111111111111117857",
-  fakeagent: "0x2222222222222222222222222222222222227857",
+  codeguardian: "0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9",
+  fakeagent: "0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9",
   owner: "0x053b860f329c9e4549d23dc8aadf1116b99f1233",
 } as const;
 
@@ -229,8 +242,14 @@ export class ArtifactStorageAdapter implements StorageAdapter {
     if (bundle.memory && bundle.roots?.memoryRoot) {
       this.byRoot.set(bundle.roots.memoryRoot, bundle.memory);
     }
+    for (const memory of bundle.memories ?? []) {
+      this.byRoot.set(hashCanonicalJson(memory), memory);
+    }
     if (bundle.run && bundle.roots?.latestRunRoot) {
       this.byRoot.set(bundle.roots.latestRunRoot, bundle.run);
+    }
+    for (const run of bundle.runs ?? []) {
+      this.byRoot.set(hashCanonicalJson(run), run);
     }
     if (bundle.computeRuns) {
       this.byRoot.set(

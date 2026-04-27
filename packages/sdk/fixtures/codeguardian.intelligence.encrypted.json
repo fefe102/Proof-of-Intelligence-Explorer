@@ -2,17 +2,40 @@
   "schema": "poi-intelligence/v0.1",
   "agent": "CodeGuardian",
   "encrypted": true,
-  "algorithm": "mock-aes-256-gcm-demo",
-  "ciphertext": "mock:codeguardian:v1:encrypted-intelligence-bundle",
+  "algorithm": "aes-256-gcm",
+  "ciphertext": "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",
+  "iv": "Dlq/DfvJk7tjyzrN",
+  "authTag": "yPxy+CHlA40zIuoZK7UjGw==",
   "publicSummary": {
+    "agent": "CodeGuardian",
     "goals": [
-      "Audit TypeScript code for correctness risks",
-      "Propose minimal patches",
-      "Self-review every recommendation before persisting memory"
+      "Audit TypeScript code for correctness and security risks",
+      "Propose bounded patches",
+      "Self-review every recommendation",
+      "Persist learned review patterns across runs"
     ],
-    "behaviorPolicy": "CodeGuardian reports one concrete bug or risk, proposes a bounded patch, and records a critic pass.",
-    "toolPermissions": ["read_fixture", "write_memory", "append_trace"],
-    "skills": ["static-analysis", "patch-synthesis", "critic-loop"],
-    "version": "0.1.0"
+    "behaviorPolicy": "Only run allowlisted demo code-review tasks, never execute untrusted code, and record every analysis, critic, memory, and upgrade event.",
+    "toolPermissions": [
+      "read_fixture",
+      "write_memory",
+      "append_trace"
+    ],
+    "skills": [
+      "static-code-review@0.1.0",
+      "patch-proposal@0.1.0",
+      "critic-loop@0.1.0",
+      "critic-loop@0.1.1",
+      "memory-update-policy@0.1.0"
+    ],
+    "capabilities": [
+      "static code analysis",
+      "patch synthesis",
+      "critic self-review",
+      "persistent memory update",
+      "dynamic critic-policy upgrade"
+    ],
+    "storage": "0G Storage artifact bundle or deterministic hybrid fallback",
+    "compute": "0G Compute broker path or deterministic hybrid adapter",
+    "version": "0.2.0"
   }
 }

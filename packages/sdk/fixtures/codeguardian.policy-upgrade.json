@@ -1,0 +1,9 @@
+{
+  "skill": "critic-loop",
+  "oldVersion": "0.1.0",
+  "newVersion": "0.1.1",
+  "oldHash": "sha256:c88eb62cb4deeaa9dce46fa512f30276a4d6c93620e51da886f87d0474f9e4a9",
+  "newHash": "sha256:105b17eb2621b0c6591e097f1fc0ebd81b8c6596b46efe2b7404e420173de20c",
+  "reason": "After detecting a missing authorization guard, CodeGuardian added an authorization-check heuristic to future critic reviews.",
+  "runId": "codeguardian-run-002"
+}

@@ -1,40 +1,26 @@
 {
-  "mode": "live",
-  "chainId": 16602,
-  "issuer": "0x053B860f329C9e4549D23dc8Aadf1116b99F1233",
-  "registryAddress": "0x90d7f68cbf2a860f7b2c54548095fcb72d61b9af",
-  "demoInftAddress": "0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9",
-  "tokenId": "1",
-  "onChainCertificateId": "3",
-  "certificate": {
-    "schema": "poi-certificate/v0.1",
-    "certificateId": "poi-cert-codeguardian-001",
-    "agent": "CodeGuardian",
-    "tier": 6,
-    "issuedAt": "2026-04-26T00:00:13.000Z",
-    "issuer": "Proof-of-Intelligence Explorer",
-    "evidence": {
-      "inft": {
-        "chainId": 16602,
-        "contract": "0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9",
-        "tokenId": "1"
-      },
-      "intelligenceBundleRoot": "sha256:1c47d70c2c89e0d843c1b8501e98f5bd2354f7b03b994e1b819b2fbc54b87fd4",
-      "memoryRoot": "sha256:dc1e2df935e0db426cf1e0d3014142ebec59b2b917efdec5a5188d80a6774cdf",
-      "latestRunRoot": "sha256:b8524cf76c1dadae7405d7fec813c4c43c84f588a42f0ceff2a5e5a1345c2e30",
-      "computeRunIds": [
-        "zg-live-analysis-f8dbce325ce5",
-        "zg-live-critic-e45d15098a2d"
-      ]
-    }
-  },
+  "schema": "poi-certificate/v0.1",
+  "certificateId": "poi-cert-codeguardian-001",
+  "agent": "CodeGuardian",
+  "tier": 6,
+  "issuedAt": "2026-04-26T00:20:13.000Z",
+  "issuer": "AgentProof - Proof-of-Intelligence Explorer",
   "evidence": {
-    "manifestRoot": "sha256:44d69c5206fad0ce2fc238fb11c50ae1f4b1ba63176a134236e3b91c2c96fe0a",
-    "intelligenceBundleRoot": "sha256:1c47d70c2c89e0d843c1b8501e98f5bd2354f7b03b994e1b819b2fbc54b87fd4",
-    "memoryRoot": "sha256:dc1e2df935e0db426cf1e0d3014142ebec59b2b917efdec5a5188d80a6774cdf",
-    "latestRunRoot": "sha256:b8524cf76c1dadae7405d7fec813c4c43c84f588a42f0ceff2a5e5a1345c2e30",
-    "checkpointRoot": "sha256:1327b28193e5cb885e332543c20bfeaafce555102f39e33b9bf5f491abd8d426",
-    "historyRoot": "sha256:43671740184c704a39f4f7c37bd4fc3d20befbc41713bfc9737cb1022b6cb5c4"
-  },
-  "message": "Certificate artifact exported and registry certificate write is live or already recorded."
+    "inft": {
+      "chainId": 16602,
+      "contract": "0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9",
+      "tokenId": "1"
+    },
+    "intelligenceBundleRoot": "sha256:6289903e00f2e42448eb3cad30d322fcd4e1b3e3af54dd37f35a863a864f0bcd",
+    "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce",
+    "latestRunRoot": "sha256:5eea73e8098964c75c6da1aba8d37e7f677b491e0c8a229818eef3f0a4069dad",
+    "computeRunIds": [
+      "zg-hybrid-analysis-001",
+      "zg-hybrid-critic-001",
+      "zg-hybrid-analysis-002",
+      "zg-hybrid-critic-002",
+      "zg-hybrid-analysis-003",
+      "zg-hybrid-critic-003"
+    ]
+  }
 }
