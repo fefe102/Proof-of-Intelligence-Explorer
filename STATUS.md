@@ -27,6 +27,7 @@
 - [x] ERC-7857-style iNFT root accessors, events, and contract tests
 - [x] Minted iNFT proof cards and 0G evidence links surfaced in UI/docs
 - [x] Final `pnpm final:check`, `pnpm contracts:test`, security audit, Vercel redeploy, commit, and push
+- [x] ENS prize targeting explicitly deferred; current ENS support remains mock/compatibility only
 
 ## Submission Constants
 

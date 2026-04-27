@@ -267,9 +267,12 @@ export async function verifyOptionalEns(
     ok: Boolean(resolved),
     tier: 2,
     source: adapter.source,
-    detail: resolved
-      ? "ENS resolved to an agent token"
-      : "ENS name did not resolve, but ENS is optional",
+    detail:
+      adapter.source === "mock"
+        ? "ENS compatibility uses a mock adapter and is not required for this proof"
+        : resolved
+          ? "ENS resolved to an agent token"
+          : "ENS name did not resolve, but ENS is optional",
   };
 }
 

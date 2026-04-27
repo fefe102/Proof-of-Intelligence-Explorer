@@ -63,7 +63,7 @@
       "ok": true,
       "tier": 2,
       "source": "mock",
-      "detail": "ENS resolved to an agent token"
+      "detail": "ENS is not targeted in this submission; this is mock compatibility metadata only"
     },
     {
       "id": "certificate",

@@ -77,7 +77,7 @@ After Run 002, CodeGuardian upgrades `critic-loop v0.1.0 -> v0.1.1` because it l
 - **0G Storage:** encrypted intelligence artifact, memory/current-state artifact, run traces, compute bundle, certificate bundle. Regenerated local artifacts are hybrid until live upload is rerun.
 - **0G Compute:** analysis and critic run records use the same adapter shape as live 0G Compute; source labels show whether records are live or hybrid.
 - **Optional 0G DA:** exportable proof bundle.
-- **Optional ENS:** light mock resolver only; no ENS name is required.
+- **ENS:** not targeted for this submission; mock/compatibility hooks remain only for future live agent identity work.
 
 ## AgentProof Flows
 
@@ -215,7 +215,7 @@ flowchart LR
 - Regenerated proof artifacts are hybrid until live 0G Storage upload is rerun.
 - Wallet-owned create-passport writes are future work; hosted create flow is currently a deterministic preview.
 - Optional DA is export-only.
-- ENS support is light/mock.
+- ENS is intentionally not a prize target in this version. The repo keeps mock/compatibility hooks, but no live ENS identity is claimed.
 - Demo video URL is added in the ETHGlobal dashboard.
 
 Team/contact details are provided in the ETHGlobal dashboard and omitted from this public repository.

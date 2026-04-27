@@ -391,7 +391,12 @@ function applyLiveOverlay(
         };
       }
       if (slug === "codeguardian" && check.id === "ens") {
-        return { ...check, source: "hybrid" as const };
+        return {
+          ...check,
+          source: "mock" as const,
+          detail:
+            "ENS is not targeted in this submission; this is mock compatibility metadata only",
+        };
       }
       return check;
     }),

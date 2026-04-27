@@ -21,7 +21,7 @@ Production posture is suitable for the hosted hackathon demo:
 - no private keys, admin tokens, bearer tokens, encryption keys, mnemonics, or personal contact emails are tracked
 - hosted public pages and public APIs are read-only
 - hosted live write actions remain disabled unless server-only admin and wallet env vars are configured
-- CodeGuardian uses live 0G Chain evidence, deterministic hybrid 0G Storage/Compute proof artifacts, and optional DA/ENS explicitly labeled mock
+- CodeGuardian uses live 0G Chain evidence, deterministic hybrid 0G Storage/Compute proof artifacts, optional DA labeled mock, and ENS compatibility explicitly deferred as mock-only future work
 - `pnpm audit:prod` passes the moderate gate; `pnpm audit --prod` reports one low-severity advisory in a 0G broker transitive dependency path
 
 ## Fixes Applied
@@ -138,7 +138,7 @@ pnpm contracts:test
 pnpm final:check
 ```
 
-The latest production deployment was made from a gitless source copy and confirmed Ready by Vercel inspect after the CLI status request ended with a socket hang-up. Hosted checks returned `CodeGuardian iNFT` from `/api/health`, tier 6 for CodeGuardian, tier 1 for FakeAgent, HTTP 200 for the Agent Console, replay, passport, certificate pages, and `image/svg+xml` for the public badge.
+The latest production deployment was made from a gitless source copy and completed cleanly through Vercel. Hosted checks returned `CodeGuardian iNFT` from `/api/health`, tier 6 for CodeGuardian, tier 1 for FakeAgent, HTTP 200 for the Agent Console, replay, passport, certificate pages, and `image/svg+xml` for the public badge. ENS is explicitly labeled mock compatibility metadata and is not targeted for this submission.
 
 ## Operational Guidance
 

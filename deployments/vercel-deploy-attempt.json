@@ -1,10 +1,10 @@
 {
   "project": "proof-of-intelligence-explorer",
-  "attemptedAt": "2026-04-27T07:37:37.000Z",
+  "attemptedAt": "2026-04-27T08:10:16.000Z",
   "status": "ready",
   "url": "https://proof-of-intelligence-explorer.vercel.app",
   "deployMode": "gitless-source-copy",
-  "reason": "Production deployment succeeded from a source copy without .git metadata. The CLI status request ended with a socket hang-up, but Vercel inspect confirmed the deployment is Ready.",
+  "reason": "Production deployment succeeded from a source copy without .git metadata and was aliased to the production URL by Vercel.",
   "safeToCommit": true,
   "proofLayers": {
     "chain": "live",
@@ -17,6 +17,7 @@
     "GET /api/health returned ok with app CodeGuardian iNFT and proof layer Proof-of-Intelligence Explorer",
     "GET /api/health returned certificate record 3, live 0G Chain, hybrid Storage/Compute, and mock DA/ENS labels",
     "GET /api/verify?agent=codeguardian returned tier 6 with token, manifest, and certificate bound to live iNFT 0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9 #1",
+    "GET /api/verify?agent=codeguardian labels ENS as mock compatibility metadata and not a targeted submission feature",
     "GET /api/verify?agent=fakeagent returned tier 1 with live token evidence and no CodeGuardian passport or certificate identifiers",
     "Vercel inspect returned status Ready for the CodeGuardian iNFT production deployment",
     "GET /agent/codeguardian returned 200",

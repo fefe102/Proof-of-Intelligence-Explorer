@@ -60,7 +60,7 @@ AgentProof can export a DA proof bundle containing the key roots. DA is optional
 
 ## Optional ENS
 
-ENS support is light and optional. A missing ENS name does not fail verification. `codeguardian.poi-demo.eth` is a mock alias only.
+ENS is not part of the current prize strategy. A missing ENS name does not fail verification. `codeguardian.poi-demo.eth` is a mock compatibility alias only, and the submission does not claim live ENS identity, subname discovery, access gating, or ENS text-record proofs.
 
 ## Environment
 

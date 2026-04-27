@@ -46,11 +46,11 @@ Many iNFTs can be only metadata pointers. 0G builders, users, marketplaces, and 
 - `docs`: product, proof model, API, SDK, create-passport, security, 0G integration, demo script.
 - `scripts`: guarded live deployment, storage, compute, seed, hash, and Vercel sync helpers.
 - Vercel: production hosting.
-- 0G adapters: Chain, Storage, Compute, optional DA, optional ENS.
+- 0G adapters: Chain, Storage, Compute, optional DA, and ENS-compatible adapter interfaces kept for future work.
 
 ## 6. Proof Model
 
-The proof model is anchored by the CodeGuardian iNFT token and a Proof-of-Intelligence manifest. The manifest points to an encrypted intelligence bundle, memory/current-state evidence, memory history, immutable run traces, compute run history, dynamic policy/skill upgrade evidence, certificate, optional DA bundle, and optional ENS metadata.
+The proof model is anchored by the CodeGuardian iNFT token and a Proof-of-Intelligence manifest. The manifest points to an encrypted intelligence bundle, memory/current-state evidence, memory history, immutable run traces, compute run history, dynamic policy/skill upgrade evidence, certificate, and optional DA bundle. ENS is not part of the current prize strategy; any ENS fields are mock/compatibility metadata only until a real live ENS name or subname is configured.
 
 ## 7. Verification Tiers
 
@@ -114,6 +114,7 @@ Labels must be shown honestly in UI, API, CLI, docs, and certificates. Hybrid or
 - No generic chatbot.
 - No finance or trading features.
 - No Uniswap, Gensyn, or KeeperHub scope unless intentionally added later.
+- No ENS prize claim unless a real live ENS name/subname is configured and used for agent identity, discovery, or access control.
 - No overclaiming hybrid or mock evidence as live.
 
 ## 13. Acceptance Criteria

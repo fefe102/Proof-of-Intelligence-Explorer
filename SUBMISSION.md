@@ -71,7 +71,7 @@ Dynamic upgrade:
 
 **0G DA, optional:** AgentProof can export a proof bundle for DA workflows.
 
-**ENS, optional:** light alias support only; no live ENS name is required.
+**ENS:** not targeted for this submission. Existing ENS fields are mock/compatibility hooks only; no live ENS identity, subname, gating, or discovery flow is claimed.
 
 ## AgentProof / Reusable Tooling
 
