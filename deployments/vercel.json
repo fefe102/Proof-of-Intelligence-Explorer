@@ -4,7 +4,7 @@
   "url": "https://proof-of-intelligence-explorer.vercel.app",
   "mode": "hybrid",
   "liveWritesEnabled": false,
-  "deployedAt": "2026-04-27T02:53:22.000Z",
+  "deployedAt": "2026-04-27T04:22:43.000Z",
   "proofLayers": {
     "chain": "live",
     "storage": "live",
@@ -31,6 +31,7 @@
     "Security hardening deployment adds browser security headers and non-cacheable admin responses.",
     "Latest deployment binds the hosted certificate and raw evidence to CodeGuardian live iNFT 0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9 #1.",
     "CodeGuardian profile labels the optional mock layer as DA/ENS only; core Chain, Storage, and Compute evidence is live.",
-    "Privacy cleanup keeps FakeAgent from inheriting CodeGuardian passport or certificate identifiers."
+    "Privacy cleanup keeps FakeAgent from inheriting CodeGuardian passport or certificate identifiers.",
+    "Latest production deployment includes dynamic arbitrary-token verification, public passport pages, create-passport preview flow, public passport API, and SVG badge endpoint."
   ]
 }

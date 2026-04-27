@@ -15,8 +15,10 @@
 - [x] Badge endpoint
 - [x] Live/hybrid/mock labeling for seeded demo
 - [x] Vercel deployment
-- [x] Final tests/build for previous deployment
+- [x] Final tests/build
+- [x] Production route verification
+- [x] Privacy/security scan
 
 ## Active Backlog
 
-- Run final verification and redeploy production.
+- None for the current hackathon product pass.

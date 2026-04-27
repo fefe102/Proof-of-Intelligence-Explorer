@@ -75,9 +75,11 @@ Public routes:
 
 - `/api/health`
 - `/api/verify`
+- `/api/passport/[chainId]/[contract]/[tokenId]`
 - `/api/agent/[agent]`
 - `/api/run/[runId]`
 - `/api/certificate/[certificateId]`
+- `/badge/[chainId]/[contract]/[tokenId].svg`
 
 These routes return public proof data only.
 
@@ -126,6 +128,8 @@ Security-specific checks:
 pnpm lint
 pnpm audit:prod
 ```
+
+A targeted local-path and personal-email scan also completed with no tracked matches.
 
 Full product checks:
 
