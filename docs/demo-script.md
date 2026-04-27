@@ -1,27 +1,29 @@
 # 3-Minute Demo Script
 
-## 0:00-0:25
+## 0:00-0:20
 
-Many iNFTs are just metadata pointers. 0G asks teams to prove embedded intelligence and memory. This is the proof layer.
+Proof-of-Intelligence Explorer verifies whether a 0G iNFT agent actually has embedded intelligence, memory, compute evidence, and replayable behavior.
 
-## 0:25-0:55
+## 0:20-0:50
 
-Verify FakeAgent. It fails.
+Paste a token into the dynamic verifier. Show that a token without proof stays low-tier instead of inheriting demo data.
 
-Verify CodeGuardian. It passes.
+## 0:50-1:20
 
-## 0:55-1:35
+Compare FakeAgent and CodeGuardian. FakeAgent fails. CodeGuardian passes.
 
-Run CodeGuardian. It audits code, uses the live 0G Compute-backed run where configured, finds an issue, proposes a patch, self-critiques, writes memory and trace.
+## 1:20-1:55
 
-## 1:35-2:10
+Open CodeGuardian proof. Show intelligence root, memory root, compute run evidence, and replay trace.
 
-Replay latest run. Show timeline and roots.
+## 1:55-2:20
 
-## 2:10-2:35
+Replay latest run and open the certificate. Show the same iNFT address, token ID, roots, and compute run IDs.
 
-Generate or view certificate. Show iNFT, owner, intelligence root, memory root, run root, compute runs.
+## 2:20-2:45
 
-## 2:35-3:00
+Show the Create Passport wizard and the generated manifest root, public Passport URL, API URL, and badge embed.
 
-Show SDK/CLI. Explain any 0G iNFT team can use this verifier.
+## 2:45-3:00
+
+Show API, badge, SDK, and CLI. Any 0G iNFT builder can use this verifier.

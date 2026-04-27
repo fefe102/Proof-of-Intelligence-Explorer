@@ -4,7 +4,7 @@
 
 **Proof-of-Intelligence Explorer**
 
-Proof-of-Intelligence Explorer is a 0G-backed proof layer for iNFT-style agents. It lets judges verify whether an agent token contains encrypted intelligence, persistent memory, 0G Compute history, and replayable behavior instead of only NFT metadata.
+Proof-of-Intelligence Explorer is a free hosted verification, certification, API, and badge platform for 0G iNFT agents. It lets judges verify whether an agent token contains encrypted intelligence, persistent memory, 0G Compute history, and replayable behavior instead of only NFT metadata.
 
 ## Links
 
@@ -12,6 +12,8 @@ Proof-of-Intelligence Explorer is a 0G-backed proof layer for iNFT-style agents.
 - Demo video: `<add ETHGlobal demo video URL>`
 - Public GitHub: https://github.com/fefe102/Proof-of-Intelligence-Explorer
 - Minted iNFT explorer link: https://chainscan-galileo.0g.ai/address/0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9
+- Dynamic CodeGuardian Passport: https://proof-of-intelligence-explorer.vercel.app/passport/16602/0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9/1
+- Badge SVG: https://proof-of-intelligence-explorer.vercel.app/badge/16602/0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9/1.svg
 
 ## Contract Deployments
 
@@ -33,6 +35,8 @@ The explorer verifies a tiered Proof-of-Intelligence passport:
 - 0G Compute analysis and critic/self-review run records
 - replayable behavior trace
 - JSON proof export and printable certificate
+- public API and badge for arbitrary 0G iNFT/token inputs
+- create-passport preview flow for builders
 
 CodeGuardian is the positive demo agent. FakeAgent is the negative control that looks token-like but lacks the required intelligence, memory, compute, and trace evidence.
 
@@ -52,9 +56,9 @@ CodeGuardian is the positive demo agent. FakeAgent is the negative control that 
 
 The product has five parts:
 
-1. Explorer UI for public verification, replay, certificates, developer docs, and guarded admin actions.
-2. SDK with manifest schema validation, canonical JSON hashing, adapters, and tiered verification.
-3. CLI for demo seeding, verification, replay, proof export, live deploy, and Vercel sync workflows.
+1. Explorer UI for public verification, dynamic Passport pages, replay, certificates, developer docs, badges, create-passport, and guarded admin actions.
+2. SDK with manifest schema validation, canonical JSON hashing, adapters, Passport builder helpers, recorder helpers, and tiered verification.
+3. CLI for demo seeding, arbitrary verification, Passport draft creation, replay, proof export, live deploy, and Vercel sync workflows.
 4. CodeGuardian runtime with analysis, patch proposal, critic loop, memory writes, trace events, and certificates.
 5. Contracts for demo iNFT registration, root updates, and certificate issuance.
 

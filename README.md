@@ -2,7 +2,7 @@
 
 Proof-of-Intelligence Explorer is a 0G-backed verification layer for iNFT-style agents. It answers one judge-facing question: **is this iNFT actually intelligent, or is it only NFT metadata?**
 
-The product combines an explorer, SDK, CLI, registry, demo agent, and printable certificate flow so 0G iNFT teams can prove that encrypted intelligence, persistent memory, compute history, and executable behavior are embedded behind an agent token.
+The product combines an explorer, SDK, CLI, registry, create-passport flow, public API, badge, demo agent, and printable certificate flow so 0G iNFT teams can prove that encrypted intelligence, persistent memory, compute history, and executable behavior are embedded behind an agent token.
 
 Hosted demo: https://proof-of-intelligence-explorer.vercel.app
 
@@ -46,6 +46,33 @@ Every public page labels evidence honestly as `live`, `hybrid`, or `mock`.
 **CodeGuardian** is the seeded demo agent. It audits a deterministic TypeScript fixture, finds a bug/risk, proposes a patch, self-critiques the patch, writes memory, appends trace events, and emits certificate data.
 
 **FakeAgent** is the control. It has token-like metadata but no valid Proof-of-Intelligence manifest, encrypted intelligence bundle, memory root, compute run history, or replayable trace. It should fail high-tier checks.
+
+## Verify Any 0G iNFT
+
+Open `/verify`, enter a chain ID, contract address, and token ID, then submit. The hosted product reads the token on 0G Galileo when RPC is configured, checks owner and metadata, tries known Proof-of-Intelligence manifest roots, and returns an honest report. If no manifest exists, the result remains low-tier: token ownership may be readable, but embedded intelligence is not proven.
+
+Dynamic Passport pages live at:
+
+```text
+/passport/16602/<contract>/<tokenId>
+```
+
+Public API:
+
+```text
+/api/verify?chainId=16602&contract=0x...&tokenId=1
+/api/passport/16602/0x.../1
+```
+
+Badge embed:
+
+```md
+[![Proof of Intelligence](https://proof-of-intelligence-explorer.vercel.app/badge/16602/0x.../1.svg)](https://proof-of-intelligence-explorer.vercel.app/passport/16602/0x.../1)
+```
+
+## Create Passport
+
+Open `/create` to generate a Passport draft for a testnet agent. The wizard collects agent basics, token details, skills, allowed actions, and memory policy, then computes a manifest root and badge/API URLs. In public hosted mode this is a deterministic preview. With live writes enabled, the same roots can be uploaded to 0G Storage and registered through guarded testnet operations or a future wallet-owned transaction path.
 
 ## Verification Tiers
 
@@ -93,6 +120,8 @@ CLI examples:
 ```bash
 pnpm --filter @poi/cli poi verify codeguardian
 pnpm --filter @poi/cli poi verify fakeagent
+pnpm --filter @poi/cli poi verify --chain-id 16602 --contract 0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9 --token-id 1
+pnpm --filter @poi/cli poi create-passport
 pnpm --filter @poi/cli poi run-codeguardian
 pnpm --filter @poi/cli poi replay codeguardian-run-001
 pnpm --filter @poi/cli poi export-proof codeguardian --out tmp/codeguardian-proof.json
@@ -160,6 +189,23 @@ console.log(report.tier, report.status, report.evidence);
 const proofJson = exportProofJson(report);
 ```
 
+Builder recorder example:
+
+```ts
+import { createPoiRecorder } from "@poi/sdk";
+
+const recorder = createPoiRecorder({
+  chainId: 16602,
+  contract: "0x...",
+  tokenId: "1"
+});
+
+await recorder.startRun({ task: "Audit this repository" });
+await recorder.recordComputeCall({ model: "0G Compute", inputHash, outputHash });
+await recorder.recordMemoryWrite({ memoryRoot });
+await recorder.finishRun({ resultRoot });
+```
+
 Manifest schema name:
 
 ```json
@@ -222,6 +268,8 @@ flowchart LR
 
 - `/` landing page
 - `/verify`
+- `/create`
+- `/passport/[chainId]/[contract]/[tokenId]`
 - `/agent/codeguardian`
 - `/agent/fakeagent`
 - `/run/[runId]`
@@ -229,6 +277,7 @@ flowchart LR
 - `/developer`
 - `/mint-demo`
 - `/admin`
+- `/badge/[chainId]/[contract]/[tokenId].svg`
 
 Public pages must work without local setup. Admin write actions require a server-only admin token and must be disabled when live writes are not configured.
 
