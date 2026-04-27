@@ -21,7 +21,9 @@ describe("Proof-of-Intelligence contracts", function () {
     const memoryRoot = root("memory:v1");
     const runRoot = root("run:v1");
 
-    await demoINFT.mintDemo(tokenOwner.address, metadataURI, manifestRoot);
+    await expect(demoINFT.mintDemo(tokenOwner.address, metadataURI, manifestRoot))
+      .to.emit(demoINFT, "DemoMinted")
+      .withArgs(tokenOwner.address, tokenId, manifestRoot, metadataURI);
 
     return {
       admin,
@@ -61,6 +63,58 @@ describe("Proof-of-Intelligence contracts", function () {
     expect(await demoINFT.ownerOf(tokenId)).to.equal(tokenOwner.address);
     expect(await demoINFT.tokenURI(tokenId)).to.equal(metadataURI);
     expect(await demoINFT.manifestRootOf(tokenId)).to.equal(manifestRoot);
+    expect(await demoINFT.authorizedUsageOf(tokenId)).to.contain("allowlisted CodeGuardian");
+  });
+
+  it("sets and reads ERC-7857-style intelligence roots", async function () {
+    const { demoINFT, tokenOwner, tokenId, intelligenceRoot, memoryRoot, runRoot } = await loadFixture(deployFixture);
+    const skillHash = root("critic-loop:v0.1.1");
+
+    await expect(demoINFT.connect(tokenOwner).setIntelligenceRoot(tokenId, intelligenceRoot))
+      .to.emit(demoINFT, "IntelligenceRootSet")
+      .withArgs(tokenId, intelligenceRoot);
+
+    await expect(demoINFT.connect(tokenOwner).updateMemoryRoot(tokenId, memoryRoot))
+      .to.emit(demoINFT, "MemoryRootUpdated")
+      .withArgs(tokenId, ethers.ZeroHash, memoryRoot);
+
+    await expect(demoINFT.connect(tokenOwner).updateLatestRunRoot(tokenId, runRoot))
+      .to.emit(demoINFT, "LatestRunRootUpdated")
+      .withArgs(tokenId, ethers.ZeroHash, runRoot);
+
+    await expect(demoINFT.connect(tokenOwner).updateSkillHash(tokenId, "critic-loop", "0.1.1", skillHash))
+      .to.emit(demoINFT, "AgentSkillUpgraded")
+      .withArgs(tokenId, "critic-loop", "0.1.1", skillHash);
+
+    await expect(demoINFT.connect(tokenOwner).certifyRun(tokenId, runRoot, 7))
+      .to.emit(demoINFT, "AgentRunCertified")
+      .withArgs(tokenId, runRoot, 7);
+
+    expect(await demoINFT.intelligenceRootOf(tokenId)).to.equal(intelligenceRoot);
+    expect(await demoINFT.memoryRootOf(tokenId)).to.equal(memoryRoot);
+    expect(await demoINFT.latestRunRootOf(tokenId)).to.equal(runRoot);
+    expect(await demoINFT.skillHashOf(tokenId, "critic-loop", "0.1.1")).to.equal(skillHash);
+  });
+
+  it("rejects unauthorized iNFT root and skill updates", async function () {
+    const { demoINFT, other, tokenId, memoryRoot } = await loadFixture(deployFixture);
+
+    await expect(demoINFT.connect(other).setIntelligenceRoot(tokenId, memoryRoot)).to.be.revertedWithCustomError(
+      demoINFT,
+      "OwnableUnauthorizedAccount"
+    );
+    await expect(demoINFT.connect(other).updateMemoryRoot(tokenId, memoryRoot)).to.be.revertedWithCustomError(
+      demoINFT,
+      "OwnableUnauthorizedAccount"
+    );
+    await expect(demoINFT.connect(other).updateLatestRunRoot(tokenId, memoryRoot)).to.be.revertedWithCustomError(
+      demoINFT,
+      "OwnableUnauthorizedAccount"
+    );
+    await expect(demoINFT.connect(other).updateSkillHash(tokenId, "critic-loop", "0.1.1", memoryRoot)).to.be.revertedWithCustomError(
+      demoINFT,
+      "OwnableUnauthorizedAccount"
+    );
   });
 
   it("registers a Proof-of-Intelligence passport", async function () {
