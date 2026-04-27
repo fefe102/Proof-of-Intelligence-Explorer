@@ -29,6 +29,7 @@ import {
   verifyManifest,
   verifyMemory,
   type ComputeRuns,
+  type IntelligenceBundle,
   type Manifest,
   type RunTrace,
 } from "./index";
@@ -205,7 +206,9 @@ describe("Proof-of-Intelligence SDK", () => {
     expect(bundle.algorithm).toBe("aes-256-gcm");
     expect(bundle.ciphertext).not.toContain("mock:");
     expect(JSON.stringify(bundle)).not.toContain("privateMemorySeed");
-    const plaintext = decryptIntelligenceBundleForTest(bundle);
+    const plaintext = decryptIntelligenceBundleForTest(
+      codeguardianBundle as IntelligenceBundle,
+    );
     expect(plaintext.privateMemorySeed).toBeTruthy();
     expect(hashCanonicalJson(bundle)).toBe(
       (codeguardianManifest as Manifest).storage.intelligenceBundleRoot,

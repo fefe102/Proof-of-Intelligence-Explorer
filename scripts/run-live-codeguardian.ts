@@ -1,5 +1,5 @@
 import {
-  runCodeGuardian,
+  runCodeGuardianSequence,
   writeCodeGuardianArtifacts,
 } from "@poi/agent-runtime";
 import { hashCanonicalJson } from "@poi/sdk";
@@ -32,27 +32,29 @@ const liveCompute = await runLiveCompute(targetSource).catch((error) => ({
   critic: undefined,
 }));
 
-const result = runCodeGuardian({
+const result = runCodeGuardianSequence({
   source: liveCompute.source,
-  targetPath: fixturePath,
-  targetSource,
   provider: liveCompute.provider,
   model: liveCompute.model,
-  analysis: liveCompute.analysis,
-  critic: liveCompute.critic,
+  limit: 1,
 });
 writeCodeGuardianArtifacts(result, "tmp/codeguardian-live");
 writeSafeJson("deployments/codeguardian-run.json", {
   mode: liveCompute.source,
   chainId: config.expectedChainId,
   runId: result.run.runId,
-  memoryRoot: result.memoryRootAfter,
+  memoryRoot: result.roots.memoryRoot,
   traceRoot: result.certificate.evidence.latestRunRoot,
   computeRunIds: result.computeRuns.runs.map((run) => run.id),
   run: result.run,
+  runs: result.runs,
   memory: result.memory,
+  memories: result.memories,
+  memoryEvolution: result.memoryEvolution,
   computeRuns: result.computeRuns,
   certificate: result.certificate,
+  policyUpgrade: result.policyUpgrade,
+  skillHashes: result.skillHashes,
   computeProviderConfigured: Boolean(zeroGEnv("COMPUTE_PROVIDER")),
   computeServiceUrlConfigured: Boolean(zeroGEnv("COMPUTE_SERVICE_URL")),
   computeBearerConfigured: Boolean(zeroGEnv("COMPUTE_BEARER_TOKEN")),

@@ -95,37 +95,37 @@ function createProofObjects(
   const values: Array<ProofObjectRecord & { value: unknown }> = [
     {
       name: "manifest",
-      poiRoot: artifacts.roots.manifestRoot,
+      poiRoot: requireRoot(artifacts.roots, "manifestRoot"),
       source: "hybrid",
       value: artifacts.manifest,
     },
     {
       name: "intelligenceBundle",
-      poiRoot: artifacts.roots.intelligenceBundleRoot,
+      poiRoot: requireRoot(artifacts.roots, "intelligenceBundleRoot"),
       source: "hybrid",
       value: artifacts.intelligenceBundle,
     },
     {
       name: "memory",
-      poiRoot: artifacts.roots.memoryRoot,
+      poiRoot: requireRoot(artifacts.roots, "memoryRoot"),
       source: "hybrid",
       value: artifacts.memory,
     },
     {
       name: "run",
-      poiRoot: artifacts.roots.latestRunRoot,
+      poiRoot: requireRoot(artifacts.roots, "latestRunRoot"),
       source: "hybrid",
       value: artifacts.run,
     },
     {
       name: "computeRuns",
-      poiRoot: artifacts.roots.computeRunsRoot,
+      poiRoot: requireRoot(artifacts.roots, "computeRunsRoot"),
       source: "hybrid",
       value: artifacts.computeRuns,
     },
     {
       name: "certificate",
-      poiRoot: artifacts.roots.certificateRoot,
+      poiRoot: requireRoot(artifacts.roots, "certificateRoot"),
       source: "hybrid",
       value: artifacts.certificate,
     },
@@ -143,6 +143,14 @@ function readJson<T>(path: string): T | null {
   } catch {
     return null;
   }
+}
+
+function requireRoot(roots: Record<string, string>, key: string) {
+  const value = roots[key];
+  if (!value) {
+    throw new Error(`Missing CodeGuardian root: ${key}`);
+  }
+  return value;
 }
 
 function writeJson(path: string, value: unknown) {
