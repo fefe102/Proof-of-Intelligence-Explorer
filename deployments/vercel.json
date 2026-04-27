@@ -4,7 +4,14 @@
   "url": "https://proof-of-intelligence-explorer.vercel.app",
   "mode": "hybrid",
   "liveWritesEnabled": false,
-  "deployedAt": "2026-04-27T00:32:37.000Z",
+  "deployedAt": "2026-04-27T02:53:22.000Z",
+  "proofLayers": {
+    "chain": "live",
+    "storage": "live",
+    "compute": "live",
+    "da": "mock",
+    "ens": "mock"
+  },
   "liveChain": {
     "chainId": 16602,
     "demoInftAddress": "0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9",
@@ -12,16 +19,18 @@
     "codeguardianTokenId": "1",
     "fakeagentTokenId": "2",
     "codeguardianPassportId": "0x01212ca92791787ccb99c454d3b59c5596f90882c892c7fca3e63294a159430c",
-    "codeguardianCertificateId": "2"
+    "codeguardianCertificateId": "3"
   },
   "safeToCommit": true,
   "notes": [
-    "Deployment was made from a temporary source copy without .git metadata.",
+    "Production deployment was made from a temporary source copy without .git metadata.",
     "No Vercel secrets or private env values are recorded in this file.",
     "Public verification remains available; hosted live write actions are disabled.",
-    "CodeGuardian reports live 0G Chain evidence and hybrid storage/compute evidence.",
+    "CodeGuardian reports live 0G Chain, 0G Storage, and 0G Compute evidence.",
+    "0G DA and ENS remain explicitly labeled mock/optional.",
     "Security hardening deployment adds browser security headers and non-cacheable admin responses.",
-    "Latest deployment binds the hosted certificate and raw evidence to CodeGuardian live iNFT #1.",
+    "Latest deployment binds the hosted certificate and raw evidence to CodeGuardian live iNFT 0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9 #1.",
+    "CodeGuardian profile labels the optional mock layer as DA/ENS only; core Chain, Storage, and Compute evidence is live.",
     "Privacy cleanup keeps FakeAgent from inheriting CodeGuardian passport or certificate identifiers."
   ]
 }

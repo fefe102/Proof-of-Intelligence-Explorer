@@ -1,20 +1,29 @@
 {
   "project": "proof-of-intelligence-explorer",
-  "attemptedAt": "2026-04-27T00:32:37.000Z",
+  "attemptedAt": "2026-04-27T02:53:22.000Z",
   "status": "ready",
   "url": "https://proof-of-intelligence-explorer.vercel.app",
   "deployMode": "gitless-source-copy",
   "reason": "Production deployment succeeded after deploying from a source copy without .git metadata.",
   "safeToCommit": true,
+  "proofLayers": {
+    "chain": "live",
+    "storage": "live",
+    "compute": "live",
+    "da": "mock",
+    "ens": "mock"
+  },
   "publicChecks": [
     "GET /api/health returned ok",
-    "Browser fetch /api/verify?agent=codeguardian returned tier 6 with token, manifest, and certificate bound to live iNFT 0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9 #1",
+    "GET /api/health returned certificate record 3 and live 0G Chain, Storage, and Compute evidence",
+    "GET /api/verify?agent=codeguardian returned tier 6 with token, manifest, and certificate bound to live iNFT 0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9 #1",
     "GET /api/verify?agent=fakeagent returned tier 1 with live token evidence and no CodeGuardian passport or certificate identifiers",
     "Vercel inspect returned status Ready for the hardened production deployment",
     "GET /agent/codeguardian returned 200",
     "GET /agent/fakeagent returned 200",
     "GET /run/codeguardian-run-001 returned 200",
-    "Browser check /certificate/poi-cert-codeguardian-001 showed live iNFT 0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9 #1 and no mock token address",
+    "GET /api/certificate/poi-cert-codeguardian-001 showed live iNFT 0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9 #1 and no mock token address",
+    "Browser check /agent/codeguardian showed live 0G Compute copy and labeled the mock source as optional DA/ENS",
     "POST /api/admin/seed-demo without token returned 403 in local route tests; shell curl to Vercel returned TLS ECONNRESET from this environment, so hosted checks used the browser runtime"
   ]
 }

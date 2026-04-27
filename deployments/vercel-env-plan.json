@@ -2,7 +2,7 @@
   "project": "proof-of-intelligence-explorer",
   "publicEnv": {
     "NEXT_PUBLIC_APP_NAME": "Proof-of-Intelligence Explorer",
-    "NEXT_PUBLIC_APP_URL": "",
+    "NEXT_PUBLIC_APP_URL": "https://proof-of-intelligence-explorer.vercel.app",
     "NEXT_PUBLIC_POI_PUBLIC_MODE": "hybrid",
     "NEXT_PUBLIC_0G_CHAIN_ID": "16602",
     "NEXT_PUBLIC_0G_RPC_URL": "https://evmrpc-testnet.0g.ai",
@@ -12,7 +12,7 @@
     "NEXT_PUBLIC_CODEGUARDIAN_INFT_ID": "1",
     "NEXT_PUBLIC_FAKEAGENT_INFT_ID": "2",
     "NEXT_PUBLIC_POI_PASSPORT_ID": "0x01212ca92791787ccb99c454d3b59c5596f90882c892c7fca3e63294a159430c",
-    "NEXT_PUBLIC_POI_CERTIFICATE_ID": "2"
+    "NEXT_PUBLIC_POI_CERTIFICATE_ID": "3"
   },
   "serverOnlyEnvNames": [
     "POI_ADMIN_TOKEN",

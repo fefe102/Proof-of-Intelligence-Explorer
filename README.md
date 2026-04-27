@@ -13,9 +13,9 @@ Current live Galileo demo:
 - CodeGuardian token ID: `1`
 - FakeAgent token ID: `2`
 - CodeGuardian passport: `0x01212ca92791787ccb99c454d3b59c5596f90882c892c7fca3e63294a159430c`
-- On-chain certificate record: `1`
+- On-chain certificate record: `3`
 
-The hosted product uses live 0G Chain evidence with hybrid storage/compute evidence unless those services are configured server-side. The UI labels that split explicitly.
+The seeded demo now uses live 0G Chain, live 0G Storage object uploads, and live 0G Compute analysis/critic runs for CodeGuardian. Optional DA and ENS remain mock/lightweight and are labeled separately.
 
 ## Why This Exists
 
@@ -34,8 +34,8 @@ Many "AI NFTs" prove ownership of a token and maybe point to metadata. They do n
 The project is designed around 0G's full-stack AI infrastructure:
 
 - **0G Chain:** demo iNFT, Proof-of-Intelligence registry, certificate issuance, and ownership checks on Galileo testnet.
-- **0G Storage:** encrypted intelligence bundle, current memory checkpoint, immutable run trace, and evidence roots.
-- **0G Compute:** CodeGuardian analysis and critic/self-review records with model/provider/run identifiers.
+- **0G Storage:** encrypted intelligence bundle, current memory checkpoint, immutable run trace, compute run bundle, and certificate object uploads.
+- **0G Compute:** CodeGuardian analysis and critic/self-review records with provider/model/run identifiers from the 0G Compute broker path.
 - **0G DA, optional:** exportable proof bundle for teams that want an additional data availability artifact.
 - **ENS, optional:** light resolver support for nicer aliases; no ENS name is required.
 
@@ -245,7 +245,8 @@ See [docs/security.md](docs/security.md) for the checklist.
 
 ## Limitations
 
-- Live 0G Storage, Compute, and DA adapters may run in hybrid/mock mode until official SDK wiring is available and configured.
+- Hosted live write buttons remain disabled unless server-only admin and wallet secrets are configured in Vercel.
+- Optional DA remains an export bundle rather than a required verifier tier.
 - ENS support is intentionally light and optional.
 - Printable HTML certificates are the reliable baseline; PDF export is optional if runtime dependencies permit.
 - FakeAgent is a negative-control fixture, not a malicious-token detector.

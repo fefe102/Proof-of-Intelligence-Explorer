@@ -12,7 +12,7 @@ Verify CodeGuardian. It passes.
 
 ## 0:55-1:35
 
-Run CodeGuardian. It audits code, uses compute or hybrid compute, finds an issue, proposes a patch, self-critiques, writes memory and trace.
+Run CodeGuardian. It audits code, uses the live 0G Compute-backed run where configured, finds an issue, proposes a patch, self-critiques, writes memory and trace.
 
 ## 1:35-2:10
 

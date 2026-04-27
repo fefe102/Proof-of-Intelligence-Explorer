@@ -25,7 +25,7 @@ Current live Galileo seed:
 - CodeGuardian token ID: `1`
 - FakeAgent token ID: `2`
 - CodeGuardian passport: `0x01212ca92791787ccb99c454d3b59c5596f90882c892c7fca3e63294a159430c`
-- Registry certificate record: `1`
+- Registry certificate record: `3`
 
 Guardrails:
 
@@ -45,7 +45,7 @@ Guardrails:
 - immutable trace/log artifacts
 - public roots/hashes used by the verifier
 
-When live storage is unavailable, the app keeps deterministic mock artifacts and labels the evidence `mock` or `hybrid`.
+Current CodeGuardian proof objects are uploaded through the 0G Storage SDK. The public bundle records the verifier root, 0G storage root hash, transaction hash, tx sequence, source mode, and byte length for each object. When live storage is unavailable, the app keeps deterministic mock artifacts and labels the evidence `mock` or `hybrid`.
 
 ## Compute
 
@@ -54,7 +54,7 @@ When live storage is unavailable, the app keeps deterministic mock artifacts and
 1. analysis run that finds a code bug or risk
 2. critic/self-review run that evaluates the proposed patch
 
-Run records should include provider, model, run ID, input root, output root, status, and timestamp. Mock compute returns deterministic records for reliable judging.
+Run records include provider, model, run ID, prompt hash, output hash, status, source mode, and timestamp. The current CodeGuardian seed uses live 0G Compute broker requests for both analysis and critic runs. Mock compute remains available for deterministic fallback.
 
 ## Optional DA
 

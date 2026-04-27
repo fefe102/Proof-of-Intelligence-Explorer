@@ -30,6 +30,7 @@ broadcast/
 generated/
 tmp/
 temp/
+spec.md
 .wallets/
 keys/
 secrets/
