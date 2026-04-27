@@ -9,7 +9,7 @@
       "label": "iNFT token and ownership",
       "ok": true,
       "tier": 1,
-      "source": "mock",
+      "source": "live",
       "detail": "Token exists and owner can be read"
     },
     {
@@ -26,16 +26,17 @@
     "Proof-of-Intelligence manifest"
   ],
   "sources": [
+    "live",
     "mock"
   ],
   "token": {
     "chainId": 16602,
-    "contract": "0x2222222222222222222222222222222222227857",
+    "contract": "0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9",
     "tokenId": "2",
-    "owner": "0x053b860f329c9e4549d23dc8aadf1116b99f1233",
-    "standard": "ERC-721 metadata-only",
-    "metadataUri": "mock://fakeagent.png",
-    "source": "mock"
+    "owner": "0x053B860f329C9e4549D23dc8Aadf1116b99F1233",
+    "standard": "ERC-721 metadata-only live control token",
+    "metadataUri": "https://proof-of-intelligence-explorer.vercel.app/api/agent/fakeagent",
+    "source": "live"
   },
   "da": {
     "available": true,

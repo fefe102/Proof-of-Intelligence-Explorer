@@ -1,13 +1,176 @@
 {
-  "mode": "hybrid",
+  "mode": "live",
   "chainId": 16602,
   "runId": "codeguardian-run-001",
-  "memoryRoot": "sha256:50e3e700b5b580a28a79652ecd27f7e430e755bad338725979686fe737b9968b",
-  "traceRoot": "sha256:ab564debc399cd57a749842e10d885db8e55aa6df20e364461986c0d9e968812",
+  "memoryRoot": "sha256:dc1e2df935e0db426cf1e0d3014142ebec59b2b917efdec5a5188d80a6774cdf",
+  "traceRoot": "sha256:b8524cf76c1dadae7405d7fec813c4c43c84f588a42f0ceff2a5e5a1345c2e30",
   "computeRunIds": [
-    "zg-compute-analysis-001",
-    "zg-compute-critic-001"
+    "zg-live-analysis-f8dbce325ce5",
+    "zg-live-critic-e45d15098a2d"
   ],
+  "run": {
+    "schema": "poi-run/v0.1",
+    "runId": "codeguardian-run-001",
+    "agent": "CodeGuardian",
+    "source": "live",
+    "task": "Audit examples/codeguardian/fixtures/unsafe-parser.ts",
+    "events": [
+      {
+        "type": "task_received",
+        "at": "2026-04-26T00:00:00.000Z",
+        "detail": {
+          "target": "examples/codeguardian/fixtures/unsafe-parser.ts"
+        },
+        "root": "sha256:de80b6bb9e0a2b3856662038b134b46b43bca121181d00c04c4dddf990fe428f"
+      },
+      {
+        "type": "compute_started",
+        "at": "2026-04-26T00:00:01.000Z",
+        "detail": {
+          "runId": "zg-live-analysis-f8dbce325ce5",
+          "model": "qwen/qwen-2.5-7b-instruct",
+          "provider": "0xa48f01287233509FD694a22Bf840225062E67836"
+        },
+        "root": "sha256:9d7172d57f6d4c78773ff515fe9c9d53cd2d4185d3964be54bc570e876de58ed"
+      },
+      {
+        "type": "compute_completed",
+        "at": "2026-04-26T00:00:04.000Z",
+        "detail": {
+          "outputHash": "sha256:9504501144c56228c18b61ea7f538b95be596f994eb00d9c8f0d1d336d6b29db"
+        },
+        "root": "sha256:311c30f68a250e026c5d89959f9071f968c115635ceffb047c32d6daffcb94a1"
+      },
+      {
+        "type": "issue_found",
+        "at": "2026-04-26T00:00:05.000Z",
+        "detail": {
+          "issue": "Potential type safety risk when parsing the input string. The `JSON.parse` method does not validate the structure of the parsed JSON, which could lead to incorrect type assignments."
+        },
+        "root": "sha256:f71e2d580e8a597ab5dc6d476a6e5ef6e286ab8b36fb3b9d35aa82ca7b0c585b"
+      },
+      {
+        "type": "patch_proposed",
+        "at": "2026-04-26T00:00:07.000Z",
+        "detail": {
+          "patch": "Use a try-catch block to handle potential JSON parsing errors and validate the structure of the parsed JSON before casting it to the Result type.\n\n```typescript\nexport function parseResult(input: string): Result | null {\n  try {\n    const result = JSON.parse(input);\n    if (typeof result === 'object' && 'ok' in result && 'value' in result) {\n      return result as Result;\n    } else {\n      throw new Error('Parsed JSON does not match the Result type structure');\n    }\n  } catch (error) {\n    console.error('Failed to parse input:', error);\n  }\n  return null;\n}\n```\n"
+        },
+        "root": "sha256:b8e59b5a2a3193dfa89ce6b6ee9c14c515eb74e91014263054d6926228e8fea7"
+      },
+      {
+        "type": "critic_started",
+        "at": "2026-04-26T00:00:08.000Z",
+        "detail": {
+          "runId": "zg-live-critic-e45d15098a2d",
+          "model": "qwen/qwen-2.5-7b-instruct",
+          "provider": "0xa48f01287233509FD694a22Bf840225062E67836"
+        },
+        "root": "sha256:1baad0d52c01af81a395da59bf654b86e71222b942325886a7ed8ef5b15030d1"
+      },
+      {
+        "type": "critic_completed",
+        "at": "2026-04-26T00:00:10.000Z",
+        "detail": {
+          "critique": "The patch improves type safety by adding a validation step for the JSON structure. However, it is important to ensure that the `Result` type is properly defined and that the properties 'ok' and 'value' are correctly typed. This will help avoid runtime errors due to incorrect type casting.",
+          "accepted": true
+        },
+        "root": "sha256:0634db7bd25c5080051f4e4d7b0a9c9386a1f78345c08d2681182b4978af0ac0"
+      },
+      {
+        "type": "memory_written",
+        "at": "2026-04-26T00:00:11.000Z",
+        "detail": {
+          "memoryRoot": "sha256:dc1e2df935e0db426cf1e0d3014142ebec59b2b917efdec5a5188d80a6774cdf"
+        },
+        "root": "sha256:3b60a93a68cd0e9b631de899f9490223f39f96111a2bd8231bd62f4e8f965f84"
+      },
+      {
+        "type": "trace_committed",
+        "at": "2026-04-26T00:00:12.000Z",
+        "detail": {
+          "traceRoot": "sha256:a43922913ed4c33e062525e1d7d0b934fc6fb962fa943d0b88185b90cb908a74"
+        },
+        "root": "sha256:7f7bf199f19f7aaea1504f3266f0bf8fe69aaead11923f5274b730774a3de815"
+      },
+      {
+        "type": "certificate_issued",
+        "at": "2026-04-26T00:00:13.000Z",
+        "detail": {
+          "certificateId": "poi-cert-codeguardian-001"
+        },
+        "root": "sha256:2874813d9bcf69064639cf662a347de56aa8c32c92cab1c074f677003807b196"
+      }
+    ],
+    "result": {
+      "issue": "Potential type safety risk when parsing the input string. The `JSON.parse` method does not validate the structure of the parsed JSON, which could lead to incorrect type assignments.",
+      "patch": "Use a try-catch block to handle potential JSON parsing errors and validate the structure of the parsed JSON before casting it to the Result type.\n\n```typescript\nexport function parseResult(input: string): Result | null {\n  try {\n    const result = JSON.parse(input);\n    if (typeof result === 'object' && 'ok' in result && 'value' in result) {\n      return result as Result;\n    } else {\n      throw new Error('Parsed JSON does not match the Result type structure');\n    }\n  } catch (error) {\n    console.error('Failed to parse input:', error);\n  }\n  return null;\n}\n```\n",
+      "critique": "The patch improves type safety by adding a validation step for the JSON structure. However, it is important to ensure that the `Result` type is properly defined and that the properties 'ok' and 'value' are correctly typed. This will help avoid runtime errors due to incorrect type casting.",
+      "accepted": true
+    }
+  },
+  "memory": {
+    "schema": "poi-memory/v0.1",
+    "agent": "CodeGuardian",
+    "checkpoint": {
+      "runCount": 1,
+      "lastFinding": "Potential type safety risk when parsing the input string. The `JSON.parse` method does not validate the structure of the parsed JSON, which could lead to incorrect type assignments.",
+      "stateRoot": "sha256:45c43d4f28fab306fc1485600f5f509527a12e737fe9abfc9e2d7de762c10e09"
+    },
+    "history": [
+      {
+        "runId": "codeguardian-run-001",
+        "summary": "Found unsafe parsing and proposed shape validation.",
+        "root": "sha256:152cfec3d9ca404de4706100cad9466c1e50519cb4db1231de84d3d3637a2739"
+      }
+    ]
+  },
+  "computeRuns": {
+    "schema": "poi-compute-runs/v0.1",
+    "provider": "0xa48f01287233509FD694a22Bf840225062E67836",
+    "model": "qwen/qwen-2.5-7b-instruct",
+    "runs": [
+      {
+        "id": "zg-live-analysis-f8dbce325ce5",
+        "type": "analysis",
+        "promptHash": "sha256:df86656753c568ebda722c33e68ed6892613c8b34a56d770fe0a69b3d10ad056",
+        "outputHash": "sha256:9504501144c56228c18b61ea7f538b95be596f994eb00d9c8f0d1d336d6b29db",
+        "at": "2026-04-26T00:00:04.000Z",
+        "source": "live"
+      },
+      {
+        "id": "zg-live-critic-e45d15098a2d",
+        "type": "critic",
+        "promptHash": "sha256:fbf1658bc6f11193468de63f6113cf8da6c0e2835f0475124f66c640b05c0fdf",
+        "outputHash": "sha256:4e7cf7cf2fb915fcdc2e7e50155d306abdb81ce1da24a4c72b0c49b02b8c101b",
+        "at": "2026-04-26T00:00:10.000Z",
+        "source": "live"
+      }
+    ]
+  },
+  "certificate": {
+    "schema": "poi-certificate/v0.1",
+    "certificateId": "poi-cert-codeguardian-001",
+    "agent": "CodeGuardian",
+    "tier": 6,
+    "issuedAt": "2026-04-26T00:00:13.000Z",
+    "issuer": "Proof-of-Intelligence Explorer",
+    "evidence": {
+      "inft": {
+        "chainId": 16602,
+        "contract": "0x1111111111111111111111111111111111117857",
+        "tokenId": "1"
+      },
+      "intelligenceBundleRoot": "sha256:1c47d70c2c89e0d843c1b8501e98f5bd2354f7b03b994e1b819b2fbc54b87fd4",
+      "memoryRoot": "sha256:dc1e2df935e0db426cf1e0d3014142ebec59b2b917efdec5a5188d80a6774cdf",
+      "latestRunRoot": "sha256:b8524cf76c1dadae7405d7fec813c4c43c84f588a42f0ceff2a5e5a1345c2e30",
+      "computeRunIds": [
+        "zg-live-analysis-f8dbce325ce5",
+        "zg-live-critic-e45d15098a2d"
+      ]
+    }
+  },
   "computeProviderConfigured": true,
-  "computeBearerConfigured": true
+  "computeServiceUrlConfigured": false,
+  "computeBearerConfigured": true,
+  "liveProviderUsed": true
 }

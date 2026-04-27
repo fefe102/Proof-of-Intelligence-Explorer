@@ -9,7 +9,7 @@
       "label": "iNFT token and ownership",
       "ok": true,
       "tier": 1,
-      "source": "mock",
+      "source": "live",
       "detail": "Token exists and owner can be read"
     },
     {
@@ -17,8 +17,8 @@
       "label": "Proof-of-Intelligence manifest",
       "ok": true,
       "tier": 2,
-      "source": "mock",
-      "root": "sha256:9e114ffab9242098335816b789c1c274875f382fb733293293e5d293e600c8fd",
+      "source": "live",
+      "root": "sha256:44d69c5206fad0ce2fc238fb11c50ae1f4b1ba63176a134236e3b91c2c96fe0a",
       "detail": "Manifest matches poi/v0.1 schema and manifest root rule"
     },
     {
@@ -26,7 +26,7 @@
       "label": "Encrypted intelligence bundle",
       "ok": true,
       "tier": 3,
-      "source": "mock",
+      "source": "live",
       "root": "sha256:1c47d70c2c89e0d843c1b8501e98f5bd2354f7b03b994e1b819b2fbc54b87fd4",
       "detail": "Encrypted bundle exists and root matches"
     },
@@ -35,8 +35,8 @@
       "label": "Persistent memory",
       "ok": true,
       "tier": 4,
-      "source": "mock",
-      "root": "sha256:bd27bb774163cdfc375d5bcc22d55da8626002b0a209848d1f3687035bb90798",
+      "source": "live",
+      "root": "sha256:dc1e2df935e0db426cf1e0d3014142ebec59b2b917efdec5a5188d80a6774cdf",
       "detail": "Memory checkpoint and history root match"
     },
     {
@@ -44,8 +44,8 @@
       "label": "0G Compute run history",
       "ok": true,
       "tier": 5,
-      "source": "mock",
-      "root": "sha256:387f6fe1fef06fb3aec76cde6b1d5eae86d3aa11efbe29f27ca7ac9a2525b207",
+      "source": "live",
+      "root": "sha256:54af237833b50fa6a1a071cbc1625a978ee50266dc78e60b81ad2dfe7c613664",
       "detail": "Analysis and critic run records are present"
     },
     {
@@ -53,8 +53,8 @@
       "label": "Executable behavior trace",
       "ok": true,
       "tier": 5,
-      "source": "mock",
-      "root": "sha256:39d592c08a628ca34dc7b83ca6fe52584c3c56fade299fc0e274f1081c351909",
+      "source": "live",
+      "root": "sha256:b8524cf76c1dadae7405d7fec813c4c43c84f588a42f0ceff2a5e5a1345c2e30",
       "detail": "Replayable trace includes analysis, patch, critic, and memory events"
     },
     {
@@ -70,32 +70,33 @@
       "label": "Certificate/export bundle",
       "ok": true,
       "tier": 6,
-      "source": "mock",
-      "root": "sha256:da9e049fc2b1a31f320fb3ee4817435c6e5096e45fb8339c6a494b5f63624153",
+      "source": "live",
+      "root": "sha256:618516d37e04a3f1c4537cf8c08f03931e2b5d799aefd3ab408d08e6b939c5e4",
       "detail": "Certificate binds iNFT, roots, and compute run ids"
     }
   ],
   "evidence": {
-    "manifestRoot": "sha256:9e114ffab9242098335816b789c1c274875f382fb733293293e5d293e600c8fd",
+    "manifestRoot": "sha256:44d69c5206fad0ce2fc238fb11c50ae1f4b1ba63176a134236e3b91c2c96fe0a",
     "intelligenceBundleRoot": "sha256:1c47d70c2c89e0d843c1b8501e98f5bd2354f7b03b994e1b819b2fbc54b87fd4",
-    "memoryRoot": "sha256:bd27bb774163cdfc375d5bcc22d55da8626002b0a209848d1f3687035bb90798",
-    "latestRunRoot": "sha256:39d592c08a628ca34dc7b83ca6fe52584c3c56fade299fc0e274f1081c351909",
+    "memoryRoot": "sha256:dc1e2df935e0db426cf1e0d3014142ebec59b2b917efdec5a5188d80a6774cdf",
+    "latestRunRoot": "sha256:b8524cf76c1dadae7405d7fec813c4c43c84f588a42f0ceff2a5e5a1345c2e30",
     "checkpointRoot": "sha256:1327b28193e5cb885e332543c20bfeaafce555102f39e33b9bf5f491abd8d426",
     "historyRoot": "sha256:43671740184c704a39f4f7c37bd4fc3d20befbc41713bfc9737cb1022b6cb5c4"
   },
   "missing": [],
   "sources": [
+    "live",
     "mock"
   ],
   "token": {
     "chainId": 16602,
-    "contract": "0x1111111111111111111111111111111111117857",
+    "contract": "0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9",
     "tokenId": "1",
-    "owner": "0x053b860f329c9e4549d23dc8aadf1116b99f1233",
-    "standard": "ERC-7857-like",
-    "metadataUri": "mock://codeguardian",
-    "manifestRoot": "sha256:9e114ffab9242098335816b789c1c274875f382fb733293293e5d293e600c8fd",
-    "source": "mock"
+    "owner": "0x053B860f329C9e4549D23dc8Aadf1116b99F1233",
+    "standard": "ERC-7857-like live demo iNFT",
+    "metadataUri": "https://proof-of-intelligence-explorer.vercel.app/api/agent/codeguardian",
+    "manifestRoot": "sha256:44d69c5206fad0ce2fc238fb11c50ae1f4b1ba63176a134236e3b91c2c96fe0a",
+    "source": "live"
   },
   "manifest": {
     "schema": "poi/v0.1",
@@ -103,28 +104,28 @@
     "description": "A single iNFT-style code review agent with an encrypted intelligence bundle, persistent memory, 0G Compute history, and replayable critic-loop behavior.",
     "inft": {
       "chainId": 16602,
-      "contract": "0x1111111111111111111111111111111111117857",
+      "contract": "0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9",
       "tokenId": "1",
-      "standard": "ERC-7857-like"
+      "standard": "ERC-7857-like live demo iNFT"
     },
     "identity": {
       "owner": "0x053b860f329c9e4549d23dc8aadf1116b99f1233",
       "ens": "codeguardian.poi-demo.eth"
     },
     "storage": {
-      "manifestRoot": "sha256:9e114ffab9242098335816b789c1c274875f382fb733293293e5d293e600c8fd",
+      "manifestRoot": "sha256:44d69c5206fad0ce2fc238fb11c50ae1f4b1ba63176a134236e3b91c2c96fe0a",
       "intelligenceBundleRoot": "sha256:1c47d70c2c89e0d843c1b8501e98f5bd2354f7b03b994e1b819b2fbc54b87fd4",
-      "memoryRoot": "sha256:bd27bb774163cdfc375d5bcc22d55da8626002b0a209848d1f3687035bb90798",
-      "latestRunRoot": "sha256:39d592c08a628ca34dc7b83ca6fe52584c3c56fade299fc0e274f1081c351909"
+      "memoryRoot": "sha256:dc1e2df935e0db426cf1e0d3014142ebec59b2b917efdec5a5188d80a6774cdf",
+      "latestRunRoot": "sha256:b8524cf76c1dadae7405d7fec813c4c43c84f588a42f0ceff2a5e5a1345c2e30"
     },
     "compute": {
-      "provider": "0G Compute mock/hybrid",
+      "provider": "0xa48f01287233509FD694a22Bf840225062E67836",
       "models": [
         "qwen/qwen-2.5-7b-instruct"
       ],
       "latestRunIds": [
-        "zg-compute-analysis-001",
-        "zg-compute-critic-001"
+        "zg-live-analysis-f8dbce325ce5",
+        "zg-live-critic-e45d15098a2d"
       ]
     },
     "skills": [
@@ -170,15 +171,15 @@
     "evidence": {
       "inft": {
         "chainId": 16602,
-        "contract": "0x1111111111111111111111111111111111117857",
+        "contract": "0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9",
         "tokenId": "1"
       },
       "intelligenceBundleRoot": "sha256:1c47d70c2c89e0d843c1b8501e98f5bd2354f7b03b994e1b819b2fbc54b87fd4",
-      "memoryRoot": "sha256:bd27bb774163cdfc375d5bcc22d55da8626002b0a209848d1f3687035bb90798",
-      "latestRunRoot": "sha256:39d592c08a628ca34dc7b83ca6fe52584c3c56fade299fc0e274f1081c351909",
+      "memoryRoot": "sha256:dc1e2df935e0db426cf1e0d3014142ebec59b2b917efdec5a5188d80a6774cdf",
+      "latestRunRoot": "sha256:b8524cf76c1dadae7405d7fec813c4c43c84f588a42f0ceff2a5e5a1345c2e30",
       "computeRunIds": [
-        "zg-compute-analysis-001",
-        "zg-compute-critic-001"
+        "zg-live-analysis-f8dbce325ce5",
+        "zg-live-critic-e45d15098a2d"
       ]
     }
   },
@@ -186,109 +187,122 @@
     "schema": "poi-run/v0.1",
     "runId": "codeguardian-run-001",
     "agent": "CodeGuardian",
-    "source": "hybrid",
+    "source": "live",
     "task": "Audit examples/codeguardian/fixtures/unsafe-parser.ts",
     "events": [
       {
         "type": "task_received",
         "at": "2026-04-26T00:00:00.000Z",
         "detail": {
-          "target": "unsafe-parser.ts"
+          "target": "examples/codeguardian/fixtures/unsafe-parser.ts"
         },
-        "root": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+        "root": "sha256:de80b6bb9e0a2b3856662038b134b46b43bca121181d00c04c4dddf990fe428f"
       },
       {
         "type": "compute_started",
         "at": "2026-04-26T00:00:01.000Z",
         "detail": {
-          "runId": "zg-compute-analysis-001",
-          "model": "qwen/qwen-2.5-7b-instruct"
-        }
+          "runId": "zg-live-analysis-f8dbce325ce5",
+          "model": "qwen/qwen-2.5-7b-instruct",
+          "provider": "0xa48f01287233509FD694a22Bf840225062E67836"
+        },
+        "root": "sha256:9d7172d57f6d4c78773ff515fe9c9d53cd2d4185d3964be54bc570e876de58ed"
       },
       {
         "type": "compute_completed",
         "at": "2026-04-26T00:00:04.000Z",
         "detail": {
-          "outputHash": "sha256:4444444444444444444444444444444444444444444444444444444444444444"
-        }
+          "outputHash": "sha256:9504501144c56228c18b61ea7f538b95be596f994eb00d9c8f0d1d336d6b29db"
+        },
+        "root": "sha256:311c30f68a250e026c5d89959f9071f968c115635ceffb047c32d6daffcb94a1"
       },
       {
         "type": "issue_found",
         "at": "2026-04-26T00:00:05.000Z",
         "detail": {
-          "issue": "JSON.parse accepts arbitrary input and returns it as a trusted Result without shape validation."
-        }
+          "issue": "Potential type safety risk when parsing the input string. The `JSON.parse` method does not validate the structure of the parsed JSON, which could lead to incorrect type assignments."
+        },
+        "root": "sha256:f71e2d580e8a597ab5dc6d476a6e5ef6e286ab8b36fb3b9d35aa82ca7b0c585b"
       },
       {
         "type": "patch_proposed",
         "at": "2026-04-26T00:00:07.000Z",
         "detail": {
-          "patch": "Validate parsed data before returning a Result object."
-        }
+          "patch": "Use a try-catch block to handle potential JSON parsing errors and validate the structure of the parsed JSON before casting it to the Result type.\n\n```typescript\nexport function parseResult(input: string): Result | null {\n  try {\n    const result = JSON.parse(input);\n    if (typeof result === 'object' && 'ok' in result && 'value' in result) {\n      return result as Result;\n    } else {\n      throw new Error('Parsed JSON does not match the Result type structure');\n    }\n  } catch (error) {\n    console.error('Failed to parse input:', error);\n  }\n  return null;\n}\n```\n"
+        },
+        "root": "sha256:b8e59b5a2a3193dfa89ce6b6ee9c14c515eb74e91014263054d6926228e8fea7"
       },
       {
         "type": "critic_started",
         "at": "2026-04-26T00:00:08.000Z",
         "detail": {
-          "runId": "zg-compute-critic-001"
-        }
+          "runId": "zg-live-critic-e45d15098a2d",
+          "model": "qwen/qwen-2.5-7b-instruct",
+          "provider": "0xa48f01287233509FD694a22Bf840225062E67836"
+        },
+        "root": "sha256:1baad0d52c01af81a395da59bf654b86e71222b942325886a7ed8ef5b15030d1"
       },
       {
         "type": "critic_completed",
         "at": "2026-04-26T00:00:10.000Z",
         "detail": {
-          "critique": "Patch is bounded and preserves the public API."
-        }
+          "critique": "The patch improves type safety by adding a validation step for the JSON structure. However, it is important to ensure that the `Result` type is properly defined and that the properties 'ok' and 'value' are correctly typed. This will help avoid runtime errors due to incorrect type casting.",
+          "accepted": true
+        },
+        "root": "sha256:0634db7bd25c5080051f4e4d7b0a9c9386a1f78345c08d2681182b4978af0ac0"
       },
       {
         "type": "memory_written",
         "at": "2026-04-26T00:00:11.000Z",
         "detail": {
-          "memoryRoot": "sha256:bd27bb774163cdfc375d5bcc22d55da8626002b0a209848d1f3687035bb90798"
-        }
+          "memoryRoot": "sha256:dc1e2df935e0db426cf1e0d3014142ebec59b2b917efdec5a5188d80a6774cdf"
+        },
+        "root": "sha256:3b60a93a68cd0e9b631de899f9490223f39f96111a2bd8231bd62f4e8f965f84"
       },
       {
         "type": "trace_committed",
         "at": "2026-04-26T00:00:12.000Z",
         "detail": {
-          "traceRoot": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
-        }
+          "traceRoot": "sha256:a43922913ed4c33e062525e1d7d0b934fc6fb962fa943d0b88185b90cb908a74"
+        },
+        "root": "sha256:7f7bf199f19f7aaea1504f3266f0bf8fe69aaead11923f5274b730774a3de815"
       },
       {
         "type": "certificate_issued",
         "at": "2026-04-26T00:00:13.000Z",
         "detail": {
           "certificateId": "poi-cert-codeguardian-001"
-        }
+        },
+        "root": "sha256:2874813d9bcf69064639cf662a347de56aa8c32c92cab1c074f677003807b196"
       }
     ],
     "result": {
-      "issue": "Unsafe JSON.parse path returns unvalidated data.",
-      "patch": "Validate parsed data before returning a typed Result.",
-      "critique": "The patch is minimal, deterministic, and testable.",
+      "issue": "Potential type safety risk when parsing the input string. The `JSON.parse` method does not validate the structure of the parsed JSON, which could lead to incorrect type assignments.",
+      "patch": "Use a try-catch block to handle potential JSON parsing errors and validate the structure of the parsed JSON before casting it to the Result type.\n\n```typescript\nexport function parseResult(input: string): Result | null {\n  try {\n    const result = JSON.parse(input);\n    if (typeof result === 'object' && 'ok' in result && 'value' in result) {\n      return result as Result;\n    } else {\n      throw new Error('Parsed JSON does not match the Result type structure');\n    }\n  } catch (error) {\n    console.error('Failed to parse input:', error);\n  }\n  return null;\n}\n```\n",
+      "critique": "The patch improves type safety by adding a validation step for the JSON structure. However, it is important to ensure that the `Result` type is properly defined and that the properties 'ok' and 'value' are correctly typed. This will help avoid runtime errors due to incorrect type casting.",
       "accepted": true
     }
   },
   "computeRuns": {
     "schema": "poi-compute-runs/v0.1",
-    "provider": "0G Compute mock/hybrid",
+    "provider": "0xa48f01287233509FD694a22Bf840225062E67836",
     "model": "qwen/qwen-2.5-7b-instruct",
     "runs": [
       {
-        "id": "zg-compute-analysis-001",
+        "id": "zg-live-analysis-f8dbce325ce5",
         "type": "analysis",
-        "promptHash": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
-        "outputHash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+        "promptHash": "sha256:df86656753c568ebda722c33e68ed6892613c8b34a56d770fe0a69b3d10ad056",
+        "outputHash": "sha256:9504501144c56228c18b61ea7f538b95be596f994eb00d9c8f0d1d336d6b29db",
         "at": "2026-04-26T00:00:04.000Z",
-        "source": "hybrid"
+        "source": "live"
       },
       {
-        "id": "zg-compute-critic-001",
+        "id": "zg-live-critic-e45d15098a2d",
         "type": "critic",
-        "promptHash": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
-        "outputHash": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+        "promptHash": "sha256:fbf1658bc6f11193468de63f6113cf8da6c0e2835f0475124f66c640b05c0fdf",
+        "outputHash": "sha256:4e7cf7cf2fb915fcdc2e7e50155d306abdb81ce1da24a4c72b0c49b02b8c101b",
         "at": "2026-04-26T00:00:10.000Z",
-        "source": "hybrid"
+        "source": "live"
       }
     ]
   },
