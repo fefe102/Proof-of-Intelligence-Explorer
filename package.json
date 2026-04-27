@@ -43,13 +43,19 @@
     "vitest": "^2.1.8"
   },
   "dependencies": {
+    "@0gfoundation/0g-ts-sdk": "^1.2.4",
+    "@0glabs/0g-serving-broker": "^0.7.5",
     "@openzeppelin/contracts": "^5.2.0",
     "@poi/agent-runtime": "workspace:*",
     "@poi/sdk": "workspace:*",
+    "@types/crypto-js": "4.2.2",
+    "crypto-js": "4.2.0",
+    "ethers": "^6.13.1",
     "viem": "^2.22.17"
   },
   "pnpm": {
     "overrides": {
+      "axios": "1.15.0",
       "postcss": "8.5.10"
     }
   }

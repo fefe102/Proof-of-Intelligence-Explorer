@@ -9,10 +9,15 @@ loadLocalEnv();
 
 const deployment =
   readJson<Record<string, string>>("deployments/0g-galileo.json") ?? {};
+const vercelDeployment =
+  readJson<{ url?: string }>("deployments/vercel.json") ?? {};
 const publicEnv = {
   NEXT_PUBLIC_APP_NAME:
     process.env.NEXT_PUBLIC_APP_NAME ?? "Proof-of-Intelligence Explorer",
-  NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL ?? "",
+  NEXT_PUBLIC_APP_URL:
+    process.env.NEXT_PUBLIC_APP_URL ??
+    vercelDeployment.url ??
+    "https://proof-of-intelligence-explorer.vercel.app",
   NEXT_PUBLIC_POI_PUBLIC_MODE:
     process.env.NEXT_PUBLIC_POI_PUBLIC_MODE ?? "hybrid",
   NEXT_PUBLIC_0G_CHAIN_ID:

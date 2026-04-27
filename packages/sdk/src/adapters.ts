@@ -1,4 +1,10 @@
-import { createPublicClient, getContract, http, type Address, type PublicClient } from "viem";
+import {
+  createPublicClient,
+  getContract,
+  http,
+  type Address,
+  type PublicClient,
+} from "viem";
 import { defineChain } from "viem";
 import codeguardianCertificate from "../fixtures/codeguardian.certificate.json";
 import codeguardianComputeRuns from "../fixtures/codeguardian.compute-runs.json";
@@ -8,7 +14,14 @@ import codeguardianMemory from "../fixtures/codeguardian.memory.json";
 import codeguardianRun from "../fixtures/codeguardian.run.json";
 import fakeagentMetadata from "../fixtures/fakeagent.metadata.json";
 import { hashCanonicalJson } from "./canonical";
-import type { Certificate, ComputeRuns, IntelligenceBundle, Manifest, MemoryState, RunTrace } from "./schema";
+import type {
+  Certificate,
+  ComputeRuns,
+  IntelligenceBundle,
+  Manifest,
+  MemoryState,
+  RunTrace,
+} from "./schema";
 
 export type EvidenceSource = "live" | "hybrid" | "mock";
 
@@ -48,7 +61,9 @@ export interface DAAdapter {
 
 export interface EnsAdapter {
   source: EvidenceSource;
-  resolveName(name: string): Promise<{ contract: string; tokenId: string } | null>;
+  resolveName(
+    name: string,
+  ): Promise<{ contract: string; tokenId: string } | null>;
 }
 
 export type DaBundle = {
@@ -57,6 +72,37 @@ export type DaBundle = {
   roots: string[];
   bundleRoot: string;
   source: EvidenceSource;
+};
+
+export type ProofArtifactName =
+  | "manifest"
+  | "intelligenceBundle"
+  | "memory"
+  | "run"
+  | "computeRuns"
+  | "certificate";
+
+export type ProofObjectRecord = {
+  name: ProofArtifactName;
+  poiRoot: string;
+  zeroGRootHash?: string;
+  txHash?: string;
+  txSeq?: number;
+  source: EvidenceSource;
+  byteLength?: number;
+};
+
+export type ProofStorageBundle = {
+  mode?: EvidenceSource;
+  agent?: string;
+  roots?: Record<string, string>;
+  objects?: ProofObjectRecord[];
+  manifest?: Manifest;
+  intelligenceBundle?: IntelligenceBundle;
+  memory?: MemoryState;
+  run?: RunTrace;
+  computeRuns?: ComputeRuns;
+  certificate?: Certificate;
 };
 
 const manifestFixture = codeguardianManifest as Manifest;
@@ -70,7 +116,7 @@ export const demoContracts = {
   chainId: 16602,
   codeguardian: "0x1111111111111111111111111111111111117857",
   fakeagent: "0x2222222222222222222222222222222222227857",
-  owner: "0x053b860f329c9e4549d23dc8aadf1116b99f1233"
+  owner: "0x053b860f329c9e4549d23dc8aadf1116b99f1233",
 } as const;
 
 function rootMap(): Map<string, unknown> {
@@ -82,17 +128,23 @@ function rootMap(): Map<string, unknown> {
     [manifestFixture.memory.checkpointRoot, memoryFixture.checkpoint],
     [manifestFixture.memory.historyRoot, memoryFixture.history],
     [hashCanonicalJson(computeFixture), computeFixture],
-    [hashCanonicalJson(certificateFixture), certificateFixture]
+    [hashCanonicalJson(certificateFixture), certificateFixture],
   ]);
 }
 
 export class MockChainAdapter implements ChainAdapter {
   readonly source: EvidenceSource = "mock";
 
-  async getToken(contract: string, tokenId: string): Promise<TokenSnapshot | null> {
+  async getToken(
+    contract: string,
+    tokenId: string,
+  ): Promise<TokenSnapshot | null> {
     const normalized = contract.toLowerCase();
 
-    if (normalized === demoContracts.codeguardian.toLowerCase() && tokenId === "1") {
+    if (
+      normalized === demoContracts.codeguardian.toLowerCase() &&
+      tokenId === "1"
+    ) {
       return {
         chainId: demoContracts.chainId,
         contract: demoContracts.codeguardian,
@@ -101,11 +153,14 @@ export class MockChainAdapter implements ChainAdapter {
         standard: "ERC-7857-like",
         metadataUri: "mock://codeguardian",
         manifestRoot: manifestFixture.storage.manifestRoot,
-        source: this.source
+        source: this.source,
       };
     }
 
-    if (normalized === demoContracts.fakeagent.toLowerCase() && tokenId === "2") {
+    if (
+      normalized === demoContracts.fakeagent.toLowerCase() &&
+      tokenId === "2"
+    ) {
       return {
         chainId: demoContracts.chainId,
         contract: demoContracts.fakeagent,
@@ -113,7 +168,7 @@ export class MockChainAdapter implements ChainAdapter {
         owner: demoContracts.owner,
         standard: "ERC-721 metadata-only",
         metadataUri: (fakeagentMetadata as { image: string }).image,
-        source: this.source
+        source: this.source,
       };
     }
 
@@ -148,11 +203,109 @@ export class MockStorageAdapter implements StorageAdapter {
   }
 }
 
+export class ArtifactStorageAdapter implements StorageAdapter {
+  readonly source: EvidenceSource;
+  private readonly byRoot = new Map<string, unknown>();
+  private readonly certificateById = new Map<string, Certificate>();
+  private readonly alias: string;
+
+  constructor(bundle: ProofStorageBundle, options: { alias?: string } = {}) {
+    this.source = bundle.mode ?? sourceFromObjects(bundle.objects);
+    this.alias = (
+      options.alias ??
+      bundle.agent ??
+      "codeguardian"
+    ).toLowerCase();
+
+    if (bundle.manifest) {
+      this.byRoot.set(bundle.manifest.storage.manifestRoot, bundle.manifest);
+    }
+    if (bundle.intelligenceBundle && bundle.roots?.intelligenceBundleRoot) {
+      this.byRoot.set(
+        bundle.roots.intelligenceBundleRoot,
+        bundle.intelligenceBundle,
+      );
+    }
+    if (bundle.memory && bundle.roots?.memoryRoot) {
+      this.byRoot.set(bundle.roots.memoryRoot, bundle.memory);
+    }
+    if (bundle.run && bundle.roots?.latestRunRoot) {
+      this.byRoot.set(bundle.roots.latestRunRoot, bundle.run);
+    }
+    if (bundle.computeRuns) {
+      this.byRoot.set(
+        hashCanonicalJson(bundle.computeRuns),
+        bundle.computeRuns,
+      );
+    }
+    if (bundle.certificate) {
+      this.byRoot.set(
+        hashCanonicalJson(bundle.certificate),
+        bundle.certificate,
+      );
+      this.certificateById.set(
+        bundle.certificate.certificateId,
+        bundle.certificate,
+      );
+    }
+  }
+
+  async getManifestByAlias(alias: string): Promise<Manifest | null> {
+    if (alias.toLowerCase() !== this.alias) {
+      return null;
+    }
+    const manifest = [...this.byRoot.values()].find(isManifest);
+    return manifest ?? null;
+  }
+
+  async getManifestByRoot(root: string): Promise<Manifest | null> {
+    const value = this.byRoot.get(root);
+    return isManifest(value) ? value : null;
+  }
+
+  async getJsonByRoot<T>(root: string): Promise<T | null> {
+    return (this.byRoot.get(root) as T | undefined) ?? null;
+  }
+
+  async getCertificateById(certificateId: string): Promise<Certificate | null> {
+    return this.certificateById.get(certificateId) ?? null;
+  }
+}
+
+export class ArtifactComputeAdapter implements ComputeAdapter {
+  readonly source: EvidenceSource;
+  private readonly computeRuns?: ComputeRuns;
+
+  constructor(bundle: ProofStorageBundle) {
+    this.source = bundle.computeRuns?.runs.some((run) => run.source === "live")
+      ? "live"
+      : bundle.computeRuns?.runs.some((run) => run.source === "hybrid")
+        ? "hybrid"
+        : (bundle.mode ?? "hybrid");
+    this.computeRuns = bundle.computeRuns;
+  }
+
+  async getRuns(runIds: string[]): Promise<ComputeRuns | null> {
+    if (!this.computeRuns) {
+      return null;
+    }
+    const matches = this.computeRuns.runs.filter((run) =>
+      runIds.includes(run.id),
+    );
+    if (matches.length === 0) {
+      return null;
+    }
+    return { ...this.computeRuns, runs: matches };
+  }
+}
+
 export class MockComputeAdapter implements ComputeAdapter {
   readonly source: EvidenceSource = "mock";
 
   async getRuns(runIds: string[]): Promise<ComputeRuns | null> {
-    const matches = computeFixture.runs.filter((run) => runIds.includes(run.id));
+    const matches = computeFixture.runs.filter((run) =>
+      runIds.includes(run.id),
+    );
     if (matches.length === 0) {
       return null;
     }
@@ -163,13 +316,16 @@ export class MockComputeAdapter implements ComputeAdapter {
 export class MockDAAdapter implements DAAdapter {
   readonly source: EvidenceSource = "mock";
 
-  async exportBundle(input: { agent: string; roots: string[] }): Promise<DaBundle> {
+  async exportBundle(input: {
+    agent: string;
+    roots: string[];
+  }): Promise<DaBundle> {
     return {
       schema: "poi-da-bundle/v0.1",
       agent: input.agent,
       roots: input.roots,
       bundleRoot: hashCanonicalJson({ agent: input.agent, roots: input.roots }),
-      source: this.source
+      source: this.source,
     };
   }
 }
@@ -177,7 +333,9 @@ export class MockDAAdapter implements DAAdapter {
 export class MockEnsAdapter implements EnsAdapter {
   readonly source: EvidenceSource = "mock";
 
-  async resolveName(name: string): Promise<{ contract: string; tokenId: string } | null> {
+  async resolveName(
+    name: string,
+  ): Promise<{ contract: string; tokenId: string } | null> {
     if (name === "codeguardian.poi-demo.eth") {
       return { contract: demoContracts.codeguardian, tokenId: "1" };
     }
@@ -190,8 +348,8 @@ const galileo = defineChain({
   name: "0G Galileo",
   nativeCurrency: { decimals: 18, name: "0G", symbol: "0G" },
   rpcUrls: {
-    default: { http: ["https://evmrpc-testnet.0g.ai"] }
-  }
+    default: { http: ["https://evmrpc-testnet.0g.ai"] },
+  },
 });
 
 const erc721ReadAbi = [
@@ -200,15 +358,15 @@ const erc721ReadAbi = [
     name: "ownerOf",
     stateMutability: "view",
     inputs: [{ name: "tokenId", type: "uint256" }],
-    outputs: [{ name: "owner", type: "address" }]
+    outputs: [{ name: "owner", type: "address" }],
   },
   {
     type: "function",
     name: "tokenURI",
     stateMutability: "view",
     inputs: [{ name: "tokenId", type: "uint256" }],
-    outputs: [{ name: "uri", type: "string" }]
-  }
+    outputs: [{ name: "uri", type: "string" }],
+  },
 ] as const;
 
 export class ZeroGChainAdapter implements ChainAdapter {
@@ -220,26 +378,31 @@ export class ZeroGChainAdapter implements ChainAdapter {
     this.chainId = options.chainId ?? 16602;
     this.client = createPublicClient({
       chain: { ...galileo, id: this.chainId },
-      transport: http(options.rpcUrl ?? "https://evmrpc-testnet.0g.ai")
+      transport: http(options.rpcUrl ?? "https://evmrpc-testnet.0g.ai"),
     });
   }
 
-  async getToken(contract: string, tokenId: string): Promise<TokenSnapshot | null> {
+  async getToken(
+    contract: string,
+    tokenId: string,
+  ): Promise<TokenSnapshot | null> {
     const chainId = await this.client.getChainId();
     if (chainId !== this.chainId) {
-      throw new Error(`0G chain preflight failed: expected ${this.chainId}, got ${chainId}`);
+      throw new Error(
+        `0G chain preflight failed: expected ${this.chainId}, got ${chainId}`,
+      );
     }
 
     const tokenContract = getContract({
       address: contract as Address,
       abi: erc721ReadAbi,
-      client: this.client
+      client: this.client,
     });
 
     try {
       const [owner, metadataUri] = await Promise.all([
         tokenContract.read.ownerOf([BigInt(tokenId)]),
-        tokenContract.read.tokenURI([BigInt(tokenId)]).catch(() => undefined)
+        tokenContract.read.tokenURI([BigInt(tokenId)]).catch(() => undefined),
       ]);
 
       return {
@@ -249,7 +412,7 @@ export class ZeroGChainAdapter implements ChainAdapter {
         owner,
         standard: "ERC-721/ERC-7857-like",
         metadataUri,
-        source: this.source
+        source: this.source,
       };
     } catch {
       return null;
@@ -267,4 +430,32 @@ export class ZeroGComputeAdapter extends MockComputeAdapter {
 
 export class ZeroGDAAdapter extends MockDAAdapter {
   override readonly source = "hybrid" as const;
+}
+
+function sourceFromObjects(
+  objects: ProofObjectRecord[] | undefined,
+): EvidenceSource {
+  if (!objects?.length) {
+    return "hybrid";
+  }
+  if (objects.every((object) => object.source === "live")) {
+    return "live";
+  }
+  if (
+    objects.some(
+      (object) => object.source === "live" || object.source === "hybrid",
+    )
+  ) {
+    return "hybrid";
+  }
+  return "mock";
+}
+
+function isManifest(value: unknown): value is Manifest {
+  return Boolean(
+    value &&
+    typeof value === "object" &&
+    "schema" in value &&
+    (value as { schema?: string }).schema === "poi/v0.1",
+  );
 }

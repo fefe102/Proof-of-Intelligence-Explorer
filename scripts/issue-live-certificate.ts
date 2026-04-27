@@ -5,6 +5,7 @@ import {
   hashManifestForProof,
   type Certificate,
   type Manifest,
+  type ProofStorageBundle,
 } from "@poi/sdk";
 import { decodeEventLog, type Abi, type Address, type Log } from "viem";
 import {
@@ -36,23 +37,30 @@ printSanitizedPlan(operation, config);
 
 const report = await createVerifier().verify("codeguardian");
 const deployment = readJson<Deployment>("deployments/0g-galileo.json");
+const storageBundle = readJson<ProofStorageBundle>(
+  "deployments/0g-storage-bundle.json",
+);
 let preflight: Awaited<ReturnType<typeof preflightLiveWrite>> | undefined;
 let certificateId = deployment?.codeguardianCertificateId;
 const txHashes = [...(deployment?.txHashes ?? [])];
+const sourceManifest = storageBundle?.manifest ?? report.manifest;
 const liveManifest =
-  report.manifest &&
+  sourceManifest &&
   deployment?.demoInftAddress &&
   deployment.codeguardianTokenId
-    ? bindManifestToInft(report.manifest, {
+    ? bindManifestToInft(sourceManifest, {
         chainId: config.expectedChainId,
         contract: deployment.demoInftAddress,
         tokenId: deployment.codeguardianTokenId,
         standard: "ERC-7857-like live demo iNFT",
       })
-    : report.manifest;
+    : sourceManifest;
 const certificate = liveManifest
-  ? bindCertificateToInft(codeguardianCertificate, liveManifest.inft)
-  : codeguardianCertificate;
+  ? bindCertificateToInft(
+      storageBundle?.certificate ?? codeguardianCertificate,
+      liveManifest.inft,
+    )
+  : (storageBundle?.certificate ?? codeguardianCertificate);
 
 if (liveWritesAvailable(config)) {
   preflight = await preflightLiveWrite(config);
@@ -101,7 +109,11 @@ writeSafeJson("deployments/codeguardian-certificate.json", {
   onChainCertificateId: certificateId ?? "",
   certificate,
   evidence: liveManifest
-    ? { ...report.evidence, manifestRoot: liveManifest.storage.manifestRoot }
+    ? {
+        ...report.evidence,
+        ...(storageBundle?.roots ?? {}),
+        manifestRoot: liveManifest.storage.manifestRoot,
+      }
     : report.evidence,
   message: preflight
     ? "Certificate artifact exported and registry certificate write is live or already recorded."

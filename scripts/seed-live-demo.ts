@@ -5,6 +5,7 @@ import {
   hashManifestForProof,
   type Certificate,
   type Manifest,
+  type ProofStorageBundle,
 } from "@poi/sdk";
 import {
   decodeEventLog,
@@ -56,6 +57,13 @@ const [codeguardian, fakeagent] = await Promise.all([
   createVerifier().verify("fakeagent"),
 ]);
 const deployment = readJson<Deployment>("deployments/0g-galileo.json");
+const storageBundle = readJson<ProofStorageBundle>(
+  "deployments/0g-storage-bundle.json",
+);
+const evidenceRoots = {
+  ...codeguardian.evidence,
+  ...(storageBundle?.roots ?? {}),
+};
 let preflight: Awaited<ReturnType<typeof preflightLiveWrite>> | undefined;
 
 if (liveWritesAvailable(config)) {
@@ -130,16 +138,19 @@ if (preflight && deployment?.demoInftAddress && deployment.registryAddress) {
   }
 
   liveManifest =
-    codeguardian.manifest && codeguardianTokenId
+    (storageBundle?.manifest ?? codeguardian.manifest) && codeguardianTokenId
       ? bindManifestToLiveInft(
-          codeguardian.manifest,
+          (storageBundle?.manifest ?? codeguardian.manifest)!,
           config.expectedChainId,
           deployment.demoInftAddress,
           codeguardianTokenId,
         )
       : undefined;
   liveCertificate = liveManifest
-    ? bindCertificateToInft(codeguardianCertificate, liveManifest.inft)
+    ? bindCertificateToInft(
+        storageBundle?.certificate ?? codeguardianCertificate,
+        liveManifest.inft,
+      )
     : undefined;
 
   if (liveManifest && codeguardianTokenId) {
@@ -302,10 +313,10 @@ writeSafeJson("deployments/demo-seed.json", {
       status: codeguardian.status,
       roots: liveManifest
         ? {
-            ...codeguardian.evidence,
+            ...evidenceRoots,
             manifestRoot: liveManifest.storage.manifestRoot,
           }
-        : codeguardian.evidence,
+        : evidenceRoots,
     },
     fakeagent: {
       tier: fakeagent.tier,
@@ -317,7 +328,7 @@ writeSafeJson("deployments/demo-seed.json", {
 });
 
 function requiredRoot(key: keyof typeof codeguardian.evidence) {
-  const root = codeguardian.evidence[key];
+  const root = evidenceRoots[key];
   if (!root) {
     throw new Error(`Missing CodeGuardian evidence root: ${key}`);
   }
