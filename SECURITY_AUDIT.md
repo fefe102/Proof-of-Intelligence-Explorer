@@ -14,6 +14,39 @@ This audit covered:
 - demo contracts and authorization model
 - dependency advisories for production and development tooling
 
+## Current Audit Pass
+
+Fresh pass: 2026-04-27T08:27:29Z
+
+Commands and probes run in this pass:
+
+```bash
+git status --short --branch
+pnpm lint
+pnpm audit:prod
+pnpm audit --audit-level moderate
+git ls-files .env .env.local .env.production .vercel keys secrets .wallets tmp temp '*.pem' '*.key' '*.keystore' '*.sqlite' '*.db'
+rg -n "<machine-local-home>/|<personal-handle>|<personal email pattern>|BEGIN (RSA|OPENSSH|EC|PRIVATE) KEY|mnemonic|seed phrase" .
+rg -n "NEXT_PUBLIC_.*(PRIVATE|SECRET|TOKEN|KEY|BEARER|MNEMONIC)|0G_PRIVATE_KEY|POI_ADMIN_TOKEN|0G_COMPUTE_BEARER_TOKEN|POI_DEMO_ENCRYPTION_KEY" apps packages scripts docs README.md SUBMISSION.md SECURITY_AUDIT.md deployments .env.example
+curl -I https://proof-of-intelligence-explorer.vercel.app
+curl -i -X POST https://proof-of-intelligence-explorer.vercel.app/api/admin/seed-demo
+curl https://proof-of-intelligence-explorer.vercel.app/api/health
+curl https://proof-of-intelligence-explorer.vercel.app/api/verify?agent=codeguardian
+curl https://proof-of-intelligence-explorer.vercel.app/api/verify?agent=fakeagent
+```
+
+Current pass result:
+
+- no tracked `.env`, Vercel project metadata, private key, wallet, local DB, keystore, temp output, or generated secret file was found
+- no tracked personal email address, machine-local home path, PEM private key header, mnemonic, or seed phrase was found
+- secret lint passed across 133 tracked files
+- production dependency audit passed the moderate gate; one low advisory remains documented below
+- full dependency audit still fails on dev-only Hardhat/Vitest tooling advisories documented below
+- hosted security headers are present: CSP, HSTS, `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, and `Permissions-Policy`
+- hosted admin write endpoint rejected unauthenticated access and returned `Cache-Control: private, no-store`
+- hosted public health endpoint reports `liveWritesEnabled: false`
+- CodeGuardian remains tier 6, FakeAgent remains tier 1, and ENS is labeled mock compatibility metadata only
+
 ## Result
 
 Production posture is suitable for the hosted hackathon demo:
@@ -93,6 +126,13 @@ Admin routes:
 
 These routes require `POI_ADMIN_TOKEN`, remain disabled unless `POI_ENABLE_LIVE_WRITES=true`, and return sanitized operation bodies only.
 
+Hosted verification:
+
+- `POST /api/admin/seed-demo` without credentials returns `403`
+- admin responses use `Cache-Control: private, no-store`
+- write actions are currently disabled in production
+- the admin token is held in browser React state only on the admin page and is not persisted by the app
+
 ## Dependency Audit
 
 Production:
@@ -119,6 +159,30 @@ Residual advisories remain in dev-only tooling paths:
 - Vitest transitive dev server tooling: `vite`/`esbuild`
 
 These packages are not part of the hosted production runtime. They should be addressed in a future tooling upgrade, preferably by moving to newer Hardhat/Vitest major versions after contract tests are migrated and revalidated.
+
+## Open Risks
+
+No critical or high production-runtime issue was found in this pass. Remaining startup-grade risks:
+
+1. Public API and badge routes do not have application-level rate limiting.
+
+The current product is safe for the hackathon demo because public routes are read-only and write routes are disabled/token-gated, but a real free hosted product should add Vercel/edge/API rate limits, request size limits, and verification job quotas before broader launch.
+
+2. CSP still permits inline scripts and styles.
+
+The CSP blocks third-party script origins and framing, but `script-src 'self' 'unsafe-inline'` and `style-src 'self' 'unsafe-inline'` remain to support Next.js/theme bootstrapping. A production hardening sprint should move to nonces or hashes where practical.
+
+3. Vercel emits `Access-Control-Allow-Origin: *`.
+
+Public APIs are intentionally read-only, and admin writes require an unknown bearer/admin token with live writes disabled. If admin writes become regularly enabled, add explicit CORS handling for admin routes and avoid any credentialed cross-origin flow.
+
+4. Admin and live-write paths are centralized.
+
+The registry/demo contracts allow a configured admin to update roots and issue certificates. This is acceptable for a hackathon demo and seeded agent, but a startup product should move routine Passport creation to wallet-owned transactions and reserve admin powers for emergency/demo operations.
+
+5. 0G Storage and 0G Compute are currently hybrid proof artifacts.
+
+The UI labels this honestly. For startup-grade credibility, rerun the live storage upload and live compute flow so the public report can show Chain, Storage, and Compute as live.
 
 ## Verification Commands
 
