@@ -194,8 +194,12 @@ function applyLiveOverlay(
       ...(manifest ? { manifestRoot: manifest.storage.manifestRoot } : {}),
       liveRegistryAddress: registryAddress,
       liveDemoInftAddress: demoInftAddress,
-      ...(passportId ? { livePassportId: passportId } : {}),
-      ...(certificateId ? { liveCertificateId: certificateId } : {}),
+      ...(slug === "codeguardian" && passportId
+        ? { livePassportId: passportId }
+        : {}),
+      ...(slug === "codeguardian" && certificateId
+        ? { liveCertificateId: certificateId }
+        : {}),
     },
     checks: report.checks.map((check) => {
       if (check.id === "token") {
