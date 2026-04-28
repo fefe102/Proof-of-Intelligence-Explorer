@@ -130,9 +130,10 @@ export default async function HomePage() {
             <div>
               <h2 className="text-2xl font-semibold">0G evidence bundle</h2>
               <p className="mt-3 leading-7 text-slate-400">
-                Public proof objects are uploaded to 0G Storage and
+                Public proof objects are canonicalized, hashed, and
                 cross-checked against the manifest, registry, run trace, and
-                certificate roots.
+                certificate roots. Live 0G Storage roots appear when configured;
+                this hosted demo labels hybrid evidence explicitly.
               </p>
             </div>
             <div className="divide-y divide-white/10 border-y border-white/10">
