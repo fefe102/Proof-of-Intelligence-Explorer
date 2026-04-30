@@ -93,11 +93,62 @@ export function Checklist({ report }: { report: VerificationReport }) {
   );
 }
 
+export function RawJsonDetails({
+  title,
+  summary,
+  value,
+  className = "",
+}: {
+  title: string;
+  summary?: string;
+  value: unknown;
+  className?: string;
+}) {
+  return (
+    <details className={`rounded-md border border-white/10 bg-black/20 p-4 ${className}`}>
+      <summary className="cursor-pointer text-sm font-semibold text-white">
+        {title}
+        {summary ? <span className="ml-2 font-normal text-slate-400">{summary}</span> : null}
+      </summary>
+      <pre className="mt-4 max-h-[520px] overflow-auto text-xs leading-6 text-slate-300">
+        {JSON.stringify(value, null, 2)}
+      </pre>
+    </details>
+  );
+}
+
 export function EvidencePanel({ report }: { report: VerificationReport }) {
+  const passingChecks = report.checks.filter((check) => check.ok).length;
+  const failingChecks = report.checks.length - passingChecks;
+  const sources = report.sources.join(" + ");
+
   return (
     <div className="rounded-md border border-white/10 bg-black/20 p-4">
-      <div className="mb-3 text-sm font-semibold text-white">Raw JSON evidence</div>
-      <pre className="max-h-[520px] overflow-auto text-xs leading-6 text-slate-300">{JSON.stringify(report, null, 2)}</pre>
+      <div className="text-sm font-semibold text-white">Evidence summary</div>
+      <div className="mt-4 grid gap-3 text-sm md:grid-cols-4">
+        <div>
+          <div className="text-xs uppercase text-slate-500">Status</div>
+          <div className="mt-1 capitalize text-slate-200">{report.status}</div>
+        </div>
+        <div>
+          <div className="text-xs uppercase text-slate-500">Tier</div>
+          <div className="mt-1 text-slate-200">Tier {report.tier}: {tierLabels[report.tier]}</div>
+        </div>
+        <div>
+          <div className="text-xs uppercase text-slate-500">Checks</div>
+          <div className="mt-1 text-slate-200">{passingChecks} pass / {failingChecks} fail</div>
+        </div>
+        <div>
+          <div className="text-xs uppercase text-slate-500">Sources</div>
+          <div className="mt-1 capitalize text-slate-200">{sources}</div>
+        </div>
+      </div>
+      <RawJsonDetails
+        title="Raw JSON evidence"
+        summary="Full verifier response"
+        value={report}
+        className="mt-4 bg-black/10"
+      />
     </div>
   );
 }
@@ -184,7 +235,12 @@ export function RunTimeline({ run }: { run: RunTrace }) {
           <div className="absolute -left-2 top-0 h-4 w-4 rounded-full bg-emerald-300" />
           <div className="text-xs text-slate-500">#{index + 1} · {event.at}</div>
           <div className="mt-1 font-semibold text-white">{event.type}</div>
-          <pre className="mt-2 overflow-auto rounded-md bg-black/25 p-3 text-xs text-slate-300">{JSON.stringify(event.detail, null, 2)}</pre>
+          <RawJsonDetails
+            title="Event detail"
+            summary="Expand raw event JSON"
+            value={event.detail}
+            className="mt-3 bg-black/10"
+          />
         </div>
       ))}
     </div>

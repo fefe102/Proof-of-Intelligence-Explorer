@@ -1,5 +1,9 @@
 import { notFound } from "next/navigation";
-import { CertificateView, EvidenceObjects } from "../../../components/proof-ui";
+import {
+  CertificateView,
+  EvidenceObjects,
+  RawJsonDetails,
+} from "../../../components/proof-ui";
 import {
   chainscanContractUrl,
   getCertificate,
@@ -56,7 +60,12 @@ export default async function CertificatePage({ params }: { params: Promise<{ ce
             storageScanUrl={storageScanSearchUrl()}
           />
         </div>
-        <pre className="no-print mt-6 overflow-auto rounded-md bg-black/25 p-4 text-xs text-slate-300">{JSON.stringify(certificate, null, 2)}</pre>
+        <RawJsonDetails
+          title="Raw certificate JSON"
+          summary="Full certificate export"
+          value={certificate}
+          className="no-print mt-6"
+        />
       </div>
     </main>
   );
