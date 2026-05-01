@@ -17,6 +17,115 @@ const tierLabels = [
   "Certified"
 ];
 
+const eventLabels: Record<string, string> = {
+  task_received: "Task received",
+  context_loaded: "Context loaded",
+  compute_started: "Analysis started",
+  compute_completed: "Analysis completed",
+  issue_found: "Issue found",
+  patch_proposed: "Patch proposed",
+  critic_started: "Critic loop started",
+  critic_completed: "Critic completed",
+  memory_delta_created: "Memory delta created",
+  memory_written: "Memory written",
+  skill_upgrade_checked: "Policy upgrade checked",
+  trace_committed: "Trace committed",
+  certificate_issued: "Certificate issued"
+};
+
+const eventFieldKeys: Record<string, string[]> = {
+  task_received: ["goal", "target"],
+  context_loaded: ["sourceHash", "byteLength"],
+  compute_started: ["runId", "provider", "model"],
+  compute_completed: ["runId", "outputHash"],
+  issue_found: ["issue"],
+  patch_proposed: ["patch"],
+  critic_started: ["runId", "provider", "model"],
+  critic_completed: ["accepted", "critique"],
+  memory_delta_created: ["learnedPattern", "memoryDelta"],
+  memory_written: ["version", "memoryRoot"],
+  skill_upgrade_checked: ["upgraded"],
+  trace_committed: ["traceRoot"],
+  certificate_issued: ["certificateId"]
+};
+
+function detailValue(event: RunTrace["events"][number], key: string) {
+  const value = event.detail[key];
+  if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
+    return String(value);
+  }
+  return undefined;
+}
+
+function shortValue(value: string, maxLength = 160) {
+  return value.length > maxLength ? `${value.slice(0, maxLength - 1)}...` : value;
+}
+
+function eventLabel(type: string) {
+  return eventLabels[type] ?? type.split("_").join(" ");
+}
+
+function eventSummary(event: RunTrace["events"][number]) {
+  const target = detailValue(event, "target");
+  const goal = detailValue(event, "goal");
+  const runId = detailValue(event, "runId");
+  const provider = detailValue(event, "provider");
+  const model = detailValue(event, "model");
+  const issue = detailValue(event, "issue");
+  const patch = detailValue(event, "patch");
+  const critique = detailValue(event, "critique");
+  const learnedPattern = detailValue(event, "learnedPattern");
+  const memoryDelta = detailValue(event, "memoryDelta");
+  const version = detailValue(event, "version");
+  const traceRoot = detailValue(event, "traceRoot");
+  const certificateId = detailValue(event, "certificateId");
+  const accepted = detailValue(event, "accepted");
+  const upgraded = detailValue(event, "upgraded");
+
+  switch (event.type) {
+    case "task_received":
+      return `CodeGuardian accepted the allowlisted audit task${goal ? `: ${goal}` : target ? ` for ${target}` : "."}`;
+    case "context_loaded":
+      return target
+        ? `Loaded the demo source fixture and hashed the context for ${target}.`
+        : "Loaded and hashed the review context.";
+    case "compute_started":
+      return `Started the compute-backed analysis${runId ? ` run ${runId}` : ""}${provider ? ` through ${provider}` : model ? ` on ${model}` : ""}.`;
+    case "compute_completed":
+      return runId ? `Completed analysis run ${runId} and recorded its output hash.` : "Completed analysis and recorded its output hash.";
+    case "issue_found":
+      return issue ? shortValue(issue) : "Identified the primary code risk for this run.";
+    case "patch_proposed":
+      return patch ? shortValue(patch) : "Proposed a patch for the detected issue.";
+    case "critic_started":
+      return `Started the self-review critic loop${runId ? ` run ${runId}` : ""}.`;
+    case "critic_completed":
+      return critique
+        ? `${accepted === "true" ? "Accepted" : "Reviewed"} the patch after critique: ${shortValue(critique)}`
+        : "Completed the critic loop and recorded the verdict.";
+    case "memory_delta_created":
+      return learnedPattern ?? memoryDelta ?? "Created a persistent-memory delta from the review.";
+    case "memory_written":
+      return version ? `Advanced persistent memory to version ${version}.` : "Committed the updated memory root.";
+    case "skill_upgrade_checked":
+      return upgraded === "true"
+        ? "Recorded a dynamic policy upgrade for future reviews."
+        : "Checked dynamic upgrade rules; no policy upgrade was needed.";
+    case "trace_committed":
+      return traceRoot ? "Committed the replay trace root for verification." : "Committed the replay trace.";
+    case "certificate_issued":
+      return certificateId ? `Issued Proof-of-Intelligence certificate ${certificateId}.` : "Issued the Proof-of-Intelligence certificate.";
+    default:
+      return "Recorded a replayable agent event.";
+  }
+}
+
+function eventFields(event: RunTrace["events"][number]) {
+  return (eventFieldKeys[event.type] ?? [])
+    .map((key) => ({ key, value: detailValue(event, key) }))
+    .filter((field): field is { key: string; value: string } => Boolean(field.value));
+}
+
 export function Badge({ children, tone = "neutral" }: { children: React.ReactNode; tone?: "good" | "warn" | "bad" | "neutral" }) {
   const tones = {
     good: "border-emerald-400/40 bg-emerald-400/10 text-emerald-200",
@@ -230,19 +339,39 @@ export function EvidenceObjects({
 export function RunTimeline({ run }: { run: RunTrace }) {
   return (
     <div className="border-l border-white/15">
-      {run.events.map((event, index) => (
-        <div key={`${event.type}-${event.at}`} className="relative pb-7 pl-7">
-          <div className="absolute -left-2 top-0 h-4 w-4 rounded-full bg-emerald-300" />
-          <div className="text-xs text-slate-500">#{index + 1} · {event.at}</div>
-          <div className="mt-1 font-semibold text-white">{event.type}</div>
-          <RawJsonDetails
-            title="Event detail"
-            summary="Expand raw event JSON"
-            value={event.detail}
-            className="mt-3 bg-black/10"
-          />
-        </div>
-      ))}
+      {run.events.map((event, index) => {
+        const fields = eventFields(event);
+        const source = detailValue(event, "source");
+
+        return (
+          <div key={`${event.type}-${event.at}`} className="relative pb-7 pl-7">
+            <div className="absolute -left-2 top-0 h-4 w-4 rounded-full bg-emerald-300" />
+            <div className="text-xs text-slate-500">#{index + 1} · {event.at}</div>
+            <div className="mt-2 flex flex-wrap items-center gap-2">
+              <div className="font-semibold text-white">{eventLabel(event.type)}</div>
+              <code className="rounded-full border border-white/10 px-2 py-0.5 text-[11px] text-slate-400">{event.type}</code>
+              {source ? <Badge tone={source === "live" ? "good" : source === "hybrid" ? "warn" : "neutral"}>{source}</Badge> : null}
+            </div>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-300">{eventSummary(event)}</p>
+            {fields.length ? (
+              <div className="mt-3 grid gap-2 text-xs md:grid-cols-2">
+                {fields.map((field) => (
+                  <div key={field.key} className="rounded-md border border-white/10 bg-white/[0.03] p-3">
+                    <div className="uppercase text-slate-500">{field.key}</div>
+                    <code className="mt-1 block break-all text-slate-300">{shortValue(field.value, 180)}</code>
+                  </div>
+                ))}
+              </div>
+            ) : null}
+            <RawJsonDetails
+              title="Raw event JSON"
+              summary="Full canonical event detail"
+              value={event.detail}
+              className="mt-3 bg-black/10"
+            />
+          </div>
+        );
+      })}
     </div>
   );
 }

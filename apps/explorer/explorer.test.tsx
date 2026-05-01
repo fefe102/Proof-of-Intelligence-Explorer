@@ -88,6 +88,9 @@ describe("explorer app smoke tests", () => {
       }),
     );
     expect(html).toContain("task_received");
+    expect(html).toContain("Task received");
+    expect(html).toContain("CodeGuardian accepted the allowlisted audit task");
+    expect(html).toContain("Raw event JSON");
     expect(html).toContain("certificate_issued");
   });
 
