@@ -4,7 +4,7 @@
   "url": "https://proof-of-intelligence-explorer.vercel.app",
   "mode": "hybrid",
   "liveWritesEnabled": false,
-  "deployedAt": "2026-04-27T08:10:16.000Z",
+  "deployedAt": "2026-05-01T14:48:26.000Z",
   "proofLayers": {
     "chain": "live",
     "storage": "hybrid",
@@ -34,6 +34,7 @@
     "Privacy cleanup keeps FakeAgent from inheriting CodeGuardian passport or certificate identifiers.",
     "Latest production deployment includes CodeGuardian iNFT health framing, Agent Console, dynamic arbitrary-token verification, public passport pages, create-passport preview flow, public passport API, and SVG badge endpoint.",
     "ENS is explicitly not targeted in this submission; any ENS evidence is mock compatibility metadata only.",
-    "The deployment completed successfully and was aliased to the production URL by Vercel."
+    "The deployment completed successfully and was aliased to the production URL by Vercel.",
+    "Latest UI closeout adds an operating proof pipeline, Create Passport wizard progress, copy controls for proof roots and share URLs, narrative replay, collapsed raw JSON, de-emphasized Admin navigation, and certificate-first presentation."
   ]
 }

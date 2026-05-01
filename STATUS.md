@@ -13,6 +13,7 @@
 - [x] Public API for verify/passport/run/certificate/health
 - [x] Badge endpoint
 - [x] Existing Vercel production deployment
+- [x] Latest Vercel production deployment refreshed from a `.git`-less source copy on 2026-05-01
 
 ## Active Backlog
 
