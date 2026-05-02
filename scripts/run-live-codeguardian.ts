@@ -1,6 +1,8 @@
 import {
   runCodeGuardianSequence,
+  traceRootFromRun,
   writeCodeGuardianArtifacts,
+  type CodeGuardianProofArtifacts,
 } from "@poi/agent-runtime";
 import { hashCanonicalJson } from "@poi/sdk";
 import { readFileSync } from "node:fs";
@@ -21,7 +23,8 @@ const config = liveConfig();
 const computeTimeoutMs = Number(process.env.POI_COMPUTE_TIMEOUT_MS ?? "30000");
 printSanitizedPlan(operation, config);
 
-const fixturePath = "examples/codeguardian/fixtures/unsafe-parser.ts";
+const fixturePath =
+  "examples/codeguardian/fixtures/unchecked-async-side-effect.ts";
 const targetSource = readFileSync(fixturePath, "utf8");
 const liveCompute = await runLiveCompute(targetSource).catch((error) => ({
   source: "hybrid" as const,
@@ -32,15 +35,17 @@ const liveCompute = await runLiveCompute(targetSource).catch((error) => ({
   critic: undefined,
 }));
 
-const result = runCodeGuardianSequence({
-  source: liveCompute.source,
-  provider: liveCompute.provider,
-  model: liveCompute.model,
-  limit: 1,
-});
+const result = applyLiveComputeEvidence(
+  runCodeGuardianSequence({
+    source: liveCompute.source === "live" ? "hybrid" : liveCompute.source,
+    provider: liveCompute.provider,
+    model: liveCompute.model,
+  }),
+  liveCompute,
+);
 writeCodeGuardianArtifacts(result, "tmp/codeguardian-live");
 writeSafeJson("deployments/codeguardian-run.json", {
-  mode: liveCompute.source,
+  mode: computeMode(result),
   chainId: config.expectedChainId,
   runId: result.run.runId,
   memoryRoot: result.roots.memoryRoot,
@@ -82,6 +87,171 @@ type LiveComputeResult = {
     runId: string;
   };
 };
+
+function applyLiveComputeEvidence(
+  result: CodeGuardianProofArtifacts,
+  liveCompute: LiveComputeResult,
+): CodeGuardianProofArtifacts {
+  if (
+    liveCompute.source !== "live" ||
+    !liveCompute.analysis ||
+    !liveCompute.critic
+  ) {
+    return result;
+  }
+
+  const patched = structuredClone(result) as CodeGuardianProofArtifacts;
+  const runIndex = patched.runs.length - 1;
+  const run = patched.runs[runIndex];
+  const memory = patched.memories[runIndex];
+  if (!run || !memory) {
+    return patched;
+  }
+
+  run.source = "live";
+  run.result.issue = liveCompute.analysis.issue;
+  run.result.patch = liveCompute.analysis.patch;
+  run.result.critique = liveCompute.critic.critique;
+  run.result.accepted = liveCompute.critic.accepted;
+
+  memory.checkpoint.lastFinding = liveCompute.analysis.issue;
+  const latestHistory = memory.history.at(-1);
+  if (latestHistory) {
+    latestHistory.summary = liveCompute.analysis.issue;
+    latestHistory.source = "live";
+    latestHistory.root = hashCanonicalJson({
+      runId: latestHistory.runId,
+      learnedPattern: latestHistory.learnedPattern,
+      memoryDelta: latestHistory.memoryDelta,
+      version: latestHistory.version,
+      source: "live",
+    });
+  }
+  memory.checkpoint.stateRoot = hashCanonicalJson({
+    version: memory.checkpoint.runCount,
+    learnedPatterns: memory.history.map((item) => item.learnedPattern),
+    latestIssue: liveCompute.analysis.issue,
+  });
+  const memoryRoot = hashCanonicalJson(memory);
+  run.result.memoryRoot = memoryRoot;
+
+  patchEvent(run, "compute_started", {
+    runId: liveCompute.analysis.runId,
+    model: liveCompute.model,
+    provider: liveCompute.provider,
+    source: "live",
+  });
+  patchEvent(run, "compute_completed", {
+    runId: liveCompute.analysis.runId,
+    outputHash: liveCompute.analysis.outputHash,
+    source: "live",
+  });
+  patchEvent(run, "issue_found", {
+    issue: liveCompute.analysis.issue,
+    source: "live",
+  });
+  patchEvent(run, "patch_proposed", {
+    patch: liveCompute.analysis.patch,
+    source: "live",
+  });
+  patchEvent(run, "critic_started", {
+    runId: liveCompute.critic.runId,
+    model: liveCompute.model,
+    provider: liveCompute.provider,
+    source: "live",
+  });
+  patchEvent(run, "critic_completed", {
+    critique: liveCompute.critic.critique,
+    accepted: liveCompute.critic.accepted,
+    source: "live",
+  });
+  patchEvent(run, "memory_written", {
+    memoryRoot,
+    version: memory.checkpoint.runCount,
+    source: "live",
+  });
+
+  const traceRoot = traceRootFromRun(run);
+  patchEvent(run, "trace_committed", {
+    traceRoot,
+    source: "live",
+  });
+  patchEvent(run, "certificate_issued", {
+    certificateId: patched.certificate.certificateId,
+    source: "live",
+  });
+
+  const latestRunRoot = hashCanonicalJson(run);
+  const analysisRecord = patched.computeRuns.runs.find(
+    (item) => item.type === "analysis" && item.id.endsWith("-003"),
+  );
+  if (analysisRecord) {
+    analysisRecord.id = liveCompute.analysis.runId;
+    analysisRecord.promptHash = liveCompute.analysis.promptHash;
+    analysisRecord.outputHash = liveCompute.analysis.outputHash;
+    analysisRecord.source = "live";
+  }
+  const criticRecord = patched.computeRuns.runs.find(
+    (item) => item.type === "critic" && item.id.endsWith("-003"),
+  );
+  if (criticRecord) {
+    criticRecord.id = liveCompute.critic.runId;
+    criticRecord.promptHash = liveCompute.critic.promptHash;
+    criticRecord.outputHash = liveCompute.critic.outputHash;
+    criticRecord.source = "live";
+  }
+  patched.computeRuns.provider = liveCompute.provider;
+  patched.computeRuns.model = liveCompute.model;
+
+  patched.memory = memory;
+  patched.memories[runIndex] = memory;
+  patched.run = run;
+  patched.runs[runIndex] = run;
+  patched.memoryEvolution[runIndex] = {
+    ...patched.memoryEvolution[runIndex]!,
+    memoryRoot,
+    traceRoot,
+    source: "live",
+  };
+  patched.certificate.evidence.memoryRoot = memoryRoot;
+  patched.certificate.evidence.latestRunRoot = latestRunRoot;
+  patched.certificate.evidence.computeRunIds = patched.computeRuns.runs.map(
+    (item) => item.id,
+  );
+  patched.roots = {
+    ...patched.roots,
+    memoryRoot,
+    latestRunRoot,
+    checkpointRoot: hashCanonicalJson(memory.checkpoint),
+    historyRoot: hashCanonicalJson(memory.history),
+    computeRunsRoot: hashCanonicalJson(patched.computeRuns),
+    certificateRoot: hashCanonicalJson(patched.certificate),
+  };
+
+  return patched;
+}
+
+function computeMode(result: CodeGuardianProofArtifacts) {
+  const sources = result.computeRuns.runs.map((run) => run.source);
+  if (sources.every((source) => source === "live")) return "live";
+  if (sources.some((source) => source === "live")) return "hybrid";
+  return sources.some((source) => source === "hybrid") ? "hybrid" : "mock";
+}
+
+function patchEvent(
+  run: CodeGuardianProofArtifacts["run"],
+  type: string,
+  detail: Record<string, unknown>,
+) {
+  const event = run.events.find((candidate) => candidate.type === type);
+  if (!event) return;
+  event.detail = { ...event.detail, ...detail };
+  event.root = hashCanonicalJson({
+    type: event.type,
+    at: event.at,
+    detail: event.detail,
+  });
+}
 
 async function runLiveCompute(source: string): Promise<LiveComputeResult> {
   const providerAddress = zeroGEnv("COMPUTE_PROVIDER");

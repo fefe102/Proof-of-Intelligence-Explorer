@@ -1,53 +1,69 @@
 {
-  "mode": "hybrid",
+  "mode": "live",
   "chainId": 16602,
   "agent": "CodeGuardian",
   "roots": {
-    "manifestRoot": "sha256:5704511de453c1a85d9ade4cf1b1c409f052a7556e184400070acc07900096b9",
+    "manifestRoot": "sha256:098b7cc32da7fac1d514230617a404c59bfe80eaecac22c2ff612a8cc0089ba7",
     "intelligenceBundleRoot": "sha256:6289903e00f2e42448eb3cad30d322fcd4e1b3e3af54dd37f35a863a864f0bcd",
-    "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce",
-    "latestRunRoot": "sha256:5eea73e8098964c75c6da1aba8d37e7f677b491e0c8a229818eef3f0a4069dad",
+    "memoryRoot": "sha256:d559e2a8427d70dce884ecea72ae7678effa79e0d8b62178405495be9c57e5e1",
+    "latestRunRoot": "sha256:61aeab5b75456fa20b010ddf61d5c7e8077641368085168aa446aaf62b13fafb",
     "checkpointRoot": "sha256:e397bbbff2aa81b1889f90cb749b8f70fee9791d0111192e49c79da51cebfbf1",
-    "historyRoot": "sha256:e4ba11b5c16faa78033c22d4f5b4ea7c3a129d5d9e007373c006de99c0707060",
-    "computeRunsRoot": "sha256:49e5dba18a55f5a1d9bc54f32d64cbb3ed8a8abed5b6475f54d2b3de4012f0aa",
-    "certificateRoot": "sha256:26dd3ab514a1f829cc9986f1e7b67a3c95ab7970a709ec40ac1ba8899977c463"
+    "historyRoot": "sha256:e4ba11b5c16faa78033c22d4f5b4ea7c3a129d5d9e007373c006de99c0707060"
   },
   "objects": [
     {
       "name": "manifest",
-      "poiRoot": "sha256:5704511de453c1a85d9ade4cf1b1c409f052a7556e184400070acc07900096b9",
-      "source": "hybrid",
-      "byteLength": 2892
+      "poiRoot": "sha256:098b7cc32da7fac1d514230617a404c59bfe80eaecac22c2ff612a8cc0089ba7",
+      "source": "live",
+      "zeroGRootHash": "0x314347a8249f57b9ee5aa13b4e614c40ad3bb218d012be5a85c2d4612df832c1",
+      "txHash": "0x2d2ee4f8de02655532e6c6f9a958acbcaa5a22bbee26b10e9ae03c9241c31e86",
+      "txSeq": 68674,
+      "byteLength": 2924
     },
     {
       "name": "intelligenceBundle",
       "poiRoot": "sha256:6289903e00f2e42448eb3cad30d322fcd4e1b3e3af54dd37f35a863a864f0bcd",
-      "source": "hybrid",
+      "source": "live",
+      "zeroGRootHash": "0x56f2475226993ff79654b246f0fcb3a947a9b877321f6487f869b07ff54df7d4",
+      "txHash": "0x8f99687ac6aaecaeb7f4b61a78bfa3872eb3e6c50a2bbb4d11c85dd025f26cfc",
+      "txSeq": 68661,
       "byteLength": 3437
     },
     {
       "name": "memory",
-      "poiRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce",
-      "source": "hybrid",
-      "byteLength": 1800
+      "poiRoot": "sha256:d559e2a8427d70dce884ecea72ae7678effa79e0d8b62178405495be9c57e5e1",
+      "source": "live",
+      "zeroGRootHash": "0x10f5648dd2d01591deb7baba9c76977bee4da8f07248fc1b3aeb726c6aec93c3",
+      "txHash": "0xaaf109dc0c7aca8488b76fa4755de8e9e1f18c64071aae3dbc27f3bc24f2ee28",
+      "txSeq": 68677,
+      "byteLength": 1766
     },
     {
       "name": "run",
-      "poiRoot": "sha256:5eea73e8098964c75c6da1aba8d37e7f677b491e0c8a229818eef3f0a4069dad",
-      "source": "hybrid",
-      "byteLength": 5248
+      "poiRoot": "sha256:61aeab5b75456fa20b010ddf61d5c7e8077641368085168aa446aaf62b13fafb",
+      "source": "live",
+      "zeroGRootHash": "0x4cb36cafd5a9aa57ea42133fc673d996f774e0507114d0b5c774a9aadad9c35c",
+      "txHash": "0x62dad5b56bc049509a40496be48b68adc0bc2ed98998714406df75cab9fc35ad",
+      "txSeq": 68678,
+      "byteLength": 5673
     },
     {
       "name": "computeRuns",
-      "poiRoot": "sha256:49e5dba18a55f5a1d9bc54f32d64cbb3ed8a8abed5b6475f54d2b3de4012f0aa",
-      "source": "hybrid",
-      "byteLength": 2117
+      "poiRoot": "sha256:876436ffbc263e3fd93c945cc7ab35f1e2f9bfc2234ea3ae964c509fdc7caa15",
+      "source": "live",
+      "zeroGRootHash": "0xf9af0cb27ecf3ece3b10ad4dcbb1e48ccd10c6bbd05da9ba353fe6cbf48a9168",
+      "txHash": "0x976d1a9ee08da7c39505e85c6f9fa9cc3a288a4e071d836744b57bcc3d2bce54",
+      "txSeq": 68679,
+      "byteLength": 2145
     },
     {
       "name": "certificate",
-      "poiRoot": "sha256:26dd3ab514a1f829cc9986f1e7b67a3c95ab7970a709ec40ac1ba8899977c463",
-      "source": "hybrid",
-      "byteLength": 886
+      "poiRoot": "sha256:df5ecc88a9e1672ef9b8b7ee75c45f74dd248ec1f8de69cac2f837d73525b591",
+      "source": "live",
+      "zeroGRootHash": "0xfdf79db930ad7be9b129d41ff384eab9ce949897484da375db39921b6a4a232f",
+      "txHash": "0x1d3cd4e06ba27b00bbae9295fe3580628080aa102bd9ddafc78862b9a1a258cf",
+      "txSeq": 68681,
+      "byteLength": 900
     }
   ],
   "manifest": {
@@ -65,13 +81,13 @@
       "ens": "codeguardian.poi-demo.eth"
     },
     "storage": {
-      "manifestRoot": "sha256:5704511de453c1a85d9ade4cf1b1c409f052a7556e184400070acc07900096b9",
+      "manifestRoot": "sha256:098b7cc32da7fac1d514230617a404c59bfe80eaecac22c2ff612a8cc0089ba7",
       "intelligenceBundleRoot": "sha256:6289903e00f2e42448eb3cad30d322fcd4e1b3e3af54dd37f35a863a864f0bcd",
-      "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce",
-      "latestRunRoot": "sha256:5eea73e8098964c75c6da1aba8d37e7f677b491e0c8a229818eef3f0a4069dad"
+      "memoryRoot": "sha256:d559e2a8427d70dce884ecea72ae7678effa79e0d8b62178405495be9c57e5e1",
+      "latestRunRoot": "sha256:61aeab5b75456fa20b010ddf61d5c7e8077641368085168aa446aaf62b13fafb"
     },
     "compute": {
-      "provider": "0G Compute hybrid broker",
+      "provider": "0xa48f01287233509FD694a22Bf840225062E67836",
       "models": [
         "qwen/qwen-2.5-7b-instruct"
       ],
@@ -80,8 +96,8 @@
         "zg-hybrid-critic-001",
         "zg-hybrid-analysis-002",
         "zg-hybrid-critic-002",
-        "zg-hybrid-analysis-003",
-        "zg-hybrid-critic-003"
+        "zg-live-analysis-95b970ef686e",
+        "zg-live-critic-69794555dda4"
       ]
     },
     "skills": [
@@ -190,8 +206,8 @@
     "agent": "CodeGuardian",
     "checkpoint": {
       "runCount": 3,
-      "lastFinding": "A failed awaited side effect can escape without explicit classification or recovery.",
-      "stateRoot": "sha256:c68b6efe2d509a6c233e7f5063a75ce1ac2eacc040ca69357ba200ec221fada8"
+      "lastFinding": "Unsafe JSON.parse path returns unvalidated data as a trusted Result.",
+      "stateRoot": "sha256:549ccf18e07b31d770ae81d5de2d74f4ced166ed774c299ad1a9f532e03d2727"
     },
     "history": [
       {
@@ -217,12 +233,12 @@
       {
         "runId": "codeguardian-run-003",
         "version": 3,
-        "summary": "A failed awaited side effect can escape without explicit classification or recovery.",
+        "summary": "Unsafe JSON.parse path returns unvalidated data as a trusted Result.",
         "learnedPattern": "Wrap awaited side effects in explicit error handling.",
         "memoryDelta": "Added an async side-effect handling pattern to persistent review memory.",
         "at": "2026-04-26T00:20:00.000Z",
-        "source": "hybrid",
-        "root": "sha256:77d8bfabf57c07a9130d4877328ccc84296bafe6dc5efea4a3260f607f610d69"
+        "source": "live",
+        "root": "sha256:f2046b3a19d79117e048fac7bccdcca2da99910c0825ad0263f0e4b28d6df7f6"
       }
     ]
   },
@@ -284,8 +300,8 @@
       "agent": "CodeGuardian",
       "checkpoint": {
         "runCount": 3,
-        "lastFinding": "A failed awaited side effect can escape without explicit classification or recovery.",
-        "stateRoot": "sha256:c68b6efe2d509a6c233e7f5063a75ce1ac2eacc040ca69357ba200ec221fada8"
+        "lastFinding": "Unsafe JSON.parse path returns unvalidated data as a trusted Result.",
+        "stateRoot": "sha256:549ccf18e07b31d770ae81d5de2d74f4ced166ed774c299ad1a9f532e03d2727"
       },
       "history": [
         {
@@ -311,12 +327,12 @@
         {
           "runId": "codeguardian-run-003",
           "version": 3,
-          "summary": "A failed awaited side effect can escape without explicit classification or recovery.",
+          "summary": "Unsafe JSON.parse path returns unvalidated data as a trusted Result.",
           "learnedPattern": "Wrap awaited side effects in explicit error handling.",
           "memoryDelta": "Added an async side-effect handling pattern to persistent review memory.",
           "at": "2026-04-26T00:20:00.000Z",
-          "source": "hybrid",
-          "root": "sha256:77d8bfabf57c07a9130d4877328ccc84296bafe6dc5efea4a3260f607f610d69"
+          "source": "live",
+          "root": "sha256:f2046b3a19d79117e048fac7bccdcca2da99910c0825ad0263f0e4b28d6df7f6"
         }
       ]
     }
@@ -325,7 +341,7 @@
     "schema": "poi-run/v0.1",
     "runId": "codeguardian-run-003",
     "agent": "CodeGuardian",
-    "source": "hybrid",
+    "source": "live",
     "task": "Audit async side effects for unchecked failures.",
     "events": [
       {
@@ -353,61 +369,61 @@
         "type": "compute_started",
         "at": "2026-04-26T00:20:02.000Z",
         "detail": {
-          "runId": "zg-hybrid-analysis-003",
+          "runId": "zg-live-analysis-95b970ef686e",
           "model": "qwen/qwen-2.5-7b-instruct",
-          "provider": "0G Compute hybrid broker",
-          "source": "hybrid"
+          "provider": "0xa48f01287233509FD694a22Bf840225062E67836",
+          "source": "live"
         },
-        "root": "sha256:3d1444fb5e18c8496ab211875abfa7997616b8ed2a62ffe1e13f9278ea66be5a"
+        "root": "sha256:c9452d4eeef2feb82c75c66c21a48c822e5d146a30ff9d75232840f1207543c3"
       },
       {
         "type": "compute_completed",
         "at": "2026-04-26T00:20:04.000Z",
         "detail": {
-          "runId": "zg-hybrid-analysis-003",
-          "outputHash": "sha256:df9a8ab1137844cdd896941fc9791b4931e3a3ddddbbcd8fe878fb14da0bcf1f",
-          "source": "hybrid"
+          "runId": "zg-live-analysis-95b970ef686e",
+          "outputHash": "sha256:6a1e48b944f7802859571ab1ca5888c227398c134aa667583f12ef080e3f4cb8",
+          "source": "live"
         },
-        "root": "sha256:ca9c105ab431427d6038b8e2ddd4d5be8f0912957df0c5577d999006fb3f65ff"
+        "root": "sha256:ec0a6e03980c38a51cf2c5adf2338e88aec62c303beb17df948d40203a64020a"
       },
       {
         "type": "issue_found",
         "at": "2026-04-26T00:20:05.000Z",
         "detail": {
-          "issue": "A failed awaited side effect can escape without explicit classification or recovery.",
-          "source": "hybrid"
+          "issue": "Unsafe JSON.parse path returns unvalidated data as a trusted Result.",
+          "source": "live"
         },
-        "root": "sha256:f7ed5662107cda21251d436b59d6127dfef51fb237a7f4fc3189a9ddfa401889"
+        "root": "sha256:6489198179b2838d04532f23e5cdcc752f6b39fb7803e2f0aa92a5b2bfe3e220"
       },
       {
         "type": "patch_proposed",
         "at": "2026-04-26T00:20:07.000Z",
         "detail": {
-          "patch": "Wrap the awaited side effect in explicit error handling and return a typed failure result.",
-          "source": "hybrid"
+          "patch": "Parse JSON as unknown and validate the Result shape before returning it.",
+          "source": "live"
         },
-        "root": "sha256:e5326c1de31ae2c557967229b3975604e94a75f771e48aefd5480629fa0004aa"
+        "root": "sha256:1677a96abf72fe22d0e8782329af2fe7dbc0ec54ceb8256e33b0adc98f51c058"
       },
       {
         "type": "critic_started",
         "at": "2026-04-26T00:20:08.000Z",
         "detail": {
-          "runId": "zg-hybrid-critic-003",
+          "runId": "zg-live-critic-69794555dda4",
           "model": "qwen/qwen-2.5-7b-instruct",
-          "provider": "0G Compute hybrid broker",
-          "source": "hybrid"
+          "provider": "0xa48f01287233509FD694a22Bf840225062E67836",
+          "source": "live"
         },
-        "root": "sha256:b4a574f5b16d2d1fd5c9fbfc9fa0c3079bfb64edd2a7fbf9a2dd560a4810a511"
+        "root": "sha256:82432a52bfd139b9d51b9ddcdf2194df96ecd3a702b9954565783beff3dd1a85"
       },
       {
         "type": "critic_completed",
         "at": "2026-04-26T00:20:10.000Z",
         "detail": {
-          "critique": "The patch turns an implicit runtime rejection into a deterministic failure branch that callers can test.",
+          "critique": "The patch addresses the security concern by validating the JSON result shape after parsing. However, it's important to also consider potential errors during parsing and ensure that the validation process is robust. Additionally, handling cases where the input might not be valid JSON could prevent unexpected behavior or exceptions.",
           "accepted": true,
-          "source": "hybrid"
+          "source": "live"
         },
-        "root": "sha256:8447740ce1f04de67fb27dab484048c9369a71d3f4b4dca4ab00b713cc3d2e72"
+        "root": "sha256:df89c13b8738c473d49abb22c34c43cab5bbf658aef9ed275b8bd4de123f0cc3"
       },
       {
         "type": "memory_delta_created",
@@ -423,11 +439,11 @@
         "type": "memory_written",
         "at": "2026-04-26T00:20:12.000Z",
         "detail": {
-          "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce",
+          "memoryRoot": "sha256:d559e2a8427d70dce884ecea72ae7678effa79e0d8b62178405495be9c57e5e1",
           "version": 3,
-          "source": "hybrid"
+          "source": "live"
         },
-        "root": "sha256:dab918a5887a69f69de6a8d98fa06d75f4362c4d641894d9a3a62be6d2d93f61"
+        "root": "sha256:113d3164cc76b7b99b7e36d258ffe2286fbd6189ecda5abe22a35f35d40d0136"
       },
       {
         "type": "skill_upgrade_checked",
@@ -442,27 +458,27 @@
         "type": "trace_committed",
         "at": "2026-04-26T00:20:14.000Z",
         "detail": {
-          "traceRoot": "sha256:c4a01e4a7817d88a0b9b8043221591a3896f433bdecde60976c554cf725292c4",
-          "source": "hybrid"
+          "traceRoot": "sha256:21f8acdf5fe40a013a0b7c989c42173e9ed60a7f739a1be236338511c2bfe12b",
+          "source": "live"
         },
-        "root": "sha256:a306fdb31ab4c6d2cf6c6f7655fcd69efafb57f186cdf004a11bdc3387ed81b8"
+        "root": "sha256:c7e2584be70f9c4dac7578277d4de428936d23d72e6d09c2a6f932cb0c6eb9af"
       },
       {
         "type": "certificate_issued",
         "at": "2026-04-26T00:20:15.000Z",
         "detail": {
           "certificateId": "poi-cert-codeguardian-001",
-          "source": "hybrid"
+          "source": "live"
         },
-        "root": "sha256:3170bc3254d93c4c9d36df5ca19ca1c5b9f2b1489eff546c831438678563a2fb"
+        "root": "sha256:8a98bdfa21be2867acf1d4834bdcf5db3adad17f574c0cbfc7b14950ee5a8cb1"
       }
     ],
     "result": {
-      "issue": "A failed awaited side effect can escape without explicit classification or recovery.",
-      "patch": "Wrap the awaited side effect in explicit error handling and return a typed failure result.",
-      "critique": "The patch turns an implicit runtime rejection into a deterministic failure branch that callers can test.",
+      "issue": "Unsafe JSON.parse path returns unvalidated data as a trusted Result.",
+      "patch": "Parse JSON as unknown and validate the Result shape before returning it.",
+      "critique": "The patch addresses the security concern by validating the JSON result shape after parsing. However, it's important to also consider potential errors during parsing and ensure that the validation process is robust. Additionally, handling cases where the input might not be valid JSON could prevent unexpected behavior or exceptions.",
       "accepted": true,
-      "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce"
+      "memoryRoot": "sha256:d559e2a8427d70dce884ecea72ae7678effa79e0d8b62178405495be9c57e5e1"
     }
   },
   "runs": [
@@ -500,10 +516,10 @@
           "detail": {
             "runId": "zg-hybrid-analysis-001",
             "model": "qwen/qwen-2.5-7b-instruct",
-            "provider": "0G Compute hybrid broker",
+            "provider": "0xa48f01287233509FD694a22Bf840225062E67836",
             "source": "hybrid"
           },
-          "root": "sha256:299b29b56340e37e50d9617d6b71e263d96a836e0f859218c5f38bbc576adfb9"
+          "root": "sha256:b901aba3375b4d78c9e14faef5f173699524aa79923783cca57ef2e05af3ad0b"
         },
         {
           "type": "compute_completed",
@@ -539,10 +555,10 @@
           "detail": {
             "runId": "zg-hybrid-critic-001",
             "model": "qwen/qwen-2.5-7b-instruct",
-            "provider": "0G Compute hybrid broker",
+            "provider": "0xa48f01287233509FD694a22Bf840225062E67836",
             "source": "hybrid"
           },
-          "root": "sha256:9b3ecf68d3b392e423bfaccdaf4c89d568660e8857610890a2646a5ed0d8b62c"
+          "root": "sha256:a2b0d0cbc17d3a69444b1178a97d8ea862fb42aa4ee6dd8b1ca0ab4d703441a3"
         },
         {
           "type": "critic_completed",
@@ -587,10 +603,10 @@
           "type": "trace_committed",
           "at": "2026-04-26T00:00:14.000Z",
           "detail": {
-            "traceRoot": "sha256:9b2a49d2f6cd1d5054262a855204e538f8ccfb0eadb7e64533e5632866cf1eee",
+            "traceRoot": "sha256:a69f6c4372170f72773c41a4b99e8ca02bb3aa4beb75f70e858629f77b18c412",
             "source": "hybrid"
           },
-          "root": "sha256:3ff97becad91b9cb6942d113e146306426f88c75e92010a425a07a53bf8e2bf8"
+          "root": "sha256:dd9e24f11093eb631a0cb0901bb02e9e77d9f59d32227a812111fd216023545e"
         },
         {
           "type": "certificate_issued",
@@ -644,10 +660,10 @@
           "detail": {
             "runId": "zg-hybrid-analysis-002",
             "model": "qwen/qwen-2.5-7b-instruct",
-            "provider": "0G Compute hybrid broker",
+            "provider": "0xa48f01287233509FD694a22Bf840225062E67836",
             "source": "hybrid"
           },
-          "root": "sha256:7c9db283bd037146704500a29514fdec9804e61c8aad36cd25216c8dd18206b3"
+          "root": "sha256:5bf1fe0f78d6018e8f621b2d096094252f1073b0f3a119d71eac1342bb67ec36"
         },
         {
           "type": "compute_completed",
@@ -683,10 +699,10 @@
           "detail": {
             "runId": "zg-hybrid-critic-002",
             "model": "qwen/qwen-2.5-7b-instruct",
-            "provider": "0G Compute hybrid broker",
+            "provider": "0xa48f01287233509FD694a22Bf840225062E67836",
             "source": "hybrid"
           },
-          "root": "sha256:07480398f129023c6e6f19eb46b61147e6d3e5e410c4ba1da6c603096ac2b67d"
+          "root": "sha256:c478af453356645a9f9c6b41f43063df149e5f7374c9d1f0ca75a4de59c4ad4a"
         },
         {
           "type": "critic_completed",
@@ -740,10 +756,10 @@
           "type": "trace_committed",
           "at": "2026-04-26T00:10:14.000Z",
           "detail": {
-            "traceRoot": "sha256:db9f42acf44276e8e6305f5e6dfffe7e7e21f798964dc469c35a221aa81d23c0",
+            "traceRoot": "sha256:90271aa056e32e7383e9bcda3a8f6cdb532b5b510e7bf44177a1d6143e475666",
             "source": "hybrid"
           },
-          "root": "sha256:792247467a01bf1351402ef79d56027ca8ad6092e4a59f050b8ec0817bc68dd6"
+          "root": "sha256:2a27be07bbc41b2399088f433ea59c92b98c9344b1075ea66dc45a309d2436a7"
         },
         {
           "type": "certificate_issued",
@@ -776,7 +792,7 @@
       "schema": "poi-run/v0.1",
       "runId": "codeguardian-run-003",
       "agent": "CodeGuardian",
-      "source": "hybrid",
+      "source": "live",
       "task": "Audit async side effects for unchecked failures.",
       "events": [
         {
@@ -804,61 +820,61 @@
           "type": "compute_started",
           "at": "2026-04-26T00:20:02.000Z",
           "detail": {
-            "runId": "zg-hybrid-analysis-003",
+            "runId": "zg-live-analysis-95b970ef686e",
             "model": "qwen/qwen-2.5-7b-instruct",
-            "provider": "0G Compute hybrid broker",
-            "source": "hybrid"
+            "provider": "0xa48f01287233509FD694a22Bf840225062E67836",
+            "source": "live"
           },
-          "root": "sha256:3d1444fb5e18c8496ab211875abfa7997616b8ed2a62ffe1e13f9278ea66be5a"
+          "root": "sha256:c9452d4eeef2feb82c75c66c21a48c822e5d146a30ff9d75232840f1207543c3"
         },
         {
           "type": "compute_completed",
           "at": "2026-04-26T00:20:04.000Z",
           "detail": {
-            "runId": "zg-hybrid-analysis-003",
-            "outputHash": "sha256:df9a8ab1137844cdd896941fc9791b4931e3a3ddddbbcd8fe878fb14da0bcf1f",
-            "source": "hybrid"
+            "runId": "zg-live-analysis-95b970ef686e",
+            "outputHash": "sha256:6a1e48b944f7802859571ab1ca5888c227398c134aa667583f12ef080e3f4cb8",
+            "source": "live"
           },
-          "root": "sha256:ca9c105ab431427d6038b8e2ddd4d5be8f0912957df0c5577d999006fb3f65ff"
+          "root": "sha256:ec0a6e03980c38a51cf2c5adf2338e88aec62c303beb17df948d40203a64020a"
         },
         {
           "type": "issue_found",
           "at": "2026-04-26T00:20:05.000Z",
           "detail": {
-            "issue": "A failed awaited side effect can escape without explicit classification or recovery.",
-            "source": "hybrid"
+            "issue": "Unsafe JSON.parse path returns unvalidated data as a trusted Result.",
+            "source": "live"
           },
-          "root": "sha256:f7ed5662107cda21251d436b59d6127dfef51fb237a7f4fc3189a9ddfa401889"
+          "root": "sha256:6489198179b2838d04532f23e5cdcc752f6b39fb7803e2f0aa92a5b2bfe3e220"
         },
         {
           "type": "patch_proposed",
           "at": "2026-04-26T00:20:07.000Z",
           "detail": {
-            "patch": "Wrap the awaited side effect in explicit error handling and return a typed failure result.",
-            "source": "hybrid"
+            "patch": "Parse JSON as unknown and validate the Result shape before returning it.",
+            "source": "live"
           },
-          "root": "sha256:e5326c1de31ae2c557967229b3975604e94a75f771e48aefd5480629fa0004aa"
+          "root": "sha256:1677a96abf72fe22d0e8782329af2fe7dbc0ec54ceb8256e33b0adc98f51c058"
         },
         {
           "type": "critic_started",
           "at": "2026-04-26T00:20:08.000Z",
           "detail": {
-            "runId": "zg-hybrid-critic-003",
+            "runId": "zg-live-critic-69794555dda4",
             "model": "qwen/qwen-2.5-7b-instruct",
-            "provider": "0G Compute hybrid broker",
-            "source": "hybrid"
+            "provider": "0xa48f01287233509FD694a22Bf840225062E67836",
+            "source": "live"
           },
-          "root": "sha256:b4a574f5b16d2d1fd5c9fbfc9fa0c3079bfb64edd2a7fbf9a2dd560a4810a511"
+          "root": "sha256:82432a52bfd139b9d51b9ddcdf2194df96ecd3a702b9954565783beff3dd1a85"
         },
         {
           "type": "critic_completed",
           "at": "2026-04-26T00:20:10.000Z",
           "detail": {
-            "critique": "The patch turns an implicit runtime rejection into a deterministic failure branch that callers can test.",
+            "critique": "The patch addresses the security concern by validating the JSON result shape after parsing. However, it's important to also consider potential errors during parsing and ensure that the validation process is robust. Additionally, handling cases where the input might not be valid JSON could prevent unexpected behavior or exceptions.",
             "accepted": true,
-            "source": "hybrid"
+            "source": "live"
           },
-          "root": "sha256:8447740ce1f04de67fb27dab484048c9369a71d3f4b4dca4ab00b713cc3d2e72"
+          "root": "sha256:df89c13b8738c473d49abb22c34c43cab5bbf658aef9ed275b8bd4de123f0cc3"
         },
         {
           "type": "memory_delta_created",
@@ -874,11 +890,11 @@
           "type": "memory_written",
           "at": "2026-04-26T00:20:12.000Z",
           "detail": {
-            "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce",
+            "memoryRoot": "sha256:d559e2a8427d70dce884ecea72ae7678effa79e0d8b62178405495be9c57e5e1",
             "version": 3,
-            "source": "hybrid"
+            "source": "live"
           },
-          "root": "sha256:dab918a5887a69f69de6a8d98fa06d75f4362c4d641894d9a3a62be6d2d93f61"
+          "root": "sha256:113d3164cc76b7b99b7e36d258ffe2286fbd6189ecda5abe22a35f35d40d0136"
         },
         {
           "type": "skill_upgrade_checked",
@@ -893,33 +909,33 @@
           "type": "trace_committed",
           "at": "2026-04-26T00:20:14.000Z",
           "detail": {
-            "traceRoot": "sha256:c4a01e4a7817d88a0b9b8043221591a3896f433bdecde60976c554cf725292c4",
-            "source": "hybrid"
+            "traceRoot": "sha256:21f8acdf5fe40a013a0b7c989c42173e9ed60a7f739a1be236338511c2bfe12b",
+            "source": "live"
           },
-          "root": "sha256:a306fdb31ab4c6d2cf6c6f7655fcd69efafb57f186cdf004a11bdc3387ed81b8"
+          "root": "sha256:c7e2584be70f9c4dac7578277d4de428936d23d72e6d09c2a6f932cb0c6eb9af"
         },
         {
           "type": "certificate_issued",
           "at": "2026-04-26T00:20:15.000Z",
           "detail": {
             "certificateId": "poi-cert-codeguardian-001",
-            "source": "hybrid"
+            "source": "live"
           },
-          "root": "sha256:3170bc3254d93c4c9d36df5ca19ca1c5b9f2b1489eff546c831438678563a2fb"
+          "root": "sha256:8a98bdfa21be2867acf1d4834bdcf5db3adad17f574c0cbfc7b14950ee5a8cb1"
         }
       ],
       "result": {
-        "issue": "A failed awaited side effect can escape without explicit classification or recovery.",
-        "patch": "Wrap the awaited side effect in explicit error handling and return a typed failure result.",
-        "critique": "The patch turns an implicit runtime rejection into a deterministic failure branch that callers can test.",
+        "issue": "Unsafe JSON.parse path returns unvalidated data as a trusted Result.",
+        "patch": "Parse JSON as unknown and validate the Result shape before returning it.",
+        "critique": "The patch addresses the security concern by validating the JSON result shape after parsing. However, it's important to also consider potential errors during parsing and ensure that the validation process is robust. Additionally, handling cases where the input might not be valid JSON could prevent unexpected behavior or exceptions.",
         "accepted": true,
-        "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce"
+        "memoryRoot": "sha256:d559e2a8427d70dce884ecea72ae7678effa79e0d8b62178405495be9c57e5e1"
       }
     }
   ],
   "computeRuns": {
     "schema": "poi-compute-runs/v0.1",
-    "provider": "0G Compute hybrid broker",
+    "provider": "0xa48f01287233509FD694a22Bf840225062E67836",
     "model": "qwen/qwen-2.5-7b-instruct",
     "runs": [
       {
@@ -955,20 +971,20 @@
         "source": "hybrid"
       },
       {
-        "id": "zg-hybrid-analysis-003",
+        "id": "zg-live-analysis-95b970ef686e",
         "type": "analysis",
-        "promptHash": "sha256:4e6468d20c214b50a9599f98c455fd0cfbdc734d865e98c1f7e2b6612a253af1",
-        "outputHash": "sha256:df9a8ab1137844cdd896941fc9791b4931e3a3ddddbbcd8fe878fb14da0bcf1f",
+        "promptHash": "sha256:f73f67b8ca9165a8c1aa957d3732e1dfe95f52e8ca1b5d2ac1248e433f3cdfb8",
+        "outputHash": "sha256:6a1e48b944f7802859571ab1ca5888c227398c134aa667583f12ef080e3f4cb8",
         "at": "2026-04-26T00:20:04.000Z",
-        "source": "hybrid"
+        "source": "live"
       },
       {
-        "id": "zg-hybrid-critic-003",
+        "id": "zg-live-critic-69794555dda4",
         "type": "critic",
-        "promptHash": "sha256:fc5d0960285261d8fe1850d715c6d5e6d03e3c56ab7368b41eda3bd26a568ed6",
-        "outputHash": "sha256:e96ea019c7252a615299d885f48eb17336f16216415af873567f0055a7a8078c",
+        "promptHash": "sha256:75f2ea81ff2acbb7b1f949f566819e4cbed825b1848fd0b32c3c953010b056f5",
+        "outputHash": "sha256:f95c7d6a2a377e9cc946674a50c046a0cce53d2c6b1239feb89d737869344b0b",
         "at": "2026-04-26T00:20:10.000Z",
-        "source": "hybrid"
+        "source": "live"
       }
     ]
   },
@@ -986,15 +1002,15 @@
         "tokenId": "1"
       },
       "intelligenceBundleRoot": "sha256:6289903e00f2e42448eb3cad30d322fcd4e1b3e3af54dd37f35a863a864f0bcd",
-      "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce",
-      "latestRunRoot": "sha256:5eea73e8098964c75c6da1aba8d37e7f677b491e0c8a229818eef3f0a4069dad",
+      "memoryRoot": "sha256:d559e2a8427d70dce884ecea72ae7678effa79e0d8b62178405495be9c57e5e1",
+      "latestRunRoot": "sha256:61aeab5b75456fa20b010ddf61d5c7e8077641368085168aa446aaf62b13fafb",
       "computeRunIds": [
         "zg-hybrid-analysis-001",
         "zg-hybrid-critic-001",
         "zg-hybrid-analysis-002",
         "zg-hybrid-critic-002",
-        "zg-hybrid-analysis-003",
-        "zg-hybrid-critic-003"
+        "zg-live-analysis-95b970ef686e",
+        "zg-live-critic-69794555dda4"
       ]
     }
   },
@@ -1005,7 +1021,7 @@
       "learnedPattern": "Validate JSON parse failures before using parsed payloads.",
       "memoryDelta": "Added a JSON-shape validation heuristic to future reviews.",
       "memoryRoot": "sha256:b71a518d1fadea56c7f0838e9fbd1c6a46bc043995a461f3d282ebf29b81e879",
-      "traceRoot": "sha256:9b2a49d2f6cd1d5054262a855204e538f8ccfb0eadb7e64533e5632866cf1eee",
+      "traceRoot": "sha256:a69f6c4372170f72773c41a4b99e8ca02bb3aa4beb75f70e858629f77b18c412",
       "source": "hybrid"
     },
     {
@@ -1014,7 +1030,7 @@
       "learnedPattern": "Verify authorization before returning private records.",
       "memoryDelta": "Added an authorization-check heuristic to critic reviews.",
       "memoryRoot": "sha256:568cb2b7f31804eef4dbe0231c5bb82ffb3e669a4a726943bc7e6d8c4f835ba2",
-      "traceRoot": "sha256:db9f42acf44276e8e6305f5e6dfffe7e7e21f798964dc469c35a221aa81d23c0",
+      "traceRoot": "sha256:90271aa056e32e7383e9bcda3a8f6cdb532b5b510e7bf44177a1d6143e475666",
       "source": "hybrid"
     },
     {
@@ -1022,9 +1038,9 @@
       "version": 3,
       "learnedPattern": "Wrap awaited side effects in explicit error handling.",
       "memoryDelta": "Added an async side-effect handling pattern to persistent review memory.",
-      "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce",
-      "traceRoot": "sha256:c4a01e4a7817d88a0b9b8043221591a3896f433bdecde60976c554cf725292c4",
-      "source": "hybrid"
+      "memoryRoot": "sha256:d559e2a8427d70dce884ecea72ae7678effa79e0d8b62178405495be9c57e5e1",
+      "traceRoot": "sha256:21f8acdf5fe40a013a0b7c989c42173e9ed60a7f739a1be236338511c2bfe12b",
+      "source": "live"
     }
   ],
   "policyUpgrade": {
@@ -1043,8 +1059,8 @@
     "critic-loop@0.1.1": "sha256:105b17eb2621b0c6591e097f1fc0ebd81b8c6596b46efe2b7404e420173de20c",
     "memory-update-policy@0.1.0": "sha256:3ac32f5f3fb152e07438bc904c44ad085afbb41442998bb3b066f91de8f944ee"
   },
-  "storageIndexerConfigured": false,
-  "storageUploadAttempted": false,
+  "storageIndexerConfigured": true,
+  "storageUploadAttempted": true,
   "liveComputeSource": "hybrid",
-  "message": "Hybrid CodeGuardian proof artifacts are deterministic and safe to host. Re-run scripts/upload-live-storage.ts with live 0G Storage env to replace object records with live tx hashes."
+  "message": "Proof artifacts were uploaded through the 0G Storage SDK. The public bundle keeps non-secret copies for fast hosted verification."
 }

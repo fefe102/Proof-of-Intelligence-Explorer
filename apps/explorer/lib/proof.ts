@@ -449,13 +449,17 @@ function bindCertificateToInft(
 
 function proofLayers() {
   const storageMode = storageBundle.mode ?? "hybrid";
-  const computeMode = storageBundle.computeRuns?.runs.some(
-    (run) => run.source === "live",
-  )
-    ? "live"
-    : storageBundle.computeRuns?.runs.some((run) => run.source === "hybrid")
-      ? "hybrid"
-      : "mock";
+  const computeSources =
+    storageBundle.computeRuns?.runs.map((run) => run.source) ?? [];
+  const computeMode =
+    computeSources.length > 0 &&
+    computeSources.every((source) => source === "live")
+      ? "live"
+      : computeSources.some(
+            (source) => source === "live" || source === "hybrid",
+          )
+        ? "hybrid"
+        : "mock";
   return {
     chain: currentDemoInftAddress() ? "live" : "mock",
     storage: storageMode,

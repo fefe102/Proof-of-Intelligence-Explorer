@@ -14,6 +14,7 @@ import {
   type Manifest,
   type MemoryState,
   type ProofObjectRecord,
+  type ProofStorageBundle,
   type RunTrace,
 } from "@poi/sdk";
 import { Indexer, MemData } from "@0gfoundation/0g-ts-sdk";
@@ -38,14 +39,19 @@ const report = await createVerifier().verify("codeguardian");
 const deployment = readJson<Record<string, string>>(
   "deployments/0g-galileo.json",
 );
-const runArtifact = readJson<{
-  mode?: "live" | "hybrid" | "mock";
-  run?: RunTrace;
-  memory?: MemoryState;
-  computeRuns?: ComputeRuns;
-  certificate?: Certificate;
-  liveComputeError?: string;
-}>("deployments/codeguardian-run.json");
+const previousStorageBundle = readJson<ProofStorageBundle>(
+  "deployments/0g-storage-bundle.json",
+);
+const runArtifact = readJson<
+  ProofStorageBundle & {
+    mode?: "live" | "hybrid" | "mock";
+    run?: RunTrace;
+    memory?: MemoryState;
+    computeRuns?: ComputeRuns;
+    certificate?: Certificate;
+    liveComputeError?: string;
+  }
+>("deployments/codeguardian-run.json");
 
 const intelligenceBundle = codeguardianBundle as IntelligenceBundle;
 const memory = runArtifact?.memory ?? (codeguardianMemory as MemoryState);
@@ -114,11 +120,22 @@ writeSafeJson("deployments/0g-storage-bundle.json", {
   manifest,
   intelligenceBundle,
   memory,
+  memories: runArtifact?.memories ?? [memory],
   run,
+  runs: runArtifact?.runs ?? [run],
   computeRuns,
   certificate,
+  memoryEvolution: runArtifact?.memoryEvolution ?? [],
+  policyUpgrade: runArtifact?.policyUpgrade,
+  skillHashes: runArtifact?.skillHashes ?? {},
   storageIndexerConfigured: Boolean(zeroGEnv("STORAGE_INDEXER_RPC")),
-  storageUploadAttempted: uploadResult.attempted,
+  storageUploadAttempted:
+    uploadResult.attempted ||
+    Boolean(
+      (previousStorageBundle as { storageUploadAttempted?: boolean } | null)
+        ?.storageUploadAttempted,
+    ) ||
+    objects.some((object) => Boolean(object.txHash)),
   storageUploadError: uploadResult.error,
   liveComputeSource: runArtifact?.mode ?? "fixture",
   liveComputeError: runArtifact?.liveComputeError,
@@ -218,10 +235,15 @@ async function maybeUploadProofObjects(
   if (!indexerRpc || !liveWritesAvailable(config)) {
     return {
       attempted: false,
-      objects: objects.map(({ value: _value, ...object }) => ({
-        ...object,
-        byteLength: byteLength(_value),
-      })),
+      objects: objects.map((object) => mergeExistingUploadMetadata(object)),
+    };
+  }
+
+  if (objects.length > config.maxTxPerOperation) {
+    return {
+      attempted: false,
+      error: `Refusing to upload ${objects.length} proof objects with POI_MAX_TX_PER_OPERATION=${config.maxTxPerOperation}`,
+      objects: objects.map((object) => mergeExistingUploadMetadata(object)),
     };
   }
 
@@ -298,13 +320,26 @@ async function maybeUploadProofObjects(
     return {
       attempted: true,
       error: sanitizeError(error),
-      objects: objects.map(({ value: _value, ...object }) => ({
-        ...object,
-        source: object.source,
-        byteLength: byteLength(_value),
-      })),
+      objects: objects.map((object) => mergeExistingUploadMetadata(object)),
     };
   }
+}
+
+function mergeExistingUploadMetadata(
+  object: ProofObjectRecord & { value: unknown },
+): ProofObjectRecord {
+  const { value, ...record } = object;
+  const existing = previousStorageBundle?.objects?.find(
+    (candidate) =>
+      candidate.name === record.name &&
+      candidate.poiRoot === record.poiRoot &&
+      candidate.source === "live",
+  );
+  return {
+    ...record,
+    ...existing,
+    byteLength: byteLength(value),
+  };
 }
 
 function byteLength(value: unknown) {

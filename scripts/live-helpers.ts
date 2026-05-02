@@ -86,8 +86,8 @@ export async function preflightLiveWrite(config = liveConfig()): Promise<LivePre
   if (!config.privateKey) {
     throw new Error("Missing 0G_PRIVATE_KEY for live write");
   }
-  if (config.maxTxPerOperation < 1 || config.maxTxPerOperation > 5) {
-    throw new Error("POI_MAX_TX_PER_OPERATION must be between 1 and 5");
+  if (config.maxTxPerOperation < 1 || config.maxTxPerOperation > 6) {
+    throw new Error("POI_MAX_TX_PER_OPERATION must be between 1 and 6");
   }
 
   const chain = zeroGChain(config.expectedChainId, config.rpcUrl);

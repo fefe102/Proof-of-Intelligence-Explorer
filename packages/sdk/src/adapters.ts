@@ -296,11 +296,7 @@ export class ArtifactComputeAdapter implements ComputeAdapter {
   private readonly computeRuns?: ComputeRuns;
 
   constructor(bundle: ProofStorageBundle) {
-    this.source = bundle.computeRuns?.runs.some((run) => run.source === "live")
-      ? "live"
-      : bundle.computeRuns?.runs.some((run) => run.source === "hybrid")
-        ? "hybrid"
-        : (bundle.mode ?? "hybrid");
+    this.source = computeSource(bundle.computeRuns, bundle.mode);
     this.computeRuns = bundle.computeRuns;
   }
 
@@ -465,6 +461,19 @@ function sourceFromObjects(
       (object) => object.source === "live" || object.source === "hybrid",
     )
   ) {
+    return "hybrid";
+  }
+  return "mock";
+}
+
+function computeSource(
+  computeRuns: ComputeRuns | undefined,
+  fallback: EvidenceSource | undefined,
+): EvidenceSource {
+  const sources = computeRuns?.runs.map((run) => run.source) ?? [];
+  if (!sources.length) return fallback ?? "hybrid";
+  if (sources.every((source) => source === "live")) return "live";
+  if (sources.some((source) => source === "live" || source === "hybrid")) {
     return "hybrid";
   }
   return "mock";
