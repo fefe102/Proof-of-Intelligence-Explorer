@@ -89,6 +89,12 @@ export default async function HomePage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
+                className="rounded-md bg-white px-5 py-3 font-semibold text-[#121412]"
+                href="/judge"
+              >
+                Judge Mode
+              </Link>
+              <Link
                 className="rounded-md bg-emerald-300 px-5 py-3 font-semibold text-[#121412]"
                 href="/agent/codeguardian/console"
               >

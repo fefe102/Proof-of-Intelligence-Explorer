@@ -7,6 +7,7 @@ import AgentPage from "./app/agent/[agent]/page";
 import { GET as BadgeGET } from "./app/badge/[chainId]/[contract]/[tokenId].svg/route";
 import CertificatePage from "./app/certificate/[certificateId]/page";
 import CreatePage from "./app/create/page";
+import JudgePage from "./app/judge/page";
 import HomePage from "./app/page";
 import PassportPage from "./app/passport/[chainId]/[contract]/[tokenId]/page";
 import RunPage from "./app/run/[runId]/page";
@@ -30,9 +31,20 @@ describe("explorer app smoke tests", () => {
     const html = renderToString(await HomePage());
     expect(html).toContain("CodeGuardian iNFT");
     expect(html).toContain("Autonomous 0G code-review iNFT");
+    expect(html).toContain("Judge Mode");
     expect(html).toContain("Open Agent Console");
     expect(html).toContain("Agent operating proof");
     expect(html).toContain("Proof pipeline");
+  });
+
+  it("judge page renders the prize checklist", async () => {
+    const html = renderToString(await JudgePage());
+    expect(html).toContain("CodeGuardian is the autonomous iNFT");
+    expect(html).toContain("Prize checklist");
+    expect(html).toContain("Minted iNFT proof");
+    expect(html).toContain("90-second demo script");
+    expect(html).toContain("FakeAgent");
+    expect(html).toContain("Badge");
   });
 
   it("verify page has arbitrary token form", async () => {

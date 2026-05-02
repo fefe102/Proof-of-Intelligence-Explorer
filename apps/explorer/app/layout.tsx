@@ -50,6 +50,7 @@ export default function RootLayout({
               </span>
             </Link>
             <div className="app-shell-links">
+              <Link href="/judge">Judge Mode</Link>
               <Link href="/agent/codeguardian/console">Agent Console</Link>
               <Link href="/verify">Verify</Link>
               <Link href="/create">Create Passport</Link>
