@@ -26,7 +26,7 @@ pnpm lint
 pnpm audit:prod
 pnpm audit --audit-level moderate
 git ls-files .env .env.local .env.production .vercel keys secrets .wallets tmp temp '*.pem' '*.key' '*.keystore' '*.sqlite' '*.db'
-rg -n "<machine-local-home>/|<personal-handle>|<personal email pattern>|BEGIN (RSA|OPENSSH|EC|PRIVATE) KEY|mnemonic|seed phrase" .
+rg -n "<machine-local home path>|<personal email pattern>|BEGIN (RSA|OPENSSH|EC|PRIVATE) KEY|mnemonic|seed phrase" .
 rg -n "NEXT_PUBLIC_.*(PRIVATE|SECRET|TOKEN|KEY|BEARER|MNEMONIC)|0G_PRIVATE_KEY|POI_ADMIN_TOKEN|0G_COMPUTE_BEARER_TOKEN|POI_DEMO_ENCRYPTION_KEY" apps packages scripts docs README.md SUBMISSION.md SECURITY_AUDIT.md deployments .env.example
 curl -I https://proof-of-intelligence-explorer.vercel.app
 curl -i -X POST https://proof-of-intelligence-explorer.vercel.app/api/admin/seed-demo
