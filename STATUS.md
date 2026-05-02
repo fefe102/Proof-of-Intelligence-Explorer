@@ -42,7 +42,7 @@
 - Submission name: `CodeGuardian iNFT`
 - Proof layer: `AgentProof - Proof-of-Intelligence Explorer`
 - Live demo: `https://proof-of-intelligence-explorer.vercel.app`
-- Public GitHub source: `https://github.com/fefe102/Proof-of-Intelligence-Explorer/tree/public-release`
+- Public GitHub: `https://github.com/fefe102/Proof-of-Intelligence-Explorer`
 - 0G Galileo chain ID: `16602`
 - CodeGuardian iNFT contract: `0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9`
 - CodeGuardian token ID: `1`
