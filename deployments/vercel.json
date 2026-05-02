@@ -2,12 +2,12 @@
   "project": "proof-of-intelligence-explorer",
   "status": "ready",
   "url": "https://proof-of-intelligence-explorer.vercel.app",
-  "deploymentUrl": "https://proof-of-intelligence-explorer-mgui78idy-we-lans-projects.vercel.app",
-  "deploymentId": "dpl_DYCjrkhKHAdVzQTxZbmEGUX1ndmD",
-  "inspectorUrl": "https://vercel.com/we-lans-projects/proof-of-intelligence-explorer/DYCjrkhKHAdVzQTxZbmEGUX1ndmD",
+  "deploymentUrl": "https://proof-of-intelligence-explorer-afrs0ub4z-we-lans-projects.vercel.app",
+  "deploymentId": "dpl_nSxhoPNXdQv7c4mNyLxThGs8CXXk",
+  "inspectorUrl": "https://vercel.com/we-lans-projects/proof-of-intelligence-explorer/nSxhoPNXdQv7c4mNyLxThGs8CXXk",
   "mode": "hybrid",
   "liveWritesEnabled": false,
-  "deployedAt": "2026-05-02T12:18:09.000Z",
+  "deployedAt": "2026-05-02T14:32:55.000Z",
   "proofLayers": {
     "chain": "live",
     "storage": "live",
@@ -40,6 +40,7 @@
     "The deployment completed successfully and was aliased to the production URL by Vercel.",
     "Latest UI closeout adds an operating proof pipeline, Create Passport wizard progress, copy controls for proof roots and share URLs, narrative replay, collapsed raw JSON, de-emphasized Admin navigation, and certificate-first presentation.",
     "Latest production deployment adds Judge Mode, safe pasted-diff review, live 0G Storage root/tx metadata, and live 0G Compute records for the latest CodeGuardian run.",
-    "Latest production deployment aligns public health metadata with CodeGuardian iNFT and AgentProof naming."
+    "Latest production deployment aligns public health metadata with CodeGuardian iNFT and AgentProof naming.",
+    "Latest production deployment exposes recorded 0G Chain transaction hashes as ChainScan links on Judge Mode, Agent Console, Passport, and Certificate pages."
   ]
 }
