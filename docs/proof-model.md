@@ -1,6 +1,6 @@
 # Proof Model
 
-CodeGuardian iNFT is the autonomous agent. AgentProof verifies its evidence stack.
+CodeGuardian iNFT is the autonomous 0G Agentic ID / ERC-7857-style agent. AgentProof verifies its evidence stack.
 
 ## Evidence Stack
 

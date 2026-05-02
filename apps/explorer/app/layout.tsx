@@ -7,7 +7,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "CodeGuardian iNFT",
   description:
-    "Autonomous 0G iNFT code-review agent verified by AgentProof.",
+    "Autonomous 0G Agentic ID / iNFT code-review agent verified by AgentProof.",
   applicationName: "CodeGuardian iNFT",
 };
 

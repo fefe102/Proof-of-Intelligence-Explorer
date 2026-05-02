@@ -1,6 +1,6 @@
 # 0G Integration
 
-CodeGuardian iNFT targets the 0G autonomous/iNFT track. AgentProof provides the reusable proof layer.
+CodeGuardian iNFT targets the 0G autonomous/iNFT track as a minted 0G Agentic ID / ERC-7857-style agent. AgentProof provides the reusable proof layer.
 
 ## Modes
 
@@ -21,7 +21,7 @@ Live Galileo seed:
 - Certificate record: `3`
 - FakeAgent control token ID: `2`
 
-The demo iNFT contract is ERC-7857-style. It exposes manifest, intelligence, memory, latest run, usage, skill hash, and run certification semantics. It is not a marketplace.
+The demo iNFT contract is ERC-7857-style and aligned with 0G Agentic ID proof semantics. It exposes manifest, intelligence, memory, latest run, usage, skill hash, authorized usage, and run certification semantics. It is not a marketplace.
 
 Guardrails:
 

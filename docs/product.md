@@ -4,7 +4,7 @@ Submitted project: **CodeGuardian iNFT**.
 
 Supporting proof layer: **AgentProof - Proof-of-Intelligence Explorer for 0G iNFT agents**.
 
-CodeGuardian is an autonomous 0G iNFT code-review agent. AgentProof is the reusable verifier, SDK, CLI, registry, API, badge, and explorer that proves CodeGuardian's embedded intelligence, evolving memory, compute/critic history, replayable traces, dynamic upgrade evidence, and certificate.
+CodeGuardian is an autonomous 0G Agentic ID / ERC-7857-style iNFT code-review agent. AgentProof is the reusable verifier, SDK, CLI, registry, API, badge, and explorer that proves CodeGuardian's embedded intelligence, evolving memory, compute/critic history, replayable traces, dynamic upgrade evidence, authorized execution semantics, and certificate.
 
 Primary 0G alignment:
 

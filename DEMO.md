@@ -4,13 +4,13 @@ This guide supports the ETHGlobal judging flow for **CodeGuardian iNFT**.
 
 ## Goal
 
-Show that CodeGuardian is an autonomous 0G iNFT code-review agent with embedded encrypted intelligence, evolving memory, compute/hybrid critic evidence, replayable behavior, dynamic policy upgrade evidence, and a Proof-of-Intelligence certificate. AgentProof verifies it. FakeAgent fails.
+Show that CodeGuardian is an autonomous 0G Agentic ID / ERC-7857-style iNFT code-review agent with embedded encrypted intelligence, evolving memory, compute/hybrid critic evidence, replayable behavior, dynamic policy upgrade evidence, authorized execution semantics, and a Proof-of-Intelligence certificate. AgentProof verifies it. FakeAgent fails.
 
 ## Hosted Walkthrough
 
 1. Open https://proof-of-intelligence-explorer.vercel.app.
 2. Open **Agent Console**.
-3. Show minted 0G Galileo iNFT details: contract `0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9`, token ID `1`.
+3. Open `/judge` and show minted 0G Galileo Agentic ID/iNFT details: contract `0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9`, token ID `1`.
 4. Click **Run CodeGuardian on demo file** and explain it is an allowlisted deterministic/hybrid preview.
 5. Show memory evolution across `codeguardian-run-001`, `codeguardian-run-002`, and `codeguardian-run-003`.
 6. Replay the latest run.

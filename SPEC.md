@@ -4,7 +4,7 @@
 
 - ETHGlobal submission name: **CodeGuardian iNFT**
 - Supporting proof layer: **AgentProof - Proof-of-Intelligence Explorer for 0G iNFT agents**
-- One-line pitch: CodeGuardian iNFT is an autonomous 0G code-review agent with embedded encrypted intelligence, evolving persistent memory, compute-backed self-critique, replayable behavior traces, dynamic skill/policy upgrades, and a public Proof-of-Intelligence certificate.
+- One-line pitch: CodeGuardian iNFT is an autonomous 0G Agentic ID / ERC-7857-style code-review agent with embedded encrypted intelligence, evolving persistent memory, compute-backed self-critique, replayable behavior traces, dynamic skill/policy upgrades, authorized execution semantics, and a public Proof-of-Intelligence certificate.
 - Winning frame: **CodeGuardian is the autonomous iNFT agent. AgentProof is how judges verify it is real.**
 - Primary sponsor target: 0G - Best Autonomous Agents, Swarms & iNFT Innovations
 - Secondary compatible target: 0G - Best Agent Framework, Tooling & Core Extensions
@@ -24,6 +24,7 @@ Many iNFTs can be only metadata pointers. 0G builders, users, marketplaces, and 
 
 ## 4. Core Product Flows
 
+- Open `/judge` and inspect the minted 0G Agentic ID / iNFT proof checklist.
 - Open CodeGuardian iNFT and inspect minted 0G iNFT details.
 - Use the Agent Console to see current goal, status, queue, latest run, memory version, compute analysis, critic reflection, policy upgrade, certificate, and roots.
 - Run or preview CodeGuardian on an allowlisted demo task.

@@ -150,7 +150,7 @@ export function StatusHeader({ report }: { report: VerificationReport }) {
         <div>
           <Badge tone={tone}>Tier {report.tier}: {tierLabels[report.tier]}</Badge>
           <h1 className="mt-5 max-w-3xl text-4xl font-semibold leading-tight text-white md:text-6xl">
-            Is this iNFT actually intelligent?
+            Is this Agentic ID actually intelligent?
           </h1>
           <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{report.summary}</p>
         </div>
@@ -402,7 +402,7 @@ export function CertificateView({ certificate }: { certificate: Certificate }) {
         <p className="text-sm font-semibold uppercase">Proof-of-Intelligence Certificate</p>
         <h1 className="mt-4 text-4xl font-semibold">{certificate.agent}</h1>
         <p className="mt-4 max-w-2xl text-lg">
-          Certified as a Tier {certificate.tier} iNFT-style agent with encrypted intelligence, persistent memory,
+          Certified as a Tier {certificate.tier} Agentic ID / iNFT-style agent with encrypted intelligence, persistent memory,
           compute-backed run history, and replayable behavior evidence.
         </p>
         <dl className="mt-8 grid gap-4 text-sm md:grid-cols-2">

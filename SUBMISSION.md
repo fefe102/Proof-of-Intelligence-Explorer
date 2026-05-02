@@ -4,7 +4,7 @@
 
 **CodeGuardian iNFT**
 
-CodeGuardian iNFT is an autonomous 0G code-review agent with embedded encrypted intelligence, evolving persistent memory, compute-backed self-critique, replayable behavior traces, dynamic skill/policy upgrades, and a Proof-of-Intelligence certificate.
+CodeGuardian iNFT is an autonomous 0G Agentic ID / ERC-7857-style code-review agent with embedded encrypted intelligence, evolving persistent memory, compute-backed self-critique, replayable behavior traces, dynamic skill/policy upgrades, authorized execution semantics, and a Proof-of-Intelligence certificate.
 
 Supporting product/proof layer: **AgentProof - Proof-of-Intelligence Explorer for 0G iNFT agents**.
 
@@ -13,6 +13,7 @@ Winning frame: **CodeGuardian is the autonomous iNFT agent. AgentProof is how ju
 ## Links
 
 - Live demo URL: https://proof-of-intelligence-explorer.vercel.app
+- Judge Mode: https://proof-of-intelligence-explorer.vercel.app/judge
 - Agent Console: https://proof-of-intelligence-explorer.vercel.app/agent/codeguardian/console
 - Public GitHub: https://github.com/fefe102/Proof-of-Intelligence-Explorer
 - Demo video: added in ETHGlobal dashboard
@@ -21,7 +22,7 @@ Winning frame: **CodeGuardian is the autonomous iNFT agent. AgentProof is how ju
 - Certificate: https://proof-of-intelligence-explorer.vercel.app/certificate/poi-cert-codeguardian-001
 - Badge SVG: https://proof-of-intelligence-explorer.vercel.app/badge/16602/0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9/1.svg
 
-## Contract Deployments
+## Agentic ID / iNFT Deployment
 
 - Chain: 0G Galileo
 - Chain ID: `16602`
@@ -63,7 +64,7 @@ Dynamic upgrade:
 
 ## 0G Usage
 
-**0G Chain:** live CodeGuardian iNFT mint, ERC-7857-style root accessors, registry, passport, and certificate records on Galileo testnet.
+**0G Chain:** live CodeGuardian Agentic ID / ERC-7857-style iNFT mint, root accessors, registry, passport, and certificate records on Galileo testnet.
 
 **0G Storage:** encrypted intelligence, memory, run trace, compute bundle, and certificate artifacts are represented by canonical roots. The current regenerated public bundle is labeled `hybrid` until the storage upload script is rerun with live 0G Storage env; previous live deployment metadata remains recorded separately.
 

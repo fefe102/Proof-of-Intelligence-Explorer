@@ -40,9 +40,10 @@ export default async function CodeGuardianConsolePage({
               Autonomous code-review agent console
             </h1>
             <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-300">
-              CodeGuardian audits allowlisted TypeScript fixtures, proposes a
-              patch, runs a critic loop, writes memory, checks policy upgrades,
-              commits a trace, and emits a certificate.
+              CodeGuardian is a minted 0G Agentic ID / ERC-7857-style iNFT. It
+              audits allowlisted TypeScript fixtures, proposes a patch, runs a
+              critic loop, writes memory, checks policy upgrades, commits a
+              trace, and emits a certificate.
             </p>
           </div>
           <div className="border-l border-white/10 pl-6">
@@ -66,7 +67,9 @@ export default async function CodeGuardianConsolePage({
           </div>
 
           <div className="border-t border-white/10 pt-5">
-            <div className="text-sm uppercase text-slate-500">Minted iNFT</div>
+            <div className="text-sm uppercase text-slate-500">
+              Minted Agentic ID / iNFT
+            </div>
             <dl className="mt-3 space-y-3 text-sm">
               {[
                 ["Chain", `${minted.chain} (${minted.chainId})`],

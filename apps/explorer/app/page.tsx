@@ -82,10 +82,11 @@ export default async function HomePage() {
               Autonomous 0G code-review iNFT.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-              CodeGuardian's encrypted intelligence bundle, evolving memory,
-              compute-backed critic loop, replayable traces, and dynamic policy
-              upgrade are certified through AgentProof - the
-              Proof-of-Intelligence Explorer for 0G iNFT agents.
+              CodeGuardian is a 0G Agentic ID / ERC-7857-style iNFT. Its
+              encrypted intelligence root, evolving memory root,
+              compute-backed critic loop, replayable traces, authorized
+              execution semantics, and dynamic policy upgrade are certified
+              through AgentProof.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -284,7 +285,7 @@ export default async function HomePage() {
           {[
             [
               "Why Proof-of-Intelligence?",
-              "Many agent NFTs are metadata pointers. CodeGuardian is the autonomous iNFT; AgentProof proves its intelligence, memory, compute history, and behavior traces.",
+              "Many agent NFTs are metadata pointers. CodeGuardian is the autonomous 0G Agentic ID / iNFT; AgentProof proves its intelligence, memory, compute history, and behavior traces.",
             ],
             [
               "0G full-stack evidence",

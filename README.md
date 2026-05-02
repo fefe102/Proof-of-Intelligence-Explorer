@@ -1,23 +1,24 @@
 # CodeGuardian iNFT
 
-**Powered by AgentProof - Proof-of-Intelligence Explorer for 0G iNFT agents.**
+**Powered by AgentProof - Proof-of-Intelligence Explorer for 0G Agentic ID / iNFT agents.**
 
-CodeGuardian iNFT is an autonomous 0G code-review agent. Its encrypted intelligence bundle is packaged as AES-256-GCM proof evidence, its memory evolves across certified runs, its critic loop is compute-backed or honestly hybrid-labeled, and every run is replayable through AgentProof.
+CodeGuardian iNFT is an autonomous 0G Agentic ID / ERC-7857-style code-review agent. Its encrypted intelligence bundle is packaged as AES-256-GCM proof evidence, its memory evolves across certified runs, its critic loop is compute-backed or honestly hybrid-labeled, and every run is replayable through AgentProof.
 
 Winning frame: **CodeGuardian is the autonomous iNFT agent. AgentProof is how judges verify it is real.**
 
 - Live demo: https://proof-of-intelligence-explorer.vercel.app
 - Public GitHub: https://github.com/fefe102/Proof-of-Intelligence-Explorer
+- Judge Mode: https://proof-of-intelligence-explorer.vercel.app/judge
 - Agent Console: https://proof-of-intelligence-explorer.vercel.app/agent/codeguardian/console
 - Passport: https://proof-of-intelligence-explorer.vercel.app/passport/16602/0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9/1
 
 ## Why It Matters
 
-Many iNFTs can be metadata pointers. CodeGuardian proves a stronger claim: the agent has encrypted intelligence, persistent memory, replayable behavior, compute/critic evidence, dynamic policy upgrades, and a certificate bound to a minted 0G iNFT.
+Many iNFTs can be metadata pointers. CodeGuardian proves a stronger claim: the Agentic ID has encrypted intelligence, persistent memory, replayable behavior, compute/critic evidence, dynamic policy upgrades, authorized execution semantics, and a certificate bound to a minted 0G iNFT.
 
 AgentProof is the reusable verifier, SDK, CLI, registry, API, badge, and explorer that other 0G iNFT teams can adopt.
 
-## Minted iNFT
+## Minted Agentic ID / iNFT
 
 - Chain: 0G Galileo
 - Chain ID: `16602`

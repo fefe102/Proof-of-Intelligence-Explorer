@@ -2,11 +2,11 @@
 
 ## 0:00-0:20
 
-Many iNFTs are just metadata pointers. 0G asks builders to prove intelligence and memory are actually embedded. CodeGuardian iNFT is the autonomous agent; AgentProof is how we verify it is real.
+Many iNFTs are just metadata pointers. 0G asks builders to prove intelligence and memory are actually embedded. CodeGuardian is the minted 0G Agentic ID / ERC-7857-style iNFT; AgentProof is how we verify it is real.
 
 ## 0:20-0:45
 
-Show CodeGuardian iNFT minted on 0G Galileo: contract `0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9`, token ID `1`, registry `0x90d7f68cbf2a860f7b2c54548095fcb72d61b9af`. Open the Agent Console.
+Open `/judge`. Show CodeGuardian minted on 0G Galileo as an Agentic ID/iNFT: contract `0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9`, token ID `1`, registry `0x90d7f68cbf2a860f7b2c54548095fcb72d61b9af`. Then open the Agent Console.
 
 ## 0:45-1:20
 
