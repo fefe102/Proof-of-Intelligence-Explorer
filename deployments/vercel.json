@@ -4,10 +4,10 @@
   "url": "https://proof-of-intelligence-explorer.vercel.app",
   "mode": "hybrid",
   "liveWritesEnabled": false,
-  "deployedAt": "2026-05-02T02:37:55.000Z",
+  "deployedAt": "2026-05-02T04:46:32.000Z",
   "proofLayers": {
     "chain": "live",
-    "storage": "hybrid",
+    "storage": "live",
     "compute": "hybrid",
     "da": "mock",
     "ens": "mock"
@@ -26,7 +26,7 @@
     "Production deployment was made from a temporary source copy without .git metadata.",
     "No Vercel secrets or private env values are recorded in this file.",
     "Public verification remains available; hosted live write actions are disabled.",
-    "CodeGuardian reports live 0G Chain evidence with deterministic hybrid 0G Storage and 0G Compute proof artifacts.",
+    "CodeGuardian reports live 0G Chain evidence, live 0G Storage proof objects, and hybrid 0G Compute evidence with Run 003 backed by live 0G Compute records.",
     "0G DA and ENS remain explicitly labeled mock/optional.",
     "Security hardening deployment adds browser security headers and non-cacheable admin responses.",
     "Latest deployment binds the hosted certificate and raw evidence to CodeGuardian live iNFT 0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9 #1.",
@@ -35,6 +35,7 @@
     "Latest production deployment includes CodeGuardian iNFT health framing, Agent Console, dynamic arbitrary-token verification, public passport pages, create-passport preview flow, public passport API, and SVG badge endpoint.",
     "ENS is explicitly not targeted in this submission; any ENS evidence is mock compatibility metadata only.",
     "The deployment completed successfully and was aliased to the production URL by Vercel.",
-    "Latest UI closeout adds an operating proof pipeline, Create Passport wizard progress, copy controls for proof roots and share URLs, narrative replay, collapsed raw JSON, de-emphasized Admin navigation, and certificate-first presentation."
+    "Latest UI closeout adds an operating proof pipeline, Create Passport wizard progress, copy controls for proof roots and share URLs, narrative replay, collapsed raw JSON, de-emphasized Admin navigation, and certificate-first presentation.",
+    "Latest production deployment adds Judge Mode, safe pasted-diff review, live 0G Storage root/tx metadata, and live 0G Compute records for the latest CodeGuardian run."
   ]
 }
