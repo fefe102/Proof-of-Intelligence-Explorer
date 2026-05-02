@@ -101,6 +101,12 @@ export default async function JudgePage() {
               </Link>
               <Link
                 className="rounded-md border border-white/15 px-5 py-3 font-semibold text-white"
+                href="/agent/codeguardian/review"
+              >
+                Review Pasted Diff
+              </Link>
+              <Link
+                className="rounded-md border border-white/15 px-5 py-3 font-semibold text-white"
                 href={`/certificate/${certificateId}`}
               >
                 View Certificate

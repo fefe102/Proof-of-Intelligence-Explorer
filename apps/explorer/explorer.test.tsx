@@ -3,6 +3,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { NextRequest } from "next/server";
 import AdminPage from "./app/admin/page";
 import CodeGuardianConsolePage from "./app/agent/codeguardian/console/page";
+import CodeGuardianReviewPage from "./app/agent/codeguardian/review/page";
 import AgentPage from "./app/agent/[agent]/page";
 import { GET as BadgeGET } from "./app/badge/[chainId]/[contract]/[tokenId].svg/route";
 import CertificatePage from "./app/certificate/[certificateId]/page";
@@ -87,6 +88,22 @@ describe("explorer app smoke tests", () => {
     expect(html).toContain("critic-loop");
     expect(html).toContain("Hybrid preview generated");
     expect(html).toContain("Copy memory");
+    expect(html).toContain("Review a pasted diff");
+  });
+
+  it("CodeGuardian review page renders a safe pasted-diff workflow", async () => {
+    const html = renderToString(
+      await CodeGuardianReviewPage({
+        searchParams: Promise.resolve({
+          diff: "diff --git a/api.ts b/api.ts\n+ return privateRecord;",
+        }),
+      }),
+    );
+    expect(html).toContain("Review a diff without executing it.");
+    expect(html).toContain("Safe pasted-diff review");
+    expect(html).toContain("authorization guard");
+    expect(html).toContain("Certificate preview");
+    expect(html).toContain("No arbitrary code execution");
   });
 
   it("FakeAgent page renders failures", async () => {

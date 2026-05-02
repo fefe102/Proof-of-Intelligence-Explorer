@@ -106,6 +106,12 @@ export default async function CodeGuardianConsolePage({
             </Link>
             <Link
               className="rounded-md border border-white/15 px-4 py-3 text-center text-sm font-semibold text-white"
+              href="/agent/codeguardian/review"
+            >
+              Review a pasted diff
+            </Link>
+            <Link
+              className="rounded-md border border-white/15 px-4 py-3 text-center text-sm font-semibold text-white"
               href="#memory-evolution"
             >
               View memory evolution
