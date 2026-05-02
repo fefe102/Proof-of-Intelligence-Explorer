@@ -14,7 +14,7 @@ Winning frame: **CodeGuardian is the autonomous iNFT agent. AgentProof is how ju
 
 - Live demo URL: https://proof-of-intelligence-explorer.vercel.app
 - Agent Console: https://proof-of-intelligence-explorer.vercel.app/agent/codeguardian/console
-- Public GitHub: https://github.com/fefe102/Proof-of-Intelligence-Explorer
+- Public GitHub source: https://github.com/fefe102/Proof-of-Intelligence-Explorer/tree/public-release
 - Demo video: added in ETHGlobal dashboard
 - Minted iNFT explorer link: https://chainscan-galileo.0g.ai/address/0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9
 - CodeGuardian Passport: https://proof-of-intelligence-explorer.vercel.app/passport/16602/0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9/1
