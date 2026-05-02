@@ -28,6 +28,7 @@ Many iNFTs can be only metadata pointers. 0G builders, users, marketplaces, and 
 - Open CodeGuardian iNFT and inspect minted 0G iNFT details.
 - Use the Agent Console to see current goal, status, queue, latest run, memory version, compute analysis, critic reflection, policy upgrade, certificate, and roots.
 - Run or preview CodeGuardian on an allowlisted demo task.
+- Review a pasted diff through a constrained public flow that hashes/reviews text without executing code or sending transactions.
 - View memory evolution across at least three autonomous runs.
 - Replay certified runs.
 - View and export the Proof-of-Intelligence certificate.
@@ -93,6 +94,7 @@ Labels must be shown honestly in UI, API, CLI, docs, and certificates. Hybrid or
 - Vercel production site works without local setup.
 - Public pages work for CodeGuardian, FakeAgent, run replay, certificate, verify, create-passport, developer docs, passport pages, and badge.
 - `/agent/codeguardian/console` makes CodeGuardian feel like a long-running autonomous iNFT agent.
+- `/agent/codeguardian/review` gives judges a useful no-execution CodeGuardian review workflow.
 - Public API works for seeded agents and arbitrary token verification.
 - Public badge route works.
 - Create Passport flow can compute/generate proof artifacts in hybrid/testnet mode.
@@ -106,6 +108,7 @@ Labels must be shown honestly in UI, API, CLI, docs, and certificates. Hybrid or
 - Private keys are server-only.
 - Admin routes require `POI_ADMIN_TOKEN` and are disabled unless `POI_ENABLE_LIVE_WRITES=true`.
 - No arbitrary calldata, raw transaction signing, shell execution, or untrusted code execution is accepted from the browser.
+- Public pasted-diff review is hashing and heuristic proof preview only; live writes and live compute remain server/admin-controlled.
 - Writes are 0G Galileo/testnet only.
 - The product never hides mock evidence as live evidence.
 
@@ -126,6 +129,7 @@ Labels must be shown honestly in UI, API, CLI, docs, and certificates. Hybrid or
 - CodeGuardian has embedded encrypted intelligence evidence.
 - CodeGuardian has evolving memory across at least three runs.
 - CodeGuardian has a compute-backed or honestly hybrid critic loop.
+- CodeGuardian has live 0G Storage records for its six public proof objects.
 - CodeGuardian has replayable run traces.
 - CodeGuardian has a dynamic upgrade event.
 - CodeGuardian has a Proof-of-Intelligence certificate.

@@ -43,7 +43,16 @@ Guardrails:
 - compute run bundle
 - certificate bundle
 
-The current regenerated CodeGuardian bundle is `hybrid` until `scripts/upload-live-storage.ts` is rerun with live storage env. The UI shows roots, byte lengths, and StorageScan search guidance. When live upload succeeds, the same bundle records root hashes, tx hashes, and tx sequences.
+The current CodeGuardian proof bundle has live 0G Storage records for all six allowlisted artifacts. The UI shows roots, byte lengths, StorageScan search guidance, root hashes, tx hashes, and tx sequences.
+
+Current tx sequences:
+
+- manifest: `68674`
+- encrypted intelligence: `68661`
+- memory: `68677`
+- latest run trace: `68678`
+- compute bundle: `68679`
+- certificate: `68681`
 
 ## 0G Compute
 
@@ -52,7 +61,7 @@ CodeGuardian uses two compute-shaped records for each run:
 1. analysis run
 2. critic/self-review run
 
-The current three-run regenerated evidence is deterministic `hybrid` compute unless live compute is rerun. The adapter/interface is the same shape used by live 0G Compute scripts.
+The current compute evidence is hybrid by design: Runs 001-002 use deterministic records and Run 003 includes live 0G Compute analysis and critic calls. The adapter/interface is the same shape used by live 0G Compute scripts, and pages label the mixed compute layer as `hybrid`.
 
 ## Optional 0G DA
 

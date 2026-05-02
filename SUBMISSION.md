@@ -15,6 +15,7 @@ Winning frame: **CodeGuardian is the autonomous iNFT agent. AgentProof is how ju
 - Live demo URL: https://proof-of-intelligence-explorer.vercel.app
 - Judge Mode: https://proof-of-intelligence-explorer.vercel.app/judge
 - Agent Console: https://proof-of-intelligence-explorer.vercel.app/agent/codeguardian/console
+- Safe diff review: https://proof-of-intelligence-explorer.vercel.app/agent/codeguardian/review
 - Public GitHub: https://github.com/fefe102/Proof-of-Intelligence-Explorer
 - Demo video: added in ETHGlobal dashboard
 - Minted iNFT explorer link: https://chainscan-galileo.0g.ai/address/0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9
@@ -37,12 +38,13 @@ ChainScan links to the contract page; token ID `1` is the CodeGuardian iNFT. Tok
 
 ## Proof That Intelligence And Memory Are Embedded
 
-- Manifest root: `sha256:5704511de453c1a85d9ade4cf1b1c409f052a7556e184400070acc07900096b9`
+- Manifest root: `sha256:098b7cc32da7fac1d514230617a404c59bfe80eaecac22c2ff612a8cc0089ba7`
 - Encrypted intelligence bundle root: `sha256:6289903e00f2e42448eb3cad30d322fcd4e1b3e3af54dd37f35a863a864f0bcd`
-- Latest memory root: `sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce`
-- Latest run root: `sha256:5eea73e8098964c75c6da1aba8d37e7f677b491e0c8a229818eef3f0a4069dad`
+- Latest memory root: `sha256:d559e2a8427d70dce884ecea72ae7678effa79e0d8b62178405495be9c57e5e1`
+- Latest run root: `sha256:61aeab5b75456fa20b010ddf61d5c7e8077641368085168aa446aaf62b13fafb`
 - Certificate ID: `poi-cert-codeguardian-001`
-- Compute run IDs: `zg-hybrid-analysis-001`, `zg-hybrid-critic-001`, `zg-hybrid-analysis-002`, `zg-hybrid-critic-002`, `zg-hybrid-analysis-003`, `zg-hybrid-critic-003`
+- Compute run IDs: `zg-hybrid-analysis-001`, `zg-hybrid-critic-001`, `zg-hybrid-analysis-002`, `zg-hybrid-critic-002`, `zg-live-analysis-95b970ef686e`, `zg-live-critic-69794555dda4`
+- 0G Storage tx sequences: manifest `68674`, intelligence `68661`, memory `68677`, run `68678`, compute bundle `68679`, certificate `68681`
 
 The public intelligence artifact is AES-256-GCM encrypted demo content. It contains only safe fixture plaintext before encryption and commits no real encryption key.
 
@@ -66,9 +68,9 @@ Dynamic upgrade:
 
 **0G Chain:** live CodeGuardian Agentic ID / ERC-7857-style iNFT mint, root accessors, registry, passport, and certificate records on Galileo testnet.
 
-**0G Storage:** encrypted intelligence, memory, run trace, compute bundle, and certificate artifacts are represented by canonical roots. The current regenerated public bundle is labeled `hybrid` until the storage upload script is rerun with live 0G Storage env; previous live deployment metadata remains recorded separately.
+**0G Storage:** encrypted intelligence, memory, run trace, compute bundle, and certificate artifacts are uploaded through 0G Storage SDK and recorded with root hashes, tx hashes, tx sequences, and byte lengths.
 
-**0G Compute:** analysis and critic records use 0G Compute-compatible run records and adapter paths. The current regenerated deterministic runs are labeled `hybrid` unless live compute is rerun.
+**0G Compute:** analysis and critic records use 0G Compute-compatible run records and adapter paths. Runs 001-002 are deterministic hybrid records; Run 003 includes live 0G Compute analysis and critic records.
 
 **0G DA, optional:** AgentProof can export a proof bundle for DA workflows.
 
@@ -84,6 +86,7 @@ AgentProof includes:
 - CLI for verify, run, replay, passport draft, proof export, live deploy, and env sync
 - registry contracts and ERC-7857-style demo iNFT contract
 - public API and badge endpoint
+- safe pasted-diff review flow with no arbitrary code execution
 
 FakeAgent is the negative control and remains low-tier because it lacks a valid manifest, encrypted intelligence, memory, compute, trace, and certificate evidence.
 

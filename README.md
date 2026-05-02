@@ -10,6 +10,7 @@ Winning frame: **CodeGuardian is the autonomous iNFT agent. AgentProof is how ju
 - Public GitHub: https://github.com/fefe102/Proof-of-Intelligence-Explorer
 - Judge Mode: https://proof-of-intelligence-explorer.vercel.app/judge
 - Agent Console: https://proof-of-intelligence-explorer.vercel.app/agent/codeguardian/console
+- Safe diff review: https://proof-of-intelligence-explorer.vercel.app/agent/codeguardian/review
 - Passport: https://proof-of-intelligence-explorer.vercel.app/passport/16602/0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9/1
 
 ## Why It Matters
@@ -34,14 +35,15 @@ ChainScan links to the contract page; token ID `1` is the CodeGuardian iNFT. Tok
 
 ## Proof Evidence
 
-- Manifest root: `sha256:5704511de453c1a85d9ade4cf1b1c409f052a7556e184400070acc07900096b9`
+- Manifest root: `sha256:098b7cc32da7fac1d514230617a404c59bfe80eaecac22c2ff612a8cc0089ba7`
 - Encrypted intelligence root: `sha256:6289903e00f2e42448eb3cad30d322fcd4e1b3e3af54dd37f35a863a864f0bcd`
-- Latest memory root: `sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce`
-- Latest run root: `sha256:5eea73e8098964c75c6da1aba8d37e7f677b491e0c8a229818eef3f0a4069dad`
-- Compute run IDs: `zg-hybrid-analysis-001`, `zg-hybrid-critic-001`, `zg-hybrid-analysis-002`, `zg-hybrid-critic-002`, `zg-hybrid-analysis-003`, `zg-hybrid-critic-003`
+- Latest memory root: `sha256:d559e2a8427d70dce884ecea72ae7678effa79e0d8b62178405495be9c57e5e1`
+- Latest run root: `sha256:61aeab5b75456fa20b010ddf61d5c7e8077641368085168aa446aaf62b13fafb`
+- Compute run IDs: `zg-hybrid-analysis-001`, `zg-hybrid-critic-001`, `zg-hybrid-analysis-002`, `zg-hybrid-critic-002`, `zg-live-analysis-95b970ef686e`, `zg-live-critic-69794555dda4`
 - Certificate ID: `poi-cert-codeguardian-001`
+- 0G Storage tx sequences: manifest `68674`, intelligence `68661`, memory `68677`, run `68678`, compute bundle `68679`, certificate `68681`
 
-Current regenerated CodeGuardian artifacts are labeled `hybrid` unless re-uploaded through the live 0G Storage script. The chain deployment remains live on 0G Galileo. The UI and API show source labels per evidence layer and do not hide mock/hybrid evidence as live.
+Current CodeGuardian evidence is live on 0G Chain and 0G Storage. Compute is honestly labeled `hybrid`: Runs 001-002 use deterministic hybrid records, and the latest Run 003 includes live 0G Compute analysis and critic records.
 
 ## Autonomous Flow
 
@@ -75,8 +77,8 @@ After Run 002, CodeGuardian upgrades `critic-loop v0.1.0 -> v0.1.1` because it l
 ## 0G Prize Alignment
 
 - **0G Chain:** minted ERC-7857-style demo iNFT, registry, root updates, certificate records, and ownership checks.
-- **0G Storage:** encrypted intelligence artifact, memory/current-state artifact, run traces, compute bundle, certificate bundle. Regenerated local artifacts are hybrid until live upload is rerun.
-- **0G Compute:** analysis and critic run records use the same adapter shape as live 0G Compute; source labels show whether records are live or hybrid.
+- **0G Storage:** live uploaded encrypted intelligence artifact, memory/current-state artifact, latest run trace, compute bundle, and certificate bundle with root hashes, tx hashes, and tx sequences.
+- **0G Compute:** analysis and critic records use the same adapter shape as live 0G Compute. Runs 001-002 are deterministic hybrid records; Run 003 is backed by live 0G Compute analysis and critic calls.
 - **Optional 0G DA:** exportable proof bundle.
 - **ENS:** not targeted for this submission; mock/compatibility hooks remain only for future live agent identity work.
 
@@ -85,6 +87,7 @@ After Run 002, CodeGuardian upgrades `critic-loop v0.1.0 -> v0.1.1` because it l
 - Verify CodeGuardian: `/agent/codeguardian`
 - Open Agent Console: `/agent/codeguardian/console`
 - Verify FakeAgent: `/agent/fakeagent`
+- Safe pasted-diff review: `/agent/codeguardian/review`
 - Verify any token: `/verify`
 - Create Passport: `/create`
 - Replay runs: `/run/codeguardian-run-001`, `/run/codeguardian-run-002`, `/run/codeguardian-run-003`
@@ -194,7 +197,7 @@ flowchart LR
   Runtime --> Memory["Evolving Memory"]
   Runtime --> Trace["Replayable Runs"]
   Runtime --> Compute["0G Compute / Hybrid Adapter"]
-  Runtime --> Storage["0G Storage / Hybrid Artifacts"]
+  Runtime --> Storage["0G Storage / Live Proof Artifacts"]
   AgentProof["AgentProof Verifier"] --> Chain["0G Chain"]
   AgentProof --> Storage
   AgentProof --> Compute
@@ -213,7 +216,8 @@ flowchart LR
 
 ## Limitations / Future Work
 
-- Regenerated proof artifacts are hybrid until live 0G Storage upload is rerun.
+- Runs 001-002 use deterministic hybrid compute records; Run 003 has live 0G Compute records.
+- The public pasted-diff review is a constrained preview, not arbitrary code execution.
 - Wallet-owned create-passport writes are future work; hosted create flow is currently a deterministic preview.
 - Optional DA is export-only.
 - ENS is intentionally not a prize target in this version. The repo keeps mock/compatibility hooks, but no live ENS identity is claimed.

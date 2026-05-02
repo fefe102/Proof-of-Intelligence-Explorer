@@ -8,7 +8,8 @@ flowchart LR
   Runtime --> Upgrade["Critic Policy Upgrade"]
   Runtime --> Trace["Replayable Trace"]
   Runtime --> Compute["0G Compute / Hybrid Adapter"]
-  Runtime --> Storage["0G Storage / Hybrid Bundle"]
+  Runtime --> Storage["0G Storage / Live Proof Bundle"]
+  Runtime --> Review["Safe Pasted-Diff Review"]
 
   AgentProof["AgentProof Verifier"] --> Chain["0G Chain"]
   AgentProof --> Storage
@@ -36,5 +37,6 @@ flowchart LR
 
 - Public pages and APIs are read-only.
 - Browser input never becomes calldata, shell commands, or untrusted code execution.
+- Pasted diffs are hashed and reviewed as text; they are never executed.
 - Admin writes require server-only token and remain disabled unless configured.
 - Source labels are attached per evidence layer.

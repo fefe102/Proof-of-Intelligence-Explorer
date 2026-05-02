@@ -55,6 +55,8 @@ The public CodeGuardian intelligence artifact uses AES-256-GCM over safe demo co
 
 The Agent Console "Run CodeGuardian on demo file" path is an allowlisted deterministic/hybrid preview. It does not accept arbitrary repositories, execute shell commands, run untrusted code, send transactions, sign calldata, or expose private keys.
 
+The "Review a pasted diff" path accepts public text only, caps input length, hashes the diff, and produces a constrained review preview. It does not clone repositories, install dependencies, execute code, call live write APIs, or send arbitrary calldata.
+
 ## Secret Checks
 
 Before committing:

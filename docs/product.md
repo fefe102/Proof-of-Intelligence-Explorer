@@ -17,6 +17,7 @@ Core public flows:
 - verify CodeGuardian
 - replay runs
 - inspect memory evolution
+- safely review a pasted diff without executing it
 - view certificate
 - compare FakeAgent
 - verify arbitrary token

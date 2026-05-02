@@ -10,7 +10,7 @@ Open `/judge`. Show CodeGuardian minted on 0G Galileo as an Agentic ID/iNFT: con
 
 ## 0:45-1:20
 
-Click **Run CodeGuardian on demo file**. Explain this is an allowlisted deterministic/hybrid preview: no arbitrary code execution, no calldata, no shell, no private key exposure. Show analysis, patch proposal, critic loop, memory write, and certificate event.
+Click **Run CodeGuardian on demo file**. Explain this is an allowlisted preview: no arbitrary code execution, no calldata, no shell, no private key exposure. Then open **Review a pasted diff** to show a real useful workflow where public user input is hashed and reviewed safely, while live writes remain server/admin-controlled. Show analysis, patch proposal, critic loop, memory write, and certificate event.
 
 ## 1:20-1:45
 

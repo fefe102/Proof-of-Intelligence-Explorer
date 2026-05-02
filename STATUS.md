@@ -38,6 +38,9 @@
 - [x] Admin nav is visually de-emphasized and certificate page is certificate-first
 - [x] Judge Mode page added for prize-focused one-page review
 - [x] Submission copy reframed around 0G Agentic ID / ERC-7857-style iNFT semantics
+- [x] CodeGuardian proof objects uploaded to live 0G Storage with root/tx metadata
+- [x] Latest CodeGuardian run includes live 0G Compute analysis and critic records
+- [x] Safe pasted-diff review flow added with no arbitrary execution or calldata
 
 ## Submission Constants
 
