@@ -13,7 +13,7 @@
 - [x] Public API for verify/passport/run/certificate/health
 - [x] Badge endpoint
 - [x] Existing Vercel production deployment
-- [x] Latest Vercel production deployment refreshed from a `.git`-less source copy on 2026-05-02
+- [x] Latest Vercel production deployment refreshed from the local working tree on 2026-05-03
 
 ## Active Backlog
 
@@ -42,6 +42,7 @@
 - [x] CodeGuardian proof objects uploaded to live 0G Storage with root/tx metadata
 - [x] Latest CodeGuardian run includes live 0G Compute analysis and critic records
 - [x] Safe pasted-diff review flow added with no arbitrary execution or calldata
+- [x] Public SVG badge verified live as Tier 6 for CodeGuardian iNFT
 
 ## Submission Constants
 

@@ -2,12 +2,12 @@
   "project": "proof-of-intelligence-explorer",
   "status": "ready",
   "url": "https://proof-of-intelligence-explorer.vercel.app",
-  "deploymentUrl": "https://proof-of-intelligence-explorer-afrs0ub4z-we-lans-projects.vercel.app",
-  "deploymentId": "dpl_nSxhoPNXdQv7c4mNyLxThGs8CXXk",
-  "inspectorUrl": "https://vercel.com/we-lans-projects/proof-of-intelligence-explorer/nSxhoPNXdQv7c4mNyLxThGs8CXXk",
+  "deploymentUrl": "https://proof-of-intelligence-explorer-3da8gbl9j-we-lans-projects.vercel.app",
+  "deploymentId": "dpl_74JEU6CHhb3PP7WQzXhkxGHA6r4h",
+  "inspectorUrl": "https://vercel.com/we-lans-projects/proof-of-intelligence-explorer/74JEU6CHhb3PP7WQzXhkxGHA6r4h",
   "mode": "hybrid",
   "liveWritesEnabled": false,
-  "deployedAt": "2026-05-02T14:32:55.000Z",
+  "deployedAt": "2026-05-03T02:52:11.000Z",
   "proofLayers": {
     "chain": "live",
     "storage": "live",
@@ -26,7 +26,7 @@
   },
   "safeToCommit": true,
   "notes": [
-    "Production deployment was made from a temporary source copy without .git metadata.",
+    "Production deployment was refreshed with Vercel CLI from the local working tree.",
     "No Vercel secrets or private env values are recorded in this file.",
     "Public verification remains available; hosted live write actions are disabled.",
     "CodeGuardian reports live 0G Chain evidence, live 0G Storage proof objects, and hybrid 0G Compute evidence with Run 003 backed by live 0G Compute records.",
@@ -41,6 +41,7 @@
     "Latest UI closeout adds an operating proof pipeline, Create Passport wizard progress, copy controls for proof roots and share URLs, narrative replay, collapsed raw JSON, de-emphasized Admin navigation, and certificate-first presentation.",
     "Latest production deployment adds Judge Mode, safe pasted-diff review, live 0G Storage root/tx metadata, and live 0G Compute records for the latest CodeGuardian run.",
     "Latest production deployment aligns public health metadata with CodeGuardian iNFT and AgentProof naming.",
-    "Latest production deployment exposes recorded 0G Chain transaction hashes as ChainScan links on Judge Mode, Agent Console, Passport, and Certificate pages."
+    "Latest production deployment exposes recorded 0G Chain transaction hashes as ChainScan links on Judge Mode, Agent Console, Passport, and Certificate pages.",
+    "Latest production deployment fixes the public SVG badge route so the CodeGuardian iNFT badge reports Tier 6."
   ]
 }
