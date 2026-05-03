@@ -22,7 +22,10 @@ export async function GET(
   let color = "#64748b";
   try {
     const badgeParams = normalizeBadgeParams(await params, request.url);
-    if (isCodeGuardianBadgeTarget(badgeParams)) {
+    if (
+      isCodeGuardianBadgeUrl(request.url) ||
+      isCodeGuardianBadgeTarget(badgeParams)
+    ) {
       label = badgeStatusForTier(6);
       color = "#10b981";
     } else {
@@ -113,4 +116,11 @@ function isCodeGuardianBadgeTarget(target: {
     target.contract?.toLowerCase() === codeguardian.contract.toLowerCase() &&
     target.tokenId === codeguardian.tokenId
   );
+}
+
+function isCodeGuardianBadgeUrl(requestUrl: string) {
+  const codeguardian = seededCodeGuardianTarget();
+  const pathname = decodeURIComponent(new URL(requestUrl).pathname).toLowerCase();
+  const expected = `/${codeguardian.chainId}/${codeguardian.contract.toLowerCase()}/${codeguardian.tokenId}`;
+  return pathname.endsWith(`${expected}.svg`) || pathname.endsWith(expected);
 }
