@@ -216,13 +216,13 @@ flowchart LR
 - No arbitrary calldata, raw transaction signing, shell execution, or untrusted repo execution is accepted from public input.
 - Demo encryption uses safe fixture content only. Real secrets stay in ignored env files or Vercel sensitive env vars.
 
-## Limitations / Future Work
+## Submission Scope
 
-- Runs 001-002 use deterministic hybrid compute records; Run 003 has live 0G Compute records.
-- The public pasted-diff review is a constrained preview, not arbitrary code execution.
-- Wallet-owned create-passport writes are future work; hosted create flow is currently a deterministic preview.
-- Optional DA is export-only.
+- CodeGuardian's 0G Chain and 0G Storage evidence is live on Galileo; compute is labeled `hybrid` because Runs 001-002 are deterministic records and Run 003 has live 0G Compute records.
+- The public pasted-diff review is intentionally constrained: it reviews and hashes public text without cloning repositories, executing code, or sending transactions.
+- The hosted Create Passport flow generates deterministic proof previews; wallet-owned passport writes are the next production step.
+- Optional 0G DA support is export-only in this submission.
 - ENS is intentionally not a prize target in this version. The repo keeps mock/compatibility hooks, but no live ENS identity is claimed.
-- Demo video URL is added in the ETHGlobal dashboard.
+- The demo video is attached in the ETHGlobal dashboard, not committed to the public repository.
 
 Team/contact details are provided in the ETHGlobal dashboard and omitted from this public repository.
