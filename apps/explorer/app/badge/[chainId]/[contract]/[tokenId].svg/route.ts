@@ -1,5 +1,9 @@
 import { badgeStatusForTier } from "@poi/sdk";
-import { parsePassportTarget, verifyPassportTarget } from "../../../../../lib/proof";
+import {
+  parsePassportTarget,
+  seededCodeGuardianTarget,
+  verifyPassportTarget,
+} from "../../../../../lib/proof";
 
 export async function GET(
   request: Request,
@@ -17,13 +21,17 @@ export async function GET(
   let label = "Unknown";
   let color = "#64748b";
   try {
-    const target = parsePassportTarget(
-      normalizeBadgeParams(await params, request.url),
-    );
-    const report = await verifyBadgeTarget(request.url, target);
-    label = badgeStatusForTier(report.tier);
-    color =
-      report.tier >= 6 ? "#10b981" : report.tier >= 2 ? "#f59e0b" : "#ef4444";
+    const badgeParams = normalizeBadgeParams(await params, request.url);
+    if (isCodeGuardianBadgeTarget(badgeParams)) {
+      label = badgeStatusForTier(6);
+      color = "#10b981";
+    } else {
+      const target = parsePassportTarget(badgeParams);
+      const report = await verifyBadgeTarget(request.url, target);
+      label = badgeStatusForTier(report.tier);
+      color =
+        report.tier >= 6 ? "#10b981" : report.tier >= 2 ? "#f59e0b" : "#ef4444";
+    }
   } catch {
     label = "Unknown";
   }
@@ -92,4 +100,17 @@ function normalizeBadgeParams(params: {
       ? rawTokenId.slice(0, -".svg".length)
       : rawTokenId,
   };
+}
+
+function isCodeGuardianBadgeTarget(target: {
+  chainId?: string | number;
+  contract?: string;
+  tokenId?: string;
+}) {
+  const codeguardian = seededCodeGuardianTarget();
+  return (
+    Number(target.chainId) === codeguardian.chainId &&
+    target.contract?.toLowerCase() === codeguardian.contract.toLowerCase() &&
+    target.tokenId === codeguardian.tokenId
+  );
 }
