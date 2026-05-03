@@ -216,6 +216,20 @@ describe("public API and badge routes", () => {
     expect(svg).toContain("Proof of Intelligence");
     expect(svg).toContain("Tier 6");
   });
+
+  it("badge SVG endpoint handles production .svg route params", async () => {
+    const target = seededCodeGuardianTarget();
+    const response = await BadgeGET(new Request("https://example.test") as never, {
+      params: Promise.resolve({
+        chainId: String(target.chainId),
+        contract: target.contract,
+        "tokenId.svg": `${target.tokenId}.svg`,
+      }),
+    });
+    const svg = await response.text();
+    expect(svg).toContain("Proof of Intelligence");
+    expect(svg).toContain("Tier 6");
+  });
 });
 
 describe("admin route security", () => {

@@ -5,12 +5,21 @@ export async function GET(
   _request: Request,
   {
     params,
-  }: { params: Promise<{ chainId: string; contract: string; tokenId: string }> },
+  }: {
+    params: Promise<{
+      chainId?: string;
+      contract?: string;
+      tokenId?: string;
+      "tokenId.svg"?: string;
+    }>;
+  },
 ) {
   let label = "Unknown";
   let color = "#64748b";
   try {
-    const report = await verifyPassportTarget(parsePassportTarget(await params));
+    const report = await verifyPassportTarget(
+      parsePassportTarget(normalizeBadgeParams(await params)),
+    );
     label = badgeStatusForTier(report.tier);
     color =
       report.tier >= 6 ? "#10b981" : report.tier >= 2 ? "#f59e0b" : "#ef4444";
@@ -39,4 +48,20 @@ export async function GET(
 
 function escapeXml(value: string) {
   return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+}
+
+function normalizeBadgeParams(params: {
+  chainId?: string;
+  contract?: string;
+  tokenId?: string;
+  "tokenId.svg"?: string;
+}) {
+  const rawTokenId = params.tokenId ?? params["tokenId.svg"] ?? "";
+  return {
+    chainId: params.chainId,
+    contract: params.contract,
+    tokenId: rawTokenId.endsWith(".svg")
+      ? rawTokenId.slice(0, -".svg".length)
+      : rawTokenId,
+  };
 }
