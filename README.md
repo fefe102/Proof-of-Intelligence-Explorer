@@ -1,6 +1,6 @@
 # CodeGuardian iNFT
 
-**Powered by AgentProof — Proof-of-Intelligence Explorer for 0G Agentic ID / iNFT agents.**
+**Powered by AgentProof — Proof-of-Intelligence Explorer for 0G iNFT agents.**
 
 CodeGuardian iNFT is an autonomous 0G Agentic ID / ERC-7857-style code-review agent. Its encrypted intelligence bundle is packaged as AES-256-GCM proof evidence, its memory evolves across certified runs, its critic loop is compute-backed or honestly hybrid-labeled, and every run is replayable through AgentProof.
 
@@ -30,7 +30,7 @@ AgentProof is the reusable verifier, SDK, CLI, registry, API, badge, and explore
 - Passport ID: `0x01212ca92791787ccb99c454d3b59c5596f90882c892c7fca3e63294a159430c`
 - Certificate record: `3`
 - ChainScan: https://chainscan-galileo.0g.ai/address/0xa390c79f21a3b4f62f4797308f50f8ff9ea4f4c9
-- 0G Chain tx proofs: 12 live Galileo transaction hashes are recorded in `deployments/0g-galileo.json` and exposed on Judge Mode, Agent Console, Passport, and Certificate pages as ChainScan links.
+- 0G Chain tx proofs: 12 live Galileo transaction hashes are recorded in `deployments/0g-galileo.json` and exposed on Judge Mode, CodeGuardian profile, Agent Console, Passport, and Certificate pages as ChainScan links.
 
 ChainScan links to the contract page; token ID `1` is the CodeGuardian iNFT. Token-specific proof is available in the AgentProof passport page.
 
@@ -42,7 +42,7 @@ ChainScan links to the contract page; token ID `1` is the CodeGuardian iNFT. Tok
 - Latest run root: `sha256:61aeab5b75456fa20b010ddf61d5c7e8077641368085168aa446aaf62b13fafb`
 - Compute run IDs: `zg-hybrid-analysis-001`, `zg-hybrid-critic-001`, `zg-hybrid-analysis-002`, `zg-hybrid-critic-002`, `zg-live-analysis-95b970ef686e`, `zg-live-critic-69794555dda4`
 - Certificate ID: `poi-cert-codeguardian-001`
-- 0G Storage tx sequences: manifest `68674`, intelligence `68661`, memory `68677`, run `68678`, compute bundle `68679`, certificate `68681`
+- 0G Storage tx hashes and sequences are exposed in the proof pages. Current tx sequences: manifest `68674`, intelligence `68661`, memory `68677`, run `68678`, compute bundle `68679`, certificate `68681`
 
 Current CodeGuardian evidence is live on 0G Chain and 0G Storage. Compute is honestly labeled `hybrid`: Runs 001-002 use deterministic hybrid records, and the latest Run 003 includes live 0G Compute analysis and critic records.
 
@@ -85,6 +85,7 @@ After Run 002, CodeGuardian upgrades `critic-loop v0.1.0 -> v0.1.1` because it l
 
 ## AgentProof Flows
 
+- Judge Mode: `/judge`
 - Verify CodeGuardian: `/agent/codeguardian`
 - Open Agent Console: `/agent/codeguardian/console`
 - Verify FakeAgent: `/agent/fakeagent`
