@@ -42,10 +42,10 @@
       "at": "2026-04-26T00:20:04.000Z",
       "detail": {
         "runId": "zg-hybrid-analysis-003",
-        "outputHash": "sha256:df9a8ab1137844cdd896941fc9791b4931e3a3ddddbbcd8fe878fb14da0bcf1f",
+        "outputHash": "sha256:628246fa8b279b5571be2c56d04e085205c8bf9b03282a97856f507f5ee7959d",
         "source": "hybrid"
       },
-      "root": "sha256:ca9c105ab431427d6038b8e2ddd4d5be8f0912957df0c5577d999006fb3f65ff"
+      "root": "sha256:8f8cbd476dc77d2bc292caa745e02e82dbb87e63fb267cb077faca9ee800d057"
     },
     {
       "type": "issue_found",
@@ -61,9 +61,10 @@
       "at": "2026-04-26T00:20:07.000Z",
       "detail": {
         "patch": "Wrap the awaited side effect in explicit error handling and return a typed failure result.",
+        "patchDiff": "diff --git a/examples/codeguardian/fixtures/unchecked-async-side-effect.ts b/examples/codeguardian/fixtures/unchecked-async-side-effect.ts\n@@\n export async function saveAuditResult(\n   id: string,\n   writeAudit: (id: string) => Promise<void>,\n ): Promise<SaveResult> {\n-  await writeAudit(id);\n+  try {\n+    await writeAudit(id);\n+  } catch (error) {\n+    return {\n+      ok: false,\n+      reason: error instanceof Error ? error.message : \"audit write failed\",\n+    };\n+  }\n   return { ok: true, id };\n }\n",
         "source": "hybrid"
       },
-      "root": "sha256:e5326c1de31ae2c557967229b3975604e94a75f771e48aefd5480629fa0004aa"
+      "root": "sha256:25d40f57f22684efa809d9c3a4a6afa8a2547dcf67c24c7078ef4cf836d48f7d"
     },
     {
       "type": "critic_started",
@@ -119,10 +120,10 @@
       "type": "trace_committed",
       "at": "2026-04-26T00:20:14.000Z",
       "detail": {
-        "traceRoot": "sha256:c4a01e4a7817d88a0b9b8043221591a3896f433bdecde60976c554cf725292c4",
+        "traceRoot": "sha256:66341ba29a0b707850b4215b3ea58c52b5011be1e15b96b4f24a5c5765de0962",
         "source": "hybrid"
       },
-      "root": "sha256:a306fdb31ab4c6d2cf6c6f7655fcd69efafb57f186cdf004a11bdc3387ed81b8"
+      "root": "sha256:3b96f3bd54718047dd9213c6b206f612a77963ca53f34f04bea9d896e4786c62"
     },
     {
       "type": "certificate_issued",
@@ -137,6 +138,7 @@
   "result": {
     "issue": "A failed awaited side effect can escape without explicit classification or recovery.",
     "patch": "Wrap the awaited side effect in explicit error handling and return a typed failure result.",
+    "patchDiff": "diff --git a/examples/codeguardian/fixtures/unchecked-async-side-effect.ts b/examples/codeguardian/fixtures/unchecked-async-side-effect.ts\n@@\n export async function saveAuditResult(\n   id: string,\n   writeAudit: (id: string) => Promise<void>,\n ): Promise<SaveResult> {\n-  await writeAudit(id);\n+  try {\n+    await writeAudit(id);\n+  } catch (error) {\n+    return {\n+      ok: false,\n+      reason: error instanceof Error ? error.message : \"audit write failed\",\n+    };\n+  }\n   return { ok: true, id };\n }\n",
     "critique": "The patch turns an implicit runtime rejection into a deterministic failure branch that callers can test.",
     "accepted": true,
     "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce"

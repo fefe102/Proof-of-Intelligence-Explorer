@@ -4,6 +4,7 @@ import {
   Badge,
   ChainTransactions,
   EvidenceObjects,
+  PatchDiffBlock,
   TierLadder,
 } from "../../../../components/proof-ui";
 import {
@@ -278,6 +279,16 @@ export default async function CodeGuardianConsolePage({
                 {latestRun?.result.critique}
               </p>
             </div>
+          </section>
+
+          <section className="border-y border-white/10 py-5">
+            <div className="text-sm uppercase text-slate-500">
+              Latest proposed patch
+            </div>
+            <p className="mt-3 max-w-3xl text-sm text-slate-400">
+              {latestRun?.result.patch}
+            </p>
+            <PatchDiffBlock diff={latestRun?.result.patchDiff} className="mt-4" />
           </section>
 
           {consoleState.policyUpgrade ? (

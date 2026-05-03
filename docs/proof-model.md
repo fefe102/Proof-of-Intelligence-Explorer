@@ -10,7 +10,7 @@ CodeGuardian iNFT is the autonomous 0G Agentic ID / ERC-7857-style agent. AgentP
 4. The memory/current-state artifact hashes to `memoryRoot`.
 5. The memory history shows sequential roots across autonomous runs.
 6. Compute run IDs exist for analysis and critic passes.
-7. Replay trace events recompute to the documented trace root.
+7. Replay trace events include the concrete proposed patch diff and recompute to the documented trace root.
 8. A certificate binds the iNFT, roots, and compute run IDs.
 
 ## Root Rules

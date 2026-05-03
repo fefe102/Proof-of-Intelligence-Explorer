@@ -58,6 +58,19 @@ describe("CodeGuardian runtime", () => {
     expect(result.roots.memoryRoot).toBe(roots.at(-1));
   });
 
+  it("keeps the latest run coherent with the async side-effect task", () => {
+    const result = runCodeGuardianSequence();
+    const latest = result.runs.at(-1);
+    expect(latest?.runId).toBe("codeguardian-run-003");
+    expect(latest?.task).toContain("async side effects");
+    expect(latest?.result.issue).toContain("awaited side effect");
+    expect(latest?.result.patch).toContain("typed failure result");
+    expect(latest?.result.patchDiff).toContain("saveAuditResult");
+    expect(latest?.result.patchDiff).toContain("try");
+    expect(latest?.result.patchDiff).toContain("catch");
+    expect(latest?.result.issue).not.toContain("JSON.parse");
+  });
+
   it("records dynamic critic policy upgrade evidence", () => {
     const result = runCodeGuardianSequence();
     expect(result.policyUpgrade.oldVersion).toBe("0.1.0");

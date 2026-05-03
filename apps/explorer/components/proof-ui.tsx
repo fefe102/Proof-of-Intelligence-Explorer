@@ -227,6 +227,27 @@ export function RawJsonDetails({
   );
 }
 
+export function PatchDiffBlock({
+  diff,
+  title = "Patch diff",
+  className = "",
+}: {
+  diff?: string;
+  title?: string;
+  className?: string;
+}) {
+  if (!diff) return null;
+
+  return (
+    <div className={`rounded-md border border-emerald-300/20 bg-emerald-300/[0.04] p-4 ${className}`}>
+      <div className="text-sm font-semibold text-emerald-100">{title}</div>
+      <pre className="mt-3 max-h-[420px] overflow-auto whitespace-pre-wrap break-words text-xs leading-6 text-slate-200">
+        {diff}
+      </pre>
+    </div>
+  );
+}
+
 export function EvidencePanel({ report }: { report: VerificationReport }) {
   const passingChecks = report.checks.filter((check) => check.ok).length;
   const failingChecks = report.checks.length - passingChecks;
@@ -404,6 +425,10 @@ export function RunTimeline({ run }: { run: RunTrace }) {
       {run.events.map((event, index) => {
         const fields = eventFields(event);
         const source = detailValue(event, "source");
+        const patchDiff =
+          event.type === "patch_proposed"
+            ? detailValue(event, "patchDiff")
+            : undefined;
 
         return (
           <div key={`${event.type}-${event.at}`} className="relative pb-7 pl-7">
@@ -425,6 +450,7 @@ export function RunTimeline({ run }: { run: RunTrace }) {
                 ))}
               </div>
             ) : null}
+            <PatchDiffBlock diff={patchDiff} className="mt-3" />
             <RawJsonDetails
               title="Raw event JSON"
               summary="Full canonical event detail"

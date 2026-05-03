@@ -258,6 +258,22 @@ describe("Proof-of-Intelligence SDK", () => {
     }
   });
 
+  it("keeps latest CodeGuardian proof evidence on the same async issue", () => {
+    const run = codeguardianRun as RunTrace;
+    expect(run.runId).toBe("codeguardian-run-003");
+    expect(run.task).toContain("async side effects");
+    expect(run.result.issue).toContain("awaited side effect");
+    expect(run.result.patch).toContain("typed failure result");
+    expect(run.result.patchDiff).toContain("saveAuditResult");
+    expect(run.result.patchDiff).toContain("catch");
+    expect(run.result.issue).not.toContain("JSON.parse");
+
+    const patchEvent = run.events.find(
+      (event) => event.type === "patch_proposed",
+    );
+    expect(patchEvent?.detail.patchDiff).toBe(run.result.patchDiff);
+  });
+
   it("creates Passport drafts and recorder traces", async () => {
     const manifest = createPassportManifest({
       chainId: 16602,

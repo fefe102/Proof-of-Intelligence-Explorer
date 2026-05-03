@@ -5,7 +5,7 @@
     "learnedPattern": "Validate JSON parse failures before using parsed payloads.",
     "memoryDelta": "Added a JSON-shape validation heuristic to future reviews.",
     "memoryRoot": "sha256:b71a518d1fadea56c7f0838e9fbd1c6a46bc043995a461f3d282ebf29b81e879",
-    "traceRoot": "sha256:9b2a49d2f6cd1d5054262a855204e538f8ccfb0eadb7e64533e5632866cf1eee",
+    "traceRoot": "sha256:e4fde81339295d92f900b4653b7ad0c6e3f084bda09755a089c80cb2a3061099",
     "source": "hybrid"
   },
   {
@@ -14,7 +14,7 @@
     "learnedPattern": "Verify authorization before returning private records.",
     "memoryDelta": "Added an authorization-check heuristic to critic reviews.",
     "memoryRoot": "sha256:568cb2b7f31804eef4dbe0231c5bb82ffb3e669a4a726943bc7e6d8c4f835ba2",
-    "traceRoot": "sha256:db9f42acf44276e8e6305f5e6dfffe7e7e21f798964dc469c35a221aa81d23c0",
+    "traceRoot": "sha256:9cbe4393a5325efd0b305e0b4c2596e86f00c3971f2ce0253c059496548112ee",
     "source": "hybrid"
   },
   {
@@ -23,7 +23,7 @@
     "learnedPattern": "Wrap awaited side effects in explicit error handling.",
     "memoryDelta": "Added an async side-effect handling pattern to persistent review memory.",
     "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce",
-    "traceRoot": "sha256:c4a01e4a7817d88a0b9b8043221591a3896f433bdecde60976c554cf725292c4",
+    "traceRoot": "sha256:66341ba29a0b707850b4215b3ea58c52b5011be1e15b96b4f24a5c5765de0962",
     "source": "hybrid"
   }
 ]

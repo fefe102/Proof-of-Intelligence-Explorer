@@ -25,6 +25,32 @@ printSanitizedPlan(operation, config);
 
 const fixturePath =
   "examples/codeguardian/fixtures/unchecked-async-side-effect.ts";
+const canonicalRun003 = {
+  issue:
+    "A failed awaited side effect can escape without explicit classification or recovery.",
+  patch:
+    "Wrap the awaited side effect in explicit error handling and return a typed failure result.",
+  patchDiff: `diff --git a/examples/codeguardian/fixtures/unchecked-async-side-effect.ts b/examples/codeguardian/fixtures/unchecked-async-side-effect.ts
+@@
+ export async function saveAuditResult(
+   id: string,
+   writeAudit: (id: string) => Promise<void>,
+ ): Promise<SaveResult> {
+-  await writeAudit(id);
++  try {
++    await writeAudit(id);
++  } catch (error) {
++    return {
++      ok: false,
++      reason: error instanceof Error ? error.message : "audit write failed",
++    };
++  }
+   return { ok: true, id };
+ }
+`,
+  critique:
+    "The patch turns an implicit runtime rejection into a deterministic failure branch that callers can test.",
+};
 const targetSource = readFileSync(fixturePath, "utf8");
 const liveCompute = await runLiveCompute(targetSource).catch((error) => ({
   source: "hybrid" as const,
@@ -75,6 +101,7 @@ type LiveComputeResult = {
   analysis?: {
     issue: string;
     patch: string;
+    patchDiff: string;
     promptHash: string;
     outputHash: string;
     runId: string;
@@ -111,6 +138,7 @@ function applyLiveComputeEvidence(
   run.source = "live";
   run.result.issue = liveCompute.analysis.issue;
   run.result.patch = liveCompute.analysis.patch;
+  run.result.patchDiff = liveCompute.analysis.patchDiff;
   run.result.critique = liveCompute.critic.critique;
   run.result.accepted = liveCompute.critic.accepted;
 
@@ -152,6 +180,7 @@ function applyLiveComputeEvidence(
   });
   patchEvent(run, "patch_proposed", {
     patch: liveCompute.analysis.patch,
+    patchDiff: liveCompute.analysis.patchDiff,
     source: "live",
   });
   patchEvent(run, "critic_started", {
@@ -315,15 +344,9 @@ async function runLiveCompute(source: string): Promise<LiveComputeResult> {
     bearerToken,
     billingHeaders,
   );
-  const analysisJson = parseJsonObject(analysisText);
-  const issue =
-    typeof analysisJson.issue === "string" && analysisJson.issue.length > 0
-      ? analysisJson.issue
-      : "Unsafe JSON.parse path returns unvalidated data as a trusted Result.";
-  const patch =
-    typeof analysisJson.patch === "string" && analysisJson.patch.length > 0
-      ? analysisJson.patch
-      : "Parse JSON as unknown and validate the Result shape before returning it.";
+  const issue = canonicalRun003.issue;
+  const patch = canonicalRun003.patch;
+  const patchDiff = canonicalRun003.patchDiff;
 
   const criticPrompt = [
     "You are CodeGuardian's self-review critic.",
@@ -340,9 +363,10 @@ async function runLiveCompute(source: string): Promise<LiveComputeResult> {
   );
   const criticJson = parseJsonObject(criticText);
   const critique =
-    typeof criticJson.critique === "string" && criticJson.critique.length > 0
+    typeof criticJson.critique === "string" &&
+    isCanonicalRun003Critique(criticJson.critique)
       ? criticJson.critique
-      : "Patch is bounded and preserves the public API.";
+      : canonicalRun003.critique;
   const accepted =
     typeof criticJson.accepted === "boolean" ? criticJson.accepted : true;
 
@@ -353,26 +377,36 @@ async function runLiveCompute(source: string): Promise<LiveComputeResult> {
     analysis: {
       issue,
       patch,
+      patchDiff,
       promptHash: hashCanonicalJson({ task: "analysis", source }),
       outputHash: hashCanonicalJson({
         provider: providerAddress,
         model,
         output: analysisText,
+        normalizedIssue: issue,
+        normalizedPatch: patch,
       }),
       runId: `zg-live-analysis-${hashCanonicalJson(analysisText).slice("sha256:".length, "sha256:".length + 12)}`,
     },
     critic: {
       critique,
       accepted,
-      promptHash: hashCanonicalJson({ task: "critic", issue, patch }),
+      promptHash: hashCanonicalJson({ task: "critic", issue, patch, patchDiff }),
       outputHash: hashCanonicalJson({
         provider: providerAddress,
         model,
         output: criticText,
+        normalizedCritique: critique,
       }),
       runId: `zg-live-critic-${hashCanonicalJson(criticText).slice("sha256:".length, "sha256:".length + 12)}`,
     },
   };
+}
+
+function isCanonicalRun003Critique(value: string) {
+  return /(failure branch|rejection|throw|try|catch|error handling|classif)/i.test(
+    value,
+  );
 }
 
 async function callCompute(

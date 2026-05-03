@@ -13,7 +13,7 @@
     },
     "intelligenceBundleRoot": "sha256:6289903e00f2e42448eb3cad30d322fcd4e1b3e3af54dd37f35a863a864f0bcd",
     "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce",
-    "latestRunRoot": "sha256:5eea73e8098964c75c6da1aba8d37e7f677b491e0c8a229818eef3f0a4069dad",
+    "latestRunRoot": "sha256:d291cb2408d266c7ac478cc8b36aa989f45a5c56b06c72c1c6f652256bc4c101",
     "computeRunIds": [
       "zg-hybrid-analysis-001",
       "zg-hybrid-critic-001",

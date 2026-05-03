@@ -65,6 +65,7 @@ type CodeGuardianTask = {
   task: string;
   issue: string;
   patch: string;
+  patchDiff: string;
   critique: string;
   learnedPattern: string;
   memoryDelta: string;
@@ -102,6 +103,26 @@ const tasks: CodeGuardianTask[] = [
       "Unsafe JSON.parse path returns unvalidated data as a trusted Result.",
     patch:
       "Parse JSON as unknown, validate the object shape, and return null for invalid payloads before constructing Result.",
+    patchDiff: `diff --git a/examples/codeguardian/fixtures/unsafe-parser.ts b/examples/codeguardian/fixtures/unsafe-parser.ts
+@@
++function isResult(value: unknown): value is Result {
++  return (
++    typeof value === "object" &&
++    value !== null &&
++    typeof (value as Result).ok === "boolean" &&
++    typeof (value as Result).value === "string"
++  );
++}
++
+ export function parseResult(raw: string): Result {
+-  return JSON.parse(raw) as Result;
++  const parsed: unknown = JSON.parse(raw);
++  if (!isResult(parsed)) {
++    throw new Error("invalid result payload");
++  }
++  return parsed;
+ }
+`,
     critique:
       "The patch is bounded, keeps the public API stable, and converts an unsafe cast into explicit validation.",
     learnedPattern:
@@ -119,6 +140,24 @@ const tasks: CodeGuardianTask[] = [
       "Private records can be returned before verifying the caller owns the account.",
     patch:
       "Check authorization before reading or returning private records, and fail closed when ownership cannot be proven.",
+    patchDiff: `diff --git a/examples/codeguardian/fixtures/missing-auth-guard.ts b/examples/codeguardian/fixtures/missing-auth-guard.ts
+@@
+ export async function loadPrivateRecord(
+   callerAccountId: string,
+   requestedAccountId: string,
+   readRecord: (accountId: string) => Promise<PrivateRecord>,
+   canRead: (caller: string, requested: string) => Promise<boolean>,
+ ) {
++  if (!(await canRead(callerAccountId, requestedAccountId))) {
++    return null;
++  }
+  const record = await readRecord(requestedAccountId);
+-  if (!(await canRead(callerAccountId, requestedAccountId))) {
+-    return null;
+-  }
+   return record;
+ }
+`,
     critique:
       "The fix moves authorization ahead of disclosure and preserves the function's narrow data access boundary.",
     learnedPattern:
@@ -136,6 +175,24 @@ const tasks: CodeGuardianTask[] = [
       "A failed awaited side effect can escape without explicit classification or recovery.",
     patch:
       "Wrap the awaited side effect in explicit error handling and return a typed failure result.",
+    patchDiff: `diff --git a/examples/codeguardian/fixtures/unchecked-async-side-effect.ts b/examples/codeguardian/fixtures/unchecked-async-side-effect.ts
+@@
+ export async function saveAuditResult(
+   id: string,
+   writeAudit: (id: string) => Promise<void>,
+ ): Promise<SaveResult> {
+-  await writeAudit(id);
++  try {
++    await writeAudit(id);
++  } catch (error) {
++    return {
++      ok: false,
++      reason: error instanceof Error ? error.message : "audit write failed",
++    };
++  }
+   return { ok: true, id };
+ }
+`,
     critique:
       "The patch turns an implicit runtime rejection into a deterministic failure branch that callers can test.",
     learnedPattern:
@@ -343,6 +400,7 @@ export function createCodeGuardianProofArtifacts(
         outputHash: hashCanonicalJson({
           issue: task.issue,
           patch: task.patch,
+          patchDiff: task.patchDiff,
         }),
         at: at(index, 4),
         source,
@@ -354,6 +412,7 @@ export function createCodeGuardianProofArtifacts(
           task: "critic",
           issue: task.issue,
           patch: task.patch,
+          patchDiff: task.patchDiff,
         }),
         outputHash: hashCanonicalJson({
           accepted: true,
@@ -604,7 +663,11 @@ function buildRunTrace(
     }),
     event("compute_completed", at(taskIndex, 4), {
       runId: task.analysisRunId,
-      outputHash: hashCanonicalJson({ issue: task.issue, patch: task.patch }),
+      outputHash: hashCanonicalJson({
+        issue: task.issue,
+        patch: task.patch,
+        patchDiff: task.patchDiff,
+      }),
       source: input.source,
     }),
     event("issue_found", at(taskIndex, 5), {
@@ -613,6 +676,7 @@ function buildRunTrace(
     }),
     event("patch_proposed", at(taskIndex, 7), {
       patch: task.patch,
+      patchDiff: task.patchDiff,
       source: input.source,
     }),
     event("critic_started", at(taskIndex, 8), {
@@ -664,6 +728,7 @@ function buildRunTrace(
     result: {
       issue: task.issue,
       patch: task.patch,
+      patchDiff: task.patchDiff,
       critique: task.critique,
       accepted: true,
       memoryRoot: input.memoryRoot,

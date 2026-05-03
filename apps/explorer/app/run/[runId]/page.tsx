@@ -1,5 +1,10 @@
 import { notFound } from "next/navigation";
-import { Badge, RawJsonDetails, RunTimeline } from "../../../components/proof-ui";
+import {
+  Badge,
+  PatchDiffBlock,
+  RawJsonDetails,
+  RunTimeline,
+} from "../../../components/proof-ui";
 import { getRun } from "../../../lib/proof";
 
 export default async function RunPage({ params }: { params: Promise<{ runId: string }> }) {
@@ -25,6 +30,8 @@ export default async function RunPage({ params }: { params: Promise<{ runId: str
         <aside className="border-t border-white/10 pt-5">
           <div className="text-sm uppercase text-slate-500">Result</div>
           <p className="mt-3 text-slate-300">{run.result.issue}</p>
+          <p className="mt-3 text-sm text-slate-400">{run.result.patch}</p>
+          <PatchDiffBlock diff={run.result.patchDiff} className="mt-5" />
           <RawJsonDetails
             title="Raw result JSON"
             summary="Patch, critique, and roots"

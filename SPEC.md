@@ -82,6 +82,7 @@ Labels must be shown honestly in UI, API, CLI, docs, and certificates. Hybrid or
 - Memory root must match latest memory/current-state evidence.
 - Memory roots must evolve across CodeGuardian runs.
 - Trace root is computed over all events before `trace_committed`; final run root is the canonical hash of the full run trace including `trace_committed` and `certificate_issued`.
+- Latest CodeGuardian replay evidence must keep task, issue, patch, patch diff, critic, memory delta, run root, and certificate semantics aligned to the same audited bug.
 - Compute run IDs in the manifest must exist in compute evidence.
 - Skill/policy hashes must be deterministic hashes of actual files under `examples/codeguardian/skills`.
 - Dynamic upgrade evidence must include old/new policy versions, hashes, reason, and trace event.

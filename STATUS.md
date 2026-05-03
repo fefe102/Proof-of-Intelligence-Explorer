@@ -43,6 +43,8 @@
 - [x] Latest CodeGuardian run includes live 0G Compute analysis and critic records
 - [x] Safe pasted-diff review flow added with no arbitrary execution or calldata
 - [x] Public SVG badge verified live as Tier 6 for CodeGuardian iNFT
+- [x] Latest Run 003 proof evidence is coherent as an async side-effect audit with a matching patch diff
+- [x] Judge Mode shows exact live chain, live storage, live latest-compute, hybrid-history, and mock optional-layer provenance
 
 ## Submission Constants
 

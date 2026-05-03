@@ -43,10 +43,10 @@
         "at": "2026-04-26T00:00:04.000Z",
         "detail": {
           "runId": "zg-hybrid-analysis-001",
-          "outputHash": "sha256:9a1fcd05686fe6fbc69b572054a3fdc36cb67ef817fdb93a3ed40a0274e4e84f",
+          "outputHash": "sha256:be5b3003c68d22c78d13ef0d753f88323eb71f3e40ba9a97b67de5b23e3cbef6",
           "source": "hybrid"
         },
-        "root": "sha256:50b32d1dd1b1f8b55d70ddd6b045a0e74ab013b752e5e6b3083a5c78a6b231e3"
+        "root": "sha256:b474f58c1363c699c5b76d5f2b34d05a7ac10551b13d3a3730da37ea62fcb9bb"
       },
       {
         "type": "issue_found",
@@ -62,9 +62,10 @@
         "at": "2026-04-26T00:00:07.000Z",
         "detail": {
           "patch": "Parse JSON as unknown, validate the object shape, and return null for invalid payloads before constructing Result.",
+          "patchDiff": "diff --git a/examples/codeguardian/fixtures/unsafe-parser.ts b/examples/codeguardian/fixtures/unsafe-parser.ts\n@@\n+function isResult(value: unknown): value is Result {\n+  return (\n+    typeof value === \"object\" &&\n+    value !== null &&\n+    typeof (value as Result).ok === \"boolean\" &&\n+    typeof (value as Result).value === \"string\"\n+  );\n+}\n+\n export function parseResult(raw: string): Result {\n-  return JSON.parse(raw) as Result;\n+  const parsed: unknown = JSON.parse(raw);\n+  if (!isResult(parsed)) {\n+    throw new Error(\"invalid result payload\");\n+  }\n+  return parsed;\n }\n",
           "source": "hybrid"
         },
-        "root": "sha256:870b2cd2303643f95e23c5a81ede5678c7e8c44b881abde49614365942350b82"
+        "root": "sha256:8bc40d95cc68b51a4638ae7951ca843f3e34f99bd6bdaa29ca526d8986d76936"
       },
       {
         "type": "critic_started",
@@ -120,10 +121,10 @@
         "type": "trace_committed",
         "at": "2026-04-26T00:00:14.000Z",
         "detail": {
-          "traceRoot": "sha256:9b2a49d2f6cd1d5054262a855204e538f8ccfb0eadb7e64533e5632866cf1eee",
+          "traceRoot": "sha256:e4fde81339295d92f900b4653b7ad0c6e3f084bda09755a089c80cb2a3061099",
           "source": "hybrid"
         },
-        "root": "sha256:3ff97becad91b9cb6942d113e146306426f88c75e92010a425a07a53bf8e2bf8"
+        "root": "sha256:b8e8764764a1f4d8cc962ffcf34a6189b6adefe52bd5b1cb4d0b0d2014af2791"
       },
       {
         "type": "certificate_issued",
@@ -138,6 +139,7 @@
     "result": {
       "issue": "Unsafe JSON.parse path returns unvalidated data as a trusted Result.",
       "patch": "Parse JSON as unknown, validate the object shape, and return null for invalid payloads before constructing Result.",
+      "patchDiff": "diff --git a/examples/codeguardian/fixtures/unsafe-parser.ts b/examples/codeguardian/fixtures/unsafe-parser.ts\n@@\n+function isResult(value: unknown): value is Result {\n+  return (\n+    typeof value === \"object\" &&\n+    value !== null &&\n+    typeof (value as Result).ok === \"boolean\" &&\n+    typeof (value as Result).value === \"string\"\n+  );\n+}\n+\n export function parseResult(raw: string): Result {\n-  return JSON.parse(raw) as Result;\n+  const parsed: unknown = JSON.parse(raw);\n+  if (!isResult(parsed)) {\n+    throw new Error(\"invalid result payload\");\n+  }\n+  return parsed;\n }\n",
       "critique": "The patch is bounded, keeps the public API stable, and converts an unsafe cast into explicit validation.",
       "accepted": true,
       "memoryRoot": "sha256:b71a518d1fadea56c7f0838e9fbd1c6a46bc043995a461f3d282ebf29b81e879"
@@ -187,10 +189,10 @@
         "at": "2026-04-26T00:10:04.000Z",
         "detail": {
           "runId": "zg-hybrid-analysis-002",
-          "outputHash": "sha256:0fc7f9c98d376ad7579d64dbc89492a72bf8635dd1f5645509e11a14db449991",
+          "outputHash": "sha256:52a61a030d9a99fd63a37ec5ae502438733a389b90c583f28606f3d17eef2e4d",
           "source": "hybrid"
         },
-        "root": "sha256:b07127c4ad43edd21abb39229a171e5e4e9110f9c2d06fbe68820ca25cad23a0"
+        "root": "sha256:9a94f02663d08258a2a37fe07d0cb67f6c21f1f2d5553a1036b0e7d810b8d398"
       },
       {
         "type": "issue_found",
@@ -206,9 +208,10 @@
         "at": "2026-04-26T00:10:07.000Z",
         "detail": {
           "patch": "Check authorization before reading or returning private records, and fail closed when ownership cannot be proven.",
+          "patchDiff": "diff --git a/examples/codeguardian/fixtures/missing-auth-guard.ts b/examples/codeguardian/fixtures/missing-auth-guard.ts\n@@\n export async function loadPrivateRecord(\n   callerAccountId: string,\n   requestedAccountId: string,\n   readRecord: (accountId: string) => Promise<PrivateRecord>,\n   canRead: (caller: string, requested: string) => Promise<boolean>,\n ) {\n+  if (!(await canRead(callerAccountId, requestedAccountId))) {\n+    return null;\n+  }\n  const record = await readRecord(requestedAccountId);\n-  if (!(await canRead(callerAccountId, requestedAccountId))) {\n-    return null;\n-  }\n   return record;\n }\n",
           "source": "hybrid"
         },
-        "root": "sha256:7e7b32ca9a6faaf73b05580e94eb32f61c8fe86c9662d6cd29098d32ad7868f8"
+        "root": "sha256:3f50ab0a11fd635703632252d5bf45f5c069220f4add980e487e3f047232260a"
       },
       {
         "type": "critic_started",
@@ -273,10 +276,10 @@
         "type": "trace_committed",
         "at": "2026-04-26T00:10:14.000Z",
         "detail": {
-          "traceRoot": "sha256:db9f42acf44276e8e6305f5e6dfffe7e7e21f798964dc469c35a221aa81d23c0",
+          "traceRoot": "sha256:9cbe4393a5325efd0b305e0b4c2596e86f00c3971f2ce0253c059496548112ee",
           "source": "hybrid"
         },
-        "root": "sha256:792247467a01bf1351402ef79d56027ca8ad6092e4a59f050b8ec0817bc68dd6"
+        "root": "sha256:8d1e0c6ef568e4f66ace7f08fbdd3083dc8203fc3ee00df54ab0c8ecae2679f4"
       },
       {
         "type": "certificate_issued",
@@ -291,6 +294,7 @@
     "result": {
       "issue": "Private records can be returned before verifying the caller owns the account.",
       "patch": "Check authorization before reading or returning private records, and fail closed when ownership cannot be proven.",
+      "patchDiff": "diff --git a/examples/codeguardian/fixtures/missing-auth-guard.ts b/examples/codeguardian/fixtures/missing-auth-guard.ts\n@@\n export async function loadPrivateRecord(\n   callerAccountId: string,\n   requestedAccountId: string,\n   readRecord: (accountId: string) => Promise<PrivateRecord>,\n   canRead: (caller: string, requested: string) => Promise<boolean>,\n ) {\n+  if (!(await canRead(callerAccountId, requestedAccountId))) {\n+    return null;\n+  }\n  const record = await readRecord(requestedAccountId);\n-  if (!(await canRead(callerAccountId, requestedAccountId))) {\n-    return null;\n-  }\n   return record;\n }\n",
       "critique": "The fix moves authorization ahead of disclosure and preserves the function's narrow data access boundary.",
       "accepted": true,
       "memoryRoot": "sha256:568cb2b7f31804eef4dbe0231c5bb82ffb3e669a4a726943bc7e6d8c4f835ba2",
@@ -349,10 +353,10 @@
         "at": "2026-04-26T00:20:04.000Z",
         "detail": {
           "runId": "zg-hybrid-analysis-003",
-          "outputHash": "sha256:df9a8ab1137844cdd896941fc9791b4931e3a3ddddbbcd8fe878fb14da0bcf1f",
+          "outputHash": "sha256:628246fa8b279b5571be2c56d04e085205c8bf9b03282a97856f507f5ee7959d",
           "source": "hybrid"
         },
-        "root": "sha256:ca9c105ab431427d6038b8e2ddd4d5be8f0912957df0c5577d999006fb3f65ff"
+        "root": "sha256:8f8cbd476dc77d2bc292caa745e02e82dbb87e63fb267cb077faca9ee800d057"
       },
       {
         "type": "issue_found",
@@ -368,9 +372,10 @@
         "at": "2026-04-26T00:20:07.000Z",
         "detail": {
           "patch": "Wrap the awaited side effect in explicit error handling and return a typed failure result.",
+          "patchDiff": "diff --git a/examples/codeguardian/fixtures/unchecked-async-side-effect.ts b/examples/codeguardian/fixtures/unchecked-async-side-effect.ts\n@@\n export async function saveAuditResult(\n   id: string,\n   writeAudit: (id: string) => Promise<void>,\n ): Promise<SaveResult> {\n-  await writeAudit(id);\n+  try {\n+    await writeAudit(id);\n+  } catch (error) {\n+    return {\n+      ok: false,\n+      reason: error instanceof Error ? error.message : \"audit write failed\",\n+    };\n+  }\n   return { ok: true, id };\n }\n",
           "source": "hybrid"
         },
-        "root": "sha256:e5326c1de31ae2c557967229b3975604e94a75f771e48aefd5480629fa0004aa"
+        "root": "sha256:25d40f57f22684efa809d9c3a4a6afa8a2547dcf67c24c7078ef4cf836d48f7d"
       },
       {
         "type": "critic_started",
@@ -426,10 +431,10 @@
         "type": "trace_committed",
         "at": "2026-04-26T00:20:14.000Z",
         "detail": {
-          "traceRoot": "sha256:c4a01e4a7817d88a0b9b8043221591a3896f433bdecde60976c554cf725292c4",
+          "traceRoot": "sha256:66341ba29a0b707850b4215b3ea58c52b5011be1e15b96b4f24a5c5765de0962",
           "source": "hybrid"
         },
-        "root": "sha256:a306fdb31ab4c6d2cf6c6f7655fcd69efafb57f186cdf004a11bdc3387ed81b8"
+        "root": "sha256:3b96f3bd54718047dd9213c6b206f612a77963ca53f34f04bea9d896e4786c62"
       },
       {
         "type": "certificate_issued",
@@ -444,6 +449,7 @@
     "result": {
       "issue": "A failed awaited side effect can escape without explicit classification or recovery.",
       "patch": "Wrap the awaited side effect in explicit error handling and return a typed failure result.",
+      "patchDiff": "diff --git a/examples/codeguardian/fixtures/unchecked-async-side-effect.ts b/examples/codeguardian/fixtures/unchecked-async-side-effect.ts\n@@\n export async function saveAuditResult(\n   id: string,\n   writeAudit: (id: string) => Promise<void>,\n ): Promise<SaveResult> {\n-  await writeAudit(id);\n+  try {\n+    await writeAudit(id);\n+  } catch (error) {\n+    return {\n+      ok: false,\n+      reason: error instanceof Error ? error.message : \"audit write failed\",\n+    };\n+  }\n   return { ok: true, id };\n }\n",
       "critique": "The patch turns an implicit runtime rejection into a deterministic failure branch that callers can test.",
       "accepted": true,
       "memoryRoot": "sha256:cb8cffe9ff8d50f66a4b6fe30f0ba334fec4636b45f976f40360fe4afe405fce"

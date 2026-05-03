@@ -113,6 +113,7 @@ export const RunTraceSchema = z.object({
   result: z.object({
     issue: z.string(),
     patch: z.string(),
+    patchDiff: z.string().optional(),
     critique: z.string(),
     accepted: z.boolean(),
     memoryRoot: RootSchema.optional(),

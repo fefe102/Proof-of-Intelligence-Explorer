@@ -26,6 +26,12 @@ const demoScript = [
   ["1:20-1:30", "Verify FakeAgent and show it fails the same checks."],
 ];
 
+const submissionLinks: Array<[string, string]> = [
+  ["Live demo", "https://proof-of-intelligence-explorer.vercel.app"],
+  ["GitHub", "https://github.com/fefe102/CodeGuardian-iNFT"],
+  ["Demo video", "Provided in ETHGlobal dashboard"],
+];
+
 export default async function JudgePage() {
   const [consoleState, fakeagent] = await Promise.all([
     getCodeGuardianConsole(),
@@ -38,6 +44,8 @@ export default async function JudgePage() {
   const report = consoleState.profile.report;
   const latestRun = consoleState.latestRun;
   const latestRunId = latestRun?.runId ?? "codeguardian-run-003";
+  const latestAnalysis = consoleState.latestAnalysis?.id ?? "missing";
+  const latestCritic = consoleState.latestCritic?.id ?? "missing";
   const certificateId =
     report.certificate?.certificateId ?? "poi-cert-codeguardian-001";
   const badgeEmbed = `[![Proof of Intelligence](${badgeUrl})](${passportUrl})`;
@@ -45,6 +53,11 @@ export default async function JudgePage() {
     ["Chain", status.proofLayers.chain, `0G Galileo (${status.chainId})`],
     ["Minted iNFT", "live", `${target.contract} #${target.tokenId}`],
     ["Registry", "live", status.registryAddress],
+    [
+      "0G Storage proof objects",
+      status.proofLayers.storage,
+      `${status.proofObjects.length} uploaded proof artifacts with roots and tx identifiers`,
+    ],
     [
       "Encrypted intelligence root",
       proofSource("intelligenceBundle", status.proofObjects),
@@ -61,11 +74,39 @@ export default async function JudgePage() {
       report.evidence.latestRunRoot ?? "missing",
     ],
     [
+      "Latest run",
+      latestRun?.source ?? "hybrid",
+      `${latestRunId}: async side-effect audit with live 0G Compute records`,
+    ],
+    [
+      "Latest run patch diff",
+      latestRun?.source ?? "hybrid",
+      latestRun?.result.patchDiff ? "present in replay trace and proof JSON" : "missing",
+    ],
+    [
       "Compute runs",
       status.proofLayers.compute,
       report.computeRuns?.runs.map((run) => run.id).join(", ") ?? "missing",
     ],
+    [
+      "Latest 0G Compute records",
+      "live",
+      `${latestAnalysis}, ${latestCritic}`,
+    ],
+    [
+      "Earlier run history",
+      "hybrid",
+      "Runs 001-002 are deterministic hybrid history for memory evolution",
+    ],
+    [
+      "Dynamic upgrade",
+      "hybrid",
+      consoleState.policyUpgrade
+        ? `${consoleState.policyUpgrade.skill} ${consoleState.policyUpgrade.oldVersion} -> ${consoleState.policyUpgrade.newVersion}`
+        : "missing",
+    ],
     ["Certificate", proofSource("certificate", status.proofObjects), certificateId],
+    ["DA / ENS", "mock", "Optional compatibility only; not targeted for this submission"],
   ];
 
   return (
@@ -178,6 +219,25 @@ export default async function JudgePage() {
                 <div key={time} className="grid grid-cols-[74px_1fr] gap-3">
                   <span className="text-slate-500">{time}</span>
                   <span className="text-slate-200">{line}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="border-t border-white/10 pt-5">
+            <div className="text-sm uppercase text-slate-500">
+              Submission links
+            </div>
+            <div className="mt-4 space-y-3 text-sm">
+              {submissionLinks.map(([label, value]) => (
+                <div key={label}>
+                  <div className="text-slate-500">{label}</div>
+                  <div className="mt-1 flex flex-wrap items-start gap-2">
+                    <span className="min-w-0 flex-1 break-all text-slate-200">
+                      {value}
+                    </span>
+                    <CopyButton value={value} label="Copy" />
+                  </div>
                 </div>
               ))}
             </div>
